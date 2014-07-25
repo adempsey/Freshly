@@ -10,6 +10,6 @@
 
 @interface FreshlyStorageViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
-- (id)initWithTitle:(NSString*)title;
+- (id)initWithSpace:(NSInteger)space;
 
 @end

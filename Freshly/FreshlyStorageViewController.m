@@ -7,20 +7,52 @@
 //
 
 #import "FreshlyStorageViewController.h"
+#import "FreshlyStorageViewCell.h"
+#import "FreshlyFoodItemService.h"
+#import "FreshlyFoodItem.h"
+
+#define kNumberOfItemsInRow 4
+
+@interface FreshlyStorageViewController ()
+
+@property (nonatomic, readwrite, assign) NSInteger space;
+@property (nonatomic, readwrite, strong) NSArray *items;
+
+@end
 
 @implementation FreshlyStorageViewController
 
-- (id)initWithTitle:(NSString*)title
+- (id)initWithSpace:(NSInteger)space
 {
 	if (self = [super initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc] init]]) {
-		self.title = title;
-		[self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+		
+		self.space = space;
+
+		switch (space) {
+			case FreshlyStorageSpaceRefrigerator:
+				self.title = @"Refrigerator";
+				break;
+			case FreshlyStorageSpaceFreezer:
+				self.title = @"Freezer";
+				break;
+			case FreshlyStorageSpacePantry:
+				self.title = @"Pantry";
+				break;
+			default:
+				break;
+		}
+		
+		self.items = [[FreshlyFoodItemService sharedInstance] retrieveItemsForStorageSpace:space];
+		
+		[self.collectionView registerClass:[FreshlyStorageViewCell class] forCellWithReuseIdentifier:@"cell"];
 	}
 	return self;
 }
 
 - (void)viewDidLoad
 {
+	self.collectionView.frame = CGRectMake(0, 64, 320, 640);
+	
 	UIView *bgView = [[UIView alloc] init];
 	bgView.backgroundColor = COLOR_PRIMARY;
 	self.collectionView.backgroundView = bgView;
@@ -31,21 +63,30 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-	return 1;
+	return (self.items.count / kNumberOfItemsInRow) + 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-	return 1;
+	return (section == (self.items.count / kNumberOfItemsInRow)) ? self.items.count % kNumberOfItemsInRow : kNumberOfItemsInRow;
 }
 
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+	FreshlyStorageViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+	FreshlyFoodItem *item = [self.items objectAtIndex:indexPath.row];
 	
 	if (!cell) {
-		cell = [[UICollectionViewCell alloc] init];
+		cell = [[FreshlyStorageViewCell alloc] init];
 	}
+	
+	cell.backgroundColor = [UIColor redColor];
+	UILabel *cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, cell.bounds.size.width, 20)];
+	cellLabel.textColor = [UIColor blackColor];
+	cellLabel.font = [UIFont systemFontOfSize:10.0];
+	cellLabel.textAlignment = NSTextAlignmentCenter;
+	cellLabel.text = item.name;
+	[cell.contentView addSubview:cellLabel];
 	return cell;
 }
 

@@ -34,9 +34,9 @@
 
 - (NSArray*)createStorageViewControllers
 {
-	FreshlyStorageViewController *refrigerator = [[FreshlyStorageViewController alloc] initWithTitle:@"Refrigerator"];
-	FreshlyStorageViewController *freezer = [[FreshlyStorageViewController alloc] initWithTitle:@"Freezer"];
-	FreshlyStorageViewController *pantry = [[FreshlyStorageViewController alloc] initWithTitle:@"Pantry"];
+	FreshlyStorageViewController *refrigerator = [[FreshlyStorageViewController alloc] initWithSpace:FreshlyStorageSpaceRefrigerator];
+	FreshlyStorageViewController *freezer = [[FreshlyStorageViewController alloc] initWithSpace:FreshlyStorageSpaceFreezer];
+	FreshlyStorageViewController *pantry = [[FreshlyStorageViewController alloc] initWithSpace:FreshlyStorageSpacePantry];
 	
 	return [NSArray arrayWithObjects:refrigerator, freezer, pantry, nil];
 }

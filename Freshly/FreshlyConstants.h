@@ -9,6 +9,12 @@
 #ifndef Freshly_FreshlyConstants_h
 #define Freshly_FreshlyConstants_h
 
+typedef NS_ENUM(NSInteger, FreshlyStorageSpaceIdentifier) {
+	FreshlyStorageSpaceRefrigerator = 0,
+	FreshlyStorageSpaceFreezer,
+	FreshlyStorageSpacePantry
+};
+
 /************** Colors **************/
 
 #define UIColorFromRGB(rgbValue) [UIColor \
