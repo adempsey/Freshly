@@ -7,6 +7,8 @@
 //
 
 #import "FreshlyAppDelegate.h"
+#import "FreshlyMainNavigationController.h"
+#import "FreshlyMainStorageViewController.h"
 
 @implementation FreshlyAppDelegate
 
@@ -17,8 +19,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+	
+	FreshlyMainStorageViewController *mainStorageViewController = [[FreshlyMainStorageViewController alloc] init];
+	FreshlyMainNavigationController *mainNavigationController = [[FreshlyMainNavigationController alloc] initWithRootViewController:mainStorageViewController];
+	self.window.rootViewController = mainNavigationController;
+	
     [self.window makeKeyAndVisible];
     return YES;
 }
