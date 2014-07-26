@@ -9,6 +9,7 @@
 #import "FreshlyMainStorageViewController.h"
 #import "FreshlyStorageTabBarController.h"
 #import "FreshlyStorageViewController.h"
+#import "FreshlyFoodItemService.h"
 
 @interface FreshlyMainStorageViewController ()
 
@@ -22,6 +23,15 @@
 {
 	if (self = [super init]) {
 		self.tabBarController = [[FreshlyStorageTabBarController alloc] init];
+        
+//        NSDictionary *attributes = @{@"name": @"test",
+//                                     @"space": [NSNumber numberWithInteger:FreshlyStorageSpaceRefrigerator],
+//                                     @"inStorage": @YES,
+//                                     @"dateOfPurchase": [NSDate date],
+//                                     @"dateOfExpiration": [NSDate date],
+//                                     @"category": @"shit",
+//                                     @"brand": @"fuck"};
+//        [[FreshlyFoodItemService sharedInstance] createItemWithAttributes:attributes];
 	}
 	return self;
 }

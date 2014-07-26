@@ -10,6 +10,7 @@
 #import "FreshlyStorageViewCell.h"
 #import "FreshlyFoodItemService.h"
 #import "FreshlyFoodItem.h"
+#import "FreshlyFoodItemViewController.h"
 
 #define kNumberOfItemsInRow 4
 
@@ -56,7 +57,15 @@
 	UIView *bgView = [[UIView alloc] init];
 	bgView.backgroundColor = COLOR_PRIMARY;
 	self.collectionView.backgroundView = bgView;
+    
 	
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    
+    FreshlyFoodItemViewController *vc = [[FreshlyFoodItemViewController alloc] initWithFoodItem:self.items[0]];
+    [self.view addSubview:vc.view];
 }
 
 #pragma mark - UICollectionView DataSource

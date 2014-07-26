@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		639DB39219834B1200B4B9E7 /* FreshlyFoodItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 639DB39119834B1200B4B9E7 /* FreshlyFoodItemViewController.m */; };
 		8DC373EF19821DC000DC9731 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC373EE19821DC000DC9731 /* Foundation.framework */; };
 		8DC373F119821DC000DC9731 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC373F019821DC000DC9731 /* CoreGraphics.framework */; };
 		8DC373F319821DC000DC9731 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC373F219821DC000DC9731 /* UIKit.framework */; };
@@ -42,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		639DB39019834B1200B4B9E7 /* FreshlyFoodItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreshlyFoodItemViewController.h; sourceTree = "<group>"; };
+		639DB39119834B1200B4B9E7 /* FreshlyFoodItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreshlyFoodItemViewController.m; sourceTree = "<group>"; };
 		8DC373EB19821DC000DC9731 /* Freshly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Freshly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DC373EE19821DC000DC9731 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8DC373F019821DC000DC9731 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -201,6 +204,8 @@
 		8DC374311982220700DC9731 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				639DB39019834B1200B4B9E7 /* FreshlyFoodItemViewController.h */,
+				639DB39119834B1200B4B9E7 /* FreshlyFoodItemViewController.m */,
 				8DC3742E198221FE00DC9731 /* FreshlyMainStorageViewController.h */,
 				8DC3742F198221FE00DC9731 /* FreshlyMainStorageViewController.m */,
 				8DC37435198225B600DC9731 /* FreshlyStorageViewController.h */,
@@ -347,6 +352,7 @@
 				8DC3740419821DC000DC9731 /* Freshly.xcdatamodeld in Sources */,
 				8DC3740119821DC000DC9731 /* FreshlyAppDelegate.m in Sources */,
 				8DC37430198221FE00DC9731 /* FreshlyMainStorageViewController.m in Sources */,
+				639DB39219834B1200B4B9E7 /* FreshlyFoodItemViewController.m in Sources */,
 				8DC3742A198220E200DC9731 /* FreshlyMainNavigationController.m in Sources */,
 				8DC37437198225B600DC9731 /* FreshlyStorageViewController.m in Sources */,
 				8DC3744619823C0C00DC9731 /* FreshlyFoodItem.m in Sources */,
@@ -554,6 +560,7 @@
 				8DC3741F19821DC000DC9731 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8DC3742019821DC000DC9731 /* Build configuration list for PBXNativeTarget "FreshlyTests" */ = {
 			isa = XCConfigurationList;
@@ -562,6 +569,7 @@
 				8DC3742219821DC000DC9731 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
