@@ -11,6 +11,7 @@
 #import "FreshlyFoodItemService.h"
 #import "FreshlyFoodItem.h"
 #import "FreshlyImageService.h"
+#import "NSDate+FreshlyAdditions.h"
 
 #define kStorageTableViewCellIdentifier @"StorageTableViewCell"
 
@@ -66,12 +67,13 @@
 	FreshlyStorageTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kStorageTableViewCellIdentifier];
 	
 	if (!cell) {
-		cell = [[FreshlyStorageTableViewCell alloc] init];
+		cell = [[FreshlyStorageTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kStorageTableViewCellIdentifier];
 	}
 	
 	FreshlyFoodItem *item = self.items[indexPath.row];
 	
 	cell.textLabel.text = item.name;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Purchased %@", [NSDate dateAsApproximateString: item.dateOfPurchase]];
 	cell.imageView.image = [[FreshlyImageService sharedInstance] retrieveTableViewStorageCellImageForCategory:item.category];
 	
 	return cell;

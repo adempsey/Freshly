@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63EC4EE81989463A00060C4F /* NSDate+FreshlyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 63EC4EE71989463A00060C4F /* NSDate+FreshlyAdditions.m */; };
 		8DC373EF19821DC000DC9731 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC373EE19821DC000DC9731 /* Foundation.framework */; };
 		8DC373F119821DC000DC9731 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC373F019821DC000DC9731 /* CoreGraphics.framework */; };
 		8DC373F319821DC000DC9731 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC373F219821DC000DC9731 /* UIKit.framework */; };
@@ -31,11 +32,10 @@
 		8DEB2AB11988C3A000043285 /* FreshlyStorageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEB2AB01988C3A000043285 /* FreshlyStorageTableViewCell.m */; };
 		8DEB2ABF1988CBA800043285 /* dairy 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2AB51988CBA800043285 /* dairy 50x50.png */; };
 		8DEB2AC01988CBA800043285 /* drink 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2AB61988CBA800043285 /* drink 50x50.png */; };
-		8DEB2AC11988CBA800043285 /* fish 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2AB71988CBA800043285 /* fish 50x50.png */; };
+		8DEB2AC11988CBA800043285 /* seafood 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2AB71988CBA800043285 /* seafood 50x50.png */; };
 		8DEB2AC21988CBA800043285 /* fruit 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2AB81988CBA800043285 /* fruit 50x50.png */; };
 		8DEB2AC31988CBA800043285 /* meat 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2AB91988CBA800043285 /* meat 50x50.png */; };
 		8DEB2AC51988CBA800043285 /* default 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2ABB1988CBA800043285 /* default 50x50.png */; };
-		8DEB2AC61988CBA800043285 /* seafood 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2ABC1988CBA800043285 /* seafood 50x50.png */; };
 		8DEB2AC81988CBA800043285 /* vegetable 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2ABE1988CBA800043285 /* vegetable 50x50.png */; };
 		8DEB2ACB1988CD7C00043285 /* FreshlyImageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEB2ACA1988CD7C00043285 /* FreshlyImageService.m */; };
 /* End PBXBuildFile section */
@@ -51,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		63EC4EE61989463A00060C4F /* NSDate+FreshlyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+FreshlyAdditions.h"; sourceTree = "<group>"; };
+		63EC4EE71989463A00060C4F /* NSDate+FreshlyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+FreshlyAdditions.m"; sourceTree = "<group>"; };
 		8DC373EB19821DC000DC9731 /* Freshly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Freshly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DC373EE19821DC000DC9731 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8DC373F019821DC000DC9731 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -86,11 +88,10 @@
 		8DEB2AB01988C3A000043285 /* FreshlyStorageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreshlyStorageTableViewCell.m; sourceTree = "<group>"; };
 		8DEB2AB51988CBA800043285 /* dairy 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dairy 50x50.png"; sourceTree = "<group>"; };
 		8DEB2AB61988CBA800043285 /* drink 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drink 50x50.png"; sourceTree = "<group>"; };
-		8DEB2AB71988CBA800043285 /* fish 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fish 50x50.png"; sourceTree = "<group>"; };
+		8DEB2AB71988CBA800043285 /* seafood 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "seafood 50x50.png"; sourceTree = "<group>"; };
 		8DEB2AB81988CBA800043285 /* fruit 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fruit 50x50.png"; sourceTree = "<group>"; };
 		8DEB2AB91988CBA800043285 /* meat 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "meat 50x50.png"; sourceTree = "<group>"; };
 		8DEB2ABB1988CBA800043285 /* default 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default 50x50.png"; sourceTree = "<group>"; };
-		8DEB2ABC1988CBA800043285 /* seafood 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "seafood 50x50.png"; sourceTree = "<group>"; };
 		8DEB2ABE1988CBA800043285 /* vegetable 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vegetable 50x50.png"; sourceTree = "<group>"; };
 		8DEB2AC91988CD7C00043285 /* FreshlyImageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreshlyImageService.h; sourceTree = "<group>"; };
 		8DEB2ACA1988CD7C00043285 /* FreshlyImageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreshlyImageService.m; sourceTree = "<group>"; };
@@ -122,6 +123,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63EC4EE51989461F00060C4F /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				63EC4EE61989463A00060C4F /* NSDate+FreshlyAdditions.h */,
+				63EC4EE71989463A00060C4F /* NSDate+FreshlyAdditions.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		8DC373E219821DC000DC9731 = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +166,7 @@
 		8DC373F619821DC000DC9731 /* Freshly */ = {
 			isa = PBXGroup;
 			children = (
+				63EC4EE51989461F00060C4F /* Categories */,
 				8DEB2AB21988CB5300043285 /* Resources */,
 				8DC3744A198241B500DC9731 /* Views */,
 				8DC3744219822E5000DC9731 /* Services */,
@@ -289,11 +300,10 @@
 			children = (
 				8DEB2AB51988CBA800043285 /* dairy 50x50.png */,
 				8DEB2AB61988CBA800043285 /* drink 50x50.png */,
-				8DEB2AB71988CBA800043285 /* fish 50x50.png */,
+				8DEB2AB71988CBA800043285 /* seafood 50x50.png */,
 				8DEB2AB81988CBA800043285 /* fruit 50x50.png */,
 				8DEB2AB91988CBA800043285 /* meat 50x50.png */,
 				8DEB2ABB1988CBA800043285 /* default 50x50.png */,
-				8DEB2ABC1988CBA800043285 /* seafood 50x50.png */,
 				8DEB2ABE1988CBA800043285 /* vegetable 50x50.png */,
 			);
 			name = "Food Categories";
@@ -379,11 +389,10 @@
 				8DEB2AC51988CBA800043285 /* default 50x50.png in Resources */,
 				8DC373FB19821DC000DC9731 /* InfoPlist.strings in Resources */,
 				8DC3740619821DC000DC9731 /* Images.xcassets in Resources */,
-				8DEB2AC11988CBA800043285 /* fish 50x50.png in Resources */,
+				8DEB2AC11988CBA800043285 /* seafood 50x50.png in Resources */,
 				8DEB2AC31988CBA800043285 /* meat 50x50.png in Resources */,
 				8DEB2AC21988CBA800043285 /* fruit 50x50.png in Resources */,
 				8DEB2ABF1988CBA800043285 /* dairy 50x50.png in Resources */,
-				8DEB2AC61988CBA800043285 /* seafood 50x50.png in Resources */,
 				8DEB2AC81988CBA800043285 /* vegetable 50x50.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,6 +418,7 @@
 				8DC3740119821DC000DC9731 /* FreshlyAppDelegate.m in Sources */,
 				8DEB2AAB1988BF3300043285 /* FreshlyStorageViewController.m in Sources */,
 				8DEB2ACB1988CD7C00043285 /* FreshlyImageService.m in Sources */,
+				63EC4EE81989463A00060C4F /* NSDate+FreshlyAdditions.m in Sources */,
 				8DC3742A198220E200DC9731 /* FreshlyMainNavigationController.m in Sources */,
 				8DEB2AA81988BC3100043285 /* FreshlyMainViewController.m in Sources */,
 				8DC3744619823C0C00DC9731 /* FreshlyFoodItem.m in Sources */,
