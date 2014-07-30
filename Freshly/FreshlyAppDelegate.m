@@ -8,7 +8,7 @@
 
 #import "FreshlyAppDelegate.h"
 #import "FreshlyMainNavigationController.h"
-#import "FreshlyMainStorageViewController.h"
+#import "FreshlyMainViewController.h"
 
 @implementation FreshlyAppDelegate
 
@@ -21,7 +21,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
 	
-	FreshlyMainStorageViewController *mainStorageViewController = [[FreshlyMainStorageViewController alloc] init];
+	FreshlyMainViewController *mainStorageViewController = [[FreshlyMainViewController alloc] init];
 	FreshlyMainNavigationController *mainNavigationController = [[FreshlyMainNavigationController alloc] initWithRootViewController:mainStorageViewController];
 	self.window.rootViewController = mainNavigationController;
 	

@@ -1,5 +1,5 @@
 //
-//  FreshlyStorageViewController.h
+//  FreshlyStorageTableViewCell.h
 //  Freshly
 //
 //  Created by Andrew Dempsey on 7/29/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FreshlyStorageViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface FreshlyStorageTableViewCell : UITableViewCell
 
 @end
