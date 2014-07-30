@@ -9,6 +9,7 @@
 #import "FreshlyMainViewController.h"
 #import "FreshlyStorageViewController.h"
 #import "FreshlyShoppingListViewController.h"
+#import "FreshlyFoodItemService.h"
 
 @interface FreshlyMainViewController ()
 

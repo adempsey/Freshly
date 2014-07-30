@@ -8,11 +8,15 @@
 
 #import "FreshlyStorageViewController.h"
 #import "FreshlyStorageTableViewCell.h"
+#import "FreshlyFoodItemService.h"
+#import "FreshlyFoodItem.h"
+#import "FreshlyImageService.h"
 
 #define kStorageTableViewCellIdentifier @"StorageTableViewCell"
 
 @interface FreshlyStorageViewController ()
 
+@property (nonatomic, readwrite, strong) NSArray *items;
 @property (nonatomic, readwrite, strong) UITableView *tableView;
 
 @end
@@ -24,6 +28,8 @@
     self = [super init];
     if (self) {
 		self.title = FRESHLY_SPACE_STORAGE;
+		
+		self.items = [[NSArray alloc] initWithArray:[[FreshlyFoodItemService sharedInstance] retrieveItemsForStorage]];
 		
 		self.tableView = [[UITableView alloc] init];
 		self.tableView.delegate = self;
@@ -37,10 +43,8 @@
     [super viewDidLoad];
 	
 	CGRect tableViewFrame = self.view.frame;
-	self.view.backgroundColor = [UIColor greenColor];
 	tableViewFrame.origin.y += 64.0;
 	tableViewFrame.size.height -= 112.0;
-	self.tableView.backgroundColor = [UIColor redColor];
 	self.tableView.frame = tableViewFrame;
 	[self.view addSubview:self.tableView];
 }
@@ -49,7 +53,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return 10;
+	return self.items.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -64,11 +68,20 @@
 	if (!cell) {
 		cell = [[FreshlyStorageTableViewCell alloc] init];
 	}
-	cell.textLabel.text = @"h";
+	
+	FreshlyFoodItem *item = self.items[indexPath.row];
+	
+	cell.textLabel.text = item.name;
+	cell.imageView.image = [[FreshlyImageService sharedInstance] retrieveTableViewStorageCellImageForCategory:item.category];
 	
 	return cell;
 }
 
 #pragma mark - TableView Delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return 70.0;
+}
 
 @end

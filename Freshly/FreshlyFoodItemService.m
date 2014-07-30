@@ -39,11 +39,11 @@
 	return self;
 }
 
-- (NSArray*)retrieveItemsForStorageSpace:(NSInteger)space
+- (NSArray*)retrieveItemsForStorage
 {
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
 	request.entity = [NSEntityDescription entityForName:kFoodItemEntityName inManagedObjectContext:self.managedObjectContext];
-	request.predicate = [NSPredicate predicateWithFormat:@"(space == %ld) AND (inStorage == 1)", (long) space];
+	request.predicate = [NSPredicate predicateWithFormat:@"(inStorage == 1)"];
 	
 	return [self.managedObjectContext executeFetchRequest:request error:nil];
 }

@@ -12,7 +12,7 @@
 
 + (FreshlyFoodItemService*)sharedInstance;
 
-- (NSArray*)retrieveItemsForStorageSpace:(NSInteger)space;
+- (NSArray*)retrieveItemsForStorage;
 - (BOOL)createItemWithAttributes:(NSDictionary*)attributes;
 
 @end
