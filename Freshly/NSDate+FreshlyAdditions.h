@@ -10,6 +10,6 @@
 
 @interface NSDate (FreshlyAdditions)
 
-+ (NSString*)dateAsApproximateString:(NSDate*)date;
+- (NSString*)approximateDescription;
 
 @end

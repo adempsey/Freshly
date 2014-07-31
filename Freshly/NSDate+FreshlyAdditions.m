@@ -15,9 +15,9 @@ static const NSUInteger kYEAR   = kMONTH*12;
 
 @implementation NSDate (FreshlyAdditions)
 
-+ (NSString*)dateAsApproximateString:(NSDate *)date
+- (NSString*)approximateDescription
 {
-    NSInteger timeInterval = [date timeIntervalSinceNow];
+    NSInteger timeInterval = [self timeIntervalSinceNow];
     BOOL inPast = (timeInterval < 0);
     NSUInteger timeSince = abs(timeInterval);
     
