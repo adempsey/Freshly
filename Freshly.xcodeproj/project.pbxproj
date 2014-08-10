@@ -145,6 +145,8 @@
 		63EC4EE51989461F00060C4F /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				8DD7EFBE1996F62A00FC0A10 /* UIImage+FreshlyAdditions.h */,
+				8DD7EFBF1996F62A00FC0A10 /* UIImage+FreshlyAdditions.m */,
 				63EC4EE61989463A00060C4F /* NSDate+FreshlyAdditions.h */,
 				63EC4EE71989463A00060C4F /* NSDate+FreshlyAdditions.m */,
 			);
@@ -186,7 +188,6 @@
 			isa = PBXGroup;
 			children = (
 				63EC4EE51989461F00060C4F /* Categories */,
-				8DD7EFC11996F62F00FC0A10 /* Categories */,
 				8DEB2AB21988CB5300043285 /* Resources */,
 				8DC3744A198241B500DC9731 /* Views */,
 				8DC3744219822E5000DC9731 /* Services */,
@@ -299,25 +300,15 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
-		8DD7EFC11996F62F00FC0A10 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				8DD7EFBE1996F62A00FC0A10 /* UIImage+FreshlyAdditions.h */,
-				8DD7EFBF1996F62A00FC0A10 /* UIImage+FreshlyAdditions.m */,
-			);
-			name = Categories;
-			sourceTree = "<group>";
-		};
 		8DD7EFC21996F74C00FC0A10 /* 50px */ = {
 			isa = PBXGroup;
 			children = (
 				8DEB2AB51988CBA800043285 /* dairy 50x50.png */,
 				8DEB2AB61988CBA800043285 /* drink 50x50.png */,
-				8DEB2AB71988CBA800043285 /* fish 50x50.png */,
+				8DEB2AB71988CBA800043285 /* seafood 50x50.png */,
 				8DEB2AB81988CBA800043285 /* fruit 50x50.png */,
 				8DEB2AB91988CBA800043285 /* meat 50x50.png */,
 				8DEB2ABB1988CBA800043285 /* default 50x50.png */,
-				8DEB2ABC1988CBA800043285 /* seafood 50x50.png */,
 				8DEB2ABE1988CBA800043285 /* vegetable 50x50.png */,
 			);
 			name = 50px;
@@ -449,11 +440,10 @@
 				8DD7EFD11996F77B00FC0A10 /* meat 100x100.png in Resources */,
 				8DC3740619821DC000DC9731 /* Images.xcassets in Resources */,
 				8DD7EFD01996F77B00FC0A10 /* fruit 100x100.png in Resources */,
-				8DEB2AC11988CBA800043285 /* fish 50x50.png in Resources */,
+				8DEB2AC11988CBA800043285 /* seafood 50x50.png in Resources */,
 				8DEB2AC31988CBA800043285 /* meat 50x50.png in Resources */,
 				8DEB2AC21988CBA800043285 /* fruit 50x50.png in Resources */,
 				8DEB2ABF1988CBA800043285 /* dairy 50x50.png in Resources */,
-				8DEB2AC61988CBA800043285 /* seafood 50x50.png in Resources */,
 				8DD7EFD41996F77B00FC0A10 /* seafood 100x100.png in Resources */,
 				8DEB2AC81988CBA800043285 /* vegetable 50x50.png in Resources */,
 				8DD7EFCF1996F77B00FC0A10 /* fish 100x100.png in Resources */,
