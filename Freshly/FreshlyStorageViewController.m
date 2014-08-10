@@ -10,8 +10,8 @@
 #import "FreshlyStorageTableViewCell.h"
 #import "FreshlyFoodItemService.h"
 #import "FreshlyFoodItem.h"
-#import "FreshlyImageService.h"
 #import "NSDate+FreshlyAdditions.h"
+#import "UIImage+FreshlyAdditions.h"
 
 #define kStorageTableViewCellIdentifier @"StorageTableViewCell"
 
@@ -74,7 +74,7 @@
 	
 	cell.textLabel.text = item.name;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"Purchased %@", item.dateOfPurchase.approximateDescription];
-	cell.imageView.image = [[FreshlyImageService sharedInstance] retrieveImageForCategory:item.category withSize:50];
+	cell.imageView.image = [UIImage imageForCategory:item.category withSize:50];
 	
 	return cell;
 }
