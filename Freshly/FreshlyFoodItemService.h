@@ -14,5 +14,7 @@
 
 - (NSArray*)retrieveItemsForStorage;
 - (BOOL)createItemWithAttributes:(NSDictionary*)attributes;
+- (NSArray*)foodItemCategoryList;
+
 
 @end

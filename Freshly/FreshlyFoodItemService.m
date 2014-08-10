@@ -39,6 +39,13 @@
 	return self;
 }
 
+- (NSArray*)foodItemCategoryList
+{
+	return @[@"Dairy", @"Drink", @"Fish", @"Fruit", @"Meat", @"Default", @"Seafood", @"Vegetable"];
+}
+
+#pragma mark - Database Methods
+
 - (NSArray*)retrieveItemsForStorage
 {
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];

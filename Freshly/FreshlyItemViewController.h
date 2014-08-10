@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FreshlyFoodItem.h"
 
-@interface FreshlyItemViewController : UIViewController
+@interface FreshlyItemViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
 - (instancetype)initWithItem:(FreshlyFoodItem*)item;
 
