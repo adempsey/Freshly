@@ -28,9 +28,9 @@
 	return self;
 }
 
-- (UIImage*)retrieveTableViewStorageCellImageForCategory:(NSString *)category
+- (UIImage*)retrieveImageForCategory:(NSString *)category withSize:(NSUInteger)size
 {
-	return [UIImage imageNamed:[NSString stringWithFormat:@"%@ 50x50", category]];
+	return [UIImage imageNamed:[NSString stringWithFormat:@"%@ %dx%d", category, size, size]];
 }
 
 @end

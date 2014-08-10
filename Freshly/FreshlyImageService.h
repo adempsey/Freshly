@@ -12,6 +12,6 @@
 
 + (FreshlyImageService*)sharedInstance;
 
-- (UIImage*)retrieveTableViewStorageCellImageForCategory:(NSString*)category;
+- (UIImage*)retrieveImageForCategory:(NSString *)category withSize:(NSUInteger)size;
 
 @end

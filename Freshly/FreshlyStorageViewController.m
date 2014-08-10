@@ -74,7 +74,7 @@
 	
 	cell.textLabel.text = item.name;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"Purchased %@", item.dateOfPurchase.approximateDescription];
-	cell.imageView.image = [[FreshlyImageService sharedInstance] retrieveTableViewStorageCellImageForCategory:item.category];
+	cell.imageView.image = [[FreshlyImageService sharedInstance] retrieveImageForCategory:item.category withSize:50];
 	
 	return cell;
 }
