@@ -35,6 +35,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	self.storageViewController.navigationController = self.navigationController;
+	
 	self.tabBarController.viewControllers = [NSArray arrayWithObjects:self.storageViewController, self.shoppingListViewController, nil];
 	[self.view addSubview:self.tabBarController.view];
 }

@@ -12,6 +12,7 @@
 #import "FreshlyFoodItem.h"
 #import "NSDate+FreshlyAdditions.h"
 #import "UIImage+FreshlyAdditions.h"
+#import "FreshlyItemViewController.h"
 
 #define kStorageTableViewCellIdentifier @"StorageTableViewCell"
 
@@ -44,8 +45,6 @@
     [super viewDidLoad];
 	
 	CGRect tableViewFrame = self.view.frame;
-	tableViewFrame.origin.y += 64.0;
-	tableViewFrame.size.height -= 112.0;
 	self.tableView.frame = tableViewFrame;
 	[self.view addSubview:self.tableView];
 }
@@ -84,6 +83,15 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	return 70.0;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	FreshlyFoodItem *item = self.items[indexPath.row];
+	FreshlyItemViewController *itemViewController = [[FreshlyItemViewController alloc] initWithItem:item];
+	[self.navigationController pushViewController:itemViewController animated:YES];
+	
+	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
