@@ -29,6 +29,7 @@
 @property (nonatomic, readwrite, strong) NSArray *categoryList;
 
 @property (nonatomic, readwrite, strong) UIPickerView *categoryPicker;
+@property (nonatomic, readwrite, strong) UIButton *categoryPickerDoneButton;
 @property (nonatomic, readwrite, strong) UIView *darkBackground;
 
 @end
@@ -46,6 +47,7 @@
 		self.categoryList = [[NSArray alloc] initWithArray:[[FreshlyFoodItemService sharedInstance] foodItemCategoryList]];
 		
 		self.categoryPicker = [[UIPickerView alloc] init];
+		self.categoryPickerDoneButton = [[UIButton alloc] init];
 		self.darkBackground = [[UIView alloc] init];
 	}
 	return self;
@@ -78,6 +80,13 @@
 	self.categoryPicker.backgroundColor = [UIColor whiteColor];
 	self.categoryPicker.dataSource = self;
 	self.categoryPicker.delegate = self;
+	
+	self.categoryPickerDoneButton.frame = CGRectMake(screenBounds.size.width - 80, 10, 80, 30);
+	self.categoryPickerDoneButton.backgroundColor = [UIColor clearColor];
+	[self.categoryPickerDoneButton setTitle:@"Done" forState:UIControlStateNormal];
+	[self.categoryPickerDoneButton setTitle:@"Done" forState:UIControlStateSelected];
+	[self.categoryPickerDoneButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+	[self.categoryPicker addSubview:self.categoryPickerDoneButton];
 	
 	self.categoryButton.frame = CGRectMake(140, 120, kTextViewWidth, kTextViewHeight);
 	[self.categoryButton setTitle:[(self.item ? self.item.category : @"Category") capitalizedString] forState:UIControlStateNormal];
