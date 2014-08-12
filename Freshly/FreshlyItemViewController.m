@@ -17,7 +17,8 @@
 
 #define kCategoryPickerHeight 162.0
 
-#define kTextInputSize 16.0
+#define kTitleFieldFontSize 22.0
+#define kCategoryFieldFontSize 18.0
 
 @interface FreshlyItemViewController ()
 
@@ -63,7 +64,7 @@
 	
 	self.titleField.frame = CGRectMake(140, 80, kTextViewWidth, kTextViewHeight);
 	self.titleField.text = self.item ? self.item.name : @"";
-	self.titleField.font = [UIFont systemFontOfSize:kTextInputSize];
+	self.titleField.font = [UIFont systemFontOfSize:kTitleFieldFontSize];
 	self.titleField.placeholder = @"Food";
 	[self.view addSubview:self.titleField];
 	
@@ -94,7 +95,7 @@
 	[self.categoryButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 	[self.categoryButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
 	[self.categoryButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-	[self.categoryButton.titleLabel setFont:[UIFont systemFontOfSize:kTextInputSize]];
+	[self.categoryButton.titleLabel setFont:[UIFont systemFontOfSize:kCategoryFieldFontSize]];
 	[self.categoryButton addTarget:self action:@selector(presentCategoryPicker) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:self.categoryButton];
 }
