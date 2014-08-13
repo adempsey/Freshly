@@ -31,6 +31,9 @@
 @property (nonatomic, readwrite, strong) FreshlyItemDateViewController *itemDateViewController;
 @property (nonatomic, readwrite, strong) UISegmentedControl *spaceChooser;
 
+@property (nonatomic, readwrite, strong) UIButton *moveToGroceryListButton;
+@property (nonatomic, readwrite, strong) UIButton *deleteButton;
+
 @property (nonatomic, readwrite, strong) NSArray *categoryList;
 
 @property (nonatomic, readwrite, strong) UIPickerView *categoryPicker;
@@ -50,6 +53,9 @@
 		self.categoryButton = [[UIButton alloc] init];
 		self.itemDateViewController = [[FreshlyItemDateViewController alloc] init];
 		self.spaceChooser = [[UISegmentedControl alloc] initWithItems:@[@"Refrigerator", @"Freezer", @"Pantry"]];
+		
+		self.moveToGroceryListButton = [[UIButton alloc] init];
+		self.deleteButton = [[UIButton alloc] init];
 		
 		self.categoryList = [[NSArray alloc] initWithArray:[[FreshlyFoodItemService sharedInstance] foodItemCategoryList]];
 		
@@ -111,6 +117,12 @@
 	[self.spaceChooser setFrame:CGRectMake(20, 350, screenBounds.size.width - 40, 30)];
 	self.spaceChooser.selectedSegmentIndex = [self.item.space integerValue];
 	[self.view addSubview:self.spaceChooser];
+	
+	[self.moveToGroceryListButton setFrame:CGRectMake(20, 420, screenBounds.size.width - 40, 40)];
+	[self.moveToGroceryListButton setTitle:@"Move To Grocery List" forState:UIControlStateNormal];
+	[self.moveToGroceryListButton setTitle:@"Move To Grocery List" forState:UIControlStateSelected];
+	[self.moveToGroceryListButton setBackgroundColor:[UIColor blueColor]];
+	[self.view addSubview:self.moveToGroceryListButton];
 	
 }
 
