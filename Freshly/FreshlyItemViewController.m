@@ -124,6 +124,12 @@
 	[self.moveToGroceryListButton setBackgroundColor:[UIColor blueColor]];
 	[self.view addSubview:self.moveToGroceryListButton];
 	
+	[self.deleteButton setFrame:CGRectMake(20, 490, screenBounds.size.width - 40, 40)];
+	[self.deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
+	[self.deleteButton setTitle:@"Delete" forState:UIControlStateSelected];
+	[self.deleteButton setBackgroundColor:[UIColor redColor]];
+	[self.view addSubview:self.deleteButton];
+	
 }
 
 #pragma mark - CategoryPicker
