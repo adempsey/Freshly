@@ -8,7 +8,6 @@
 
 #import "FreshlyItemViewController.h"
 #import "FreshlyFoodItemService.h"
-#import "FreshlyItemDateViewController.h"
 
 #import "UIImage+FreshlyAdditions.h"
 
@@ -17,7 +16,7 @@
 #define kTextViewWidth 160.0
 #define kTextViewHeight 30.0
 
-#define kCategoryPickerHeight 162.0
+#define kPickerHeight 162.0
 
 #define kTitleFieldFontSize 22.0
 #define kCategoryFieldFontSize 18.0
@@ -37,8 +36,11 @@
 @property (nonatomic, readwrite, strong) NSArray *categoryList;
 
 @property (nonatomic, readwrite, strong) UIPickerView *categoryPicker;
+@property (nonatomic, readwrite, strong) UIDatePicker *purchaseDatePicker;
+@property (nonatomic, readwrite, strong) UIDatePicker *expirationDatePicker;
 @property (nonatomic, readwrite, strong) UIButton *categoryPickerDoneButton;
 @property (nonatomic, readwrite, strong) UIView *darkBackground;
+@property (nonatomic, readwrite, weak) id currentPicker;
 
 @end
 
@@ -60,6 +62,8 @@
 		self.categoryList = [[NSArray alloc] initWithArray:[[FreshlyFoodItemService sharedInstance] foodItemCategoryList]];
 		
 		self.categoryPicker = [[UIPickerView alloc] init];
+		self.purchaseDatePicker = [[UIDatePicker alloc] init];
+		self.expirationDatePicker = [[UIDatePicker alloc] init];
 		self.categoryPickerDoneButton = [[UIButton alloc] init];
 		self.darkBackground = [[UIView alloc] init];
 	}
@@ -82,7 +86,7 @@
 	self.titleField.placeholder = @"Food";
 	[self.view addSubview:self.titleField];
 	
-	UITapGestureRecognizer *pickerBackgroundTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissCategoryPicker)];
+	UITapGestureRecognizer *pickerBackgroundTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissActivePicker)];
 	
 	CGRect screenBounds = [[UIScreen mainScreen] bounds];
 	
@@ -91,10 +95,20 @@
 	self.darkBackground.alpha = 0.0;
 	[self.darkBackground addGestureRecognizer:pickerBackgroundTapRecognizer];
 	
-	self.categoryPicker.frame = CGRectMake(0, screenBounds.size.height, screenBounds.size.width, kCategoryPickerHeight);
+	self.categoryPicker.frame = CGRectMake(0, screenBounds.size.height, screenBounds.size.width, kPickerHeight);
 	self.categoryPicker.backgroundColor = [UIColor whiteColor];
 	self.categoryPicker.dataSource = self;
 	self.categoryPicker.delegate = self;
+	
+	self.purchaseDatePicker.frame = CGRectMake(0, screenBounds.size.height, screenBounds.size.width, kPickerHeight);
+	self.purchaseDatePicker.backgroundColor = [UIColor whiteColor];
+	self.purchaseDatePicker.date = self.item.dateOfPurchase;
+	self.purchaseDatePicker.datePickerMode = UIDatePickerModeDate;
+	
+	self.expirationDatePicker.frame = CGRectMake(0, screenBounds.size.height, screenBounds.size.width, kPickerHeight);
+	self.expirationDatePicker.backgroundColor = [UIColor whiteColor];
+	self.expirationDatePicker.date = self.item.dateOfExpiration;
+	self.expirationDatePicker.datePickerMode = UIDatePickerModeDate;
 	
 	self.categoryPickerDoneButton.frame = CGRectMake(screenBounds.size.width - 80, 10, 80, 30);
 	self.categoryPickerDoneButton.backgroundColor = [UIColor clearColor];
@@ -115,6 +129,7 @@
 	
 	[self.itemDateViewController.view setFrame:CGRectMake(0, 220, screenBounds.size.width, 90)];
 	[self.itemDateViewController setBackgroundColor:categoryColor];
+	self.itemDateViewController.delegate = self;
 	[self.view addSubview:self.itemDateViewController.view];
 	
 	[self.spaceChooser setFrame:CGRectMake(20, 350, screenBounds.size.width - 40, 30)];
@@ -136,43 +151,63 @@
 	
 }
 
-#pragma mark - CategoryPicker
+#pragma mark - Picker Views
 
 - (void)presentCategoryPicker
 {
+	[self presentPicker:self.categoryPicker];
+}
+
+- (void)presentPicker:(id)pickerView
+{
 	CGRect screenBounds = [[UIScreen mainScreen] bounds];
 	[self.view addSubview:self.darkBackground];
-	[self.view addSubview:self.categoryPicker];
+	[self.view addSubview:pickerView];
 	
 	[UIView animateWithDuration:0.25 animations:^{
-		[self.categoryPicker setFrame:CGRectMake(0, screenBounds.size.height - kCategoryPickerHeight, screenBounds.size.width, kCategoryPickerHeight)];
+		[pickerView setFrame:CGRectMake(0, screenBounds.size.height - kPickerHeight, screenBounds.size.width, kPickerHeight)];
 		self.darkBackground.alpha = 0.5;
+	} completion:^(BOOL finished) {
+		self.currentPicker = pickerView;
 	}];
 }
 
-- (void)dismissCategoryPicker
+- (void)dismissActivePicker
 {
 	CGRect screenBounds = [[UIScreen mainScreen] bounds];
 	
-	NSInteger selectedIndex = [self.categoryPicker selectedRowInComponent:0];
-	NSString *categoryTitle = [self.categoryList objectAtIndex:selectedIndex];
-	[self.categoryButton setTitle:categoryTitle forState:UIControlStateNormal];
-	[self.categoryButton setTitle:categoryTitle forState:UIControlStateSelected];
-	
-	UIColor *categoryColor = [[FreshlyFoodItemService sharedInstance] colorForCategory:categoryTitle];
-	
 	[UIView animateWithDuration:0.25 animations:^{
-		[self.categoryPicker setFrame:CGRectMake(0, screenBounds.size.height, screenBounds.size.width, kCategoryPickerHeight)];
+		[self.currentPicker setFrame:CGRectMake(0, screenBounds.size.height, screenBounds.size.width, kPickerHeight)];
 		self.darkBackground.alpha = 0.0;
 		
-		self.imageView.image = [UIImage imageForCategory:categoryTitle withSize:kImageViewSize];
-		self.spaceChooser.tintColor = categoryColor;
-		self.moveToGroceryListButton.backgroundColor = categoryColor;
-		[self.itemDateViewController setBackgroundColor:categoryColor];
+		if ([self.currentPicker isKindOfClass:[UIPickerView class]] && [self.currentPicker isEqual:self.categoryPicker]) {
+			NSInteger selectedIndex = [self.currentPicker selectedRowInComponent:0];
+			NSString *categoryTitle = [self.categoryList objectAtIndex:selectedIndex];
+			[self.categoryButton setTitle:categoryTitle forState:UIControlStateNormal];
+			[self.categoryButton setTitle:categoryTitle forState:UIControlStateSelected];
+			
+			UIColor *categoryColor = [[FreshlyFoodItemService sharedInstance] colorForCategory:categoryTitle];
+			
+			self.imageView.image = [UIImage imageForCategory:categoryTitle withSize:kImageViewSize];
+			self.spaceChooser.tintColor = categoryColor;
+			self.moveToGroceryListButton.backgroundColor = categoryColor;
+			[self.itemDateViewController setBackgroundColor:categoryColor];
+		}
+		
 	} completion:^(BOOL finished) {
 		if (finished) {
 			[self.darkBackground removeFromSuperview];
-			[self.categoryPicker removeFromSuperview];
+			[self.currentPicker removeFromSuperview];
+			
+			if ([self.currentPicker isKindOfClass:[UIDatePicker class]]) {
+				
+				if ([self.currentPicker isEqual:self.purchaseDatePicker]) {
+					self.itemDateViewController.purchaseDate = ((UIDatePicker*) self.currentPicker).date;
+					
+				} else if ([self.currentPicker isEqual:self.expirationDatePicker]) {
+					self.itemDateViewController.expirationDate = ((UIDatePicker*) self.expirationDatePicker).date;
+				}
+			}
 		}
 	}];
 }
@@ -194,6 +229,17 @@
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
 	return self.categoryList[row];
+}
+
+#pragma mark - FreshlyItemDate Delegate
+
+- (void)itemDateViewDidBeginEditingDate:(NSDate *)date
+{
+	if ([date isEqual:self.itemDateViewController.purchaseDate]) {
+		[self presentPicker:self.purchaseDatePicker];
+	} else if ([date isEqual:self.itemDateViewController.expirationDate]) {
+		[self presentPicker:self.expirationDatePicker];
+	}
 }
 
 @end

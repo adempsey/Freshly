@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol FreshlyItemDateProtocol <NSObject>
+
+@required
+- (void)itemDateViewDidBeginEditingDate:(NSDate*)date;
+
+@end
+
 @interface FreshlyItemDateViewController : UIViewController
+
+@property (nonatomic, readwrite, weak) id<FreshlyItemDateProtocol> delegate;
 
 @property (nonatomic, readwrite, strong) NSDate *purchaseDate;
 @property (nonatomic, readwrite, strong) NSDate *expirationDate;
