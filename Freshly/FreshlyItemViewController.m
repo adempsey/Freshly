@@ -29,6 +29,7 @@
 @property (nonatomic, readwrite, strong) UITextField *titleField;
 @property (nonatomic, readwrite, strong) UIButton *categoryButton;
 @property (nonatomic, readwrite, strong) FreshlyItemDateViewController *itemDateViewController;
+@property (nonatomic, readwrite, strong) UISegmentedControl *spaceChooser;
 
 @property (nonatomic, readwrite, strong) NSArray *categoryList;
 
@@ -48,6 +49,7 @@
 		self.titleField = [[UITextField alloc] init];
 		self.categoryButton = [[UIButton alloc] init];
 		self.itemDateViewController = [[FreshlyItemDateViewController alloc] init];
+		self.spaceChooser = [[UISegmentedControl alloc] initWithItems:@[@"Refrigerator", @"Freezer", @"Pantry"]];
 		
 		self.categoryList = [[NSArray alloc] initWithArray:[[FreshlyFoodItemService sharedInstance] foodItemCategoryList]];
 		
@@ -106,6 +108,9 @@
 	[self.itemDateViewController.view setFrame:CGRectMake(0, 220, screenBounds.size.width, 90)];
 	[self.view addSubview:self.itemDateViewController.view];
 	
+	[self.spaceChooser setFrame:CGRectMake(20, 350, screenBounds.size.width - 40, 30)];
+	self.spaceChooser.selectedSegmentIndex = [self.item.space integerValue];
+	[self.view addSubview:self.spaceChooser];
 	
 }
 
