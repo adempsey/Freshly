@@ -72,42 +72,55 @@
 	[self.purchaseTitleLabel setFrame:CGRectMake(20, 5, 120, 20)];
 	self.purchaseTitleLabel.font = [UIFont systemFontOfSize:14.0];
 	self.purchaseTitleLabel.text = @"Purchased";
+	self.purchaseTitleLabel.textColor = [UIColor whiteColor];
 	[self.view addSubview:self.purchaseTitleLabel];
 	
 	[self.purchaseDayLabel setFrame:CGRectMake(20, 25, 60, 60)];
 	self.purchaseDayLabel.font = [UIFont boldSystemFontOfSize:48.0];
 	self.purchaseDayLabel.text = [NSString stringWithFormat:@"%ld", (long) self.purchaseDate.calendarDescription.day];
+	self.purchaseDayLabel.textColor = [UIColor whiteColor];
 	[self.view addSubview:self.purchaseDayLabel];
 	
 	[self.purchaseMonthLabel setFrame:CGRectMake(80, 35, 60, 20)];
 	self.purchaseMonthLabel.font = [UIFont systemFontOfSize:16.0];
 	self.purchaseMonthLabel.text = [self.purchaseDate monthAsString];
+	self.purchaseMonthLabel.textColor = [UIColor whiteColor];
 	[self.view addSubview:self.purchaseMonthLabel];
 	
 	[self.purchaseYearLabel setFrame:CGRectMake(80, 55, 60, 20)];
 	self.purchaseYearLabel.font = [UIFont systemFontOfSize:16.0];
 	self.purchaseYearLabel.text = [NSString stringWithFormat:@"%ld", (long) self.purchaseDate.calendarDescription.year];
+	self.purchaseYearLabel.textColor = [UIColor whiteColor];
 	[self.view addSubview:self.purchaseYearLabel];
 	
 	[self.expirationTitleLabel setFrame:CGRectMake(screenBounds.size.width - 15 - 100, 5, 120, 20)];
 	self.expirationTitleLabel.font = [UIFont systemFontOfSize:14.0];
 	self.expirationTitleLabel.text = @"Expires";
+	self.expirationTitleLabel.textColor = [UIColor whiteColor];
 	[self.view addSubview:self.expirationTitleLabel];
 	
 	[self.expirationDayLabel setFrame:CGRectMake(screenBounds.size.width - 15 - 100, 25, 60, 60)];
 	self.expirationDayLabel.font = [UIFont boldSystemFontOfSize:48.0];
 	self.expirationDayLabel.text = [NSString stringWithFormat:@"%ld", (long) self.expirationDate.calendarDescription.day];
+	self.expirationDayLabel.textColor = [UIColor whiteColor];
 	[self.view addSubview:self.expirationDayLabel];
 	
 	[self.expirationMonthLabel setFrame:CGRectMake(screenBounds.size.width - 15 - 40, 35, 60, 20)];
 	self.expirationMonthLabel.font = [UIFont systemFontOfSize:16.0];
 	self.expirationMonthLabel.text = self.expirationDate.monthAsString;
+	self.expirationMonthLabel.textColor = [UIColor whiteColor];
 	[self.view addSubview:self.expirationMonthLabel];
 	
 	[self.expirationYearLabel setFrame:CGRectMake(screenBounds.size.width - 15 - 40, 55, 60, 20)];
 	self.expirationYearLabel.font = [UIFont systemFontOfSize:16.0];
 	self.expirationYearLabel.text = [NSString stringWithFormat:@"%ld", (long) self.expirationDate.calendarDescription.year];
+	self.expirationYearLabel.textColor = [UIColor whiteColor];
 	[self.view addSubview:self.expirationYearLabel];
+}
+
+- (void)setBackgroundColor:(UIColor*)color
+{
+	self.view.backgroundColor = color;
 }
 
 @end

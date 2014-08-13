@@ -74,6 +74,8 @@
 	self.imageView.image = [UIImage imageForCategory:imageTitle withSize:kImageViewSize];
 	[self.view addSubview:self.imageView];
 	
+	UIColor *categoryColor = [[FreshlyFoodItemService sharedInstance] colorForCategory:self.item.category];
+	
 	self.titleField.frame = CGRectMake(140, 80, kTextViewWidth, kTextViewHeight);
 	self.titleField.text = self.item ? self.item.name : @"";
 	self.titleField.font = [UIFont systemFontOfSize:kTitleFieldFontSize];
@@ -112,22 +114,24 @@
 	[self.view addSubview:self.categoryButton];
 	
 	[self.itemDateViewController.view setFrame:CGRectMake(0, 220, screenBounds.size.width, 90)];
+	[self.itemDateViewController setBackgroundColor:categoryColor];
 	[self.view addSubview:self.itemDateViewController.view];
 	
 	[self.spaceChooser setFrame:CGRectMake(20, 350, screenBounds.size.width - 40, 30)];
 	self.spaceChooser.selectedSegmentIndex = [self.item.space integerValue];
+	self.spaceChooser.tintColor = categoryColor;
 	[self.view addSubview:self.spaceChooser];
 	
 	[self.moveToGroceryListButton setFrame:CGRectMake(20, 420, screenBounds.size.width - 40, 40)];
 	[self.moveToGroceryListButton setTitle:@"Move To Grocery List" forState:UIControlStateNormal];
 	[self.moveToGroceryListButton setTitle:@"Move To Grocery List" forState:UIControlStateSelected];
-	[self.moveToGroceryListButton setBackgroundColor:[UIColor blueColor]];
+	[self.moveToGroceryListButton setBackgroundColor:categoryColor];
 	[self.view addSubview:self.moveToGroceryListButton];
 	
 	[self.deleteButton setFrame:CGRectMake(20, 490, screenBounds.size.width - 40, 40)];
 	[self.deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
 	[self.deleteButton setTitle:@"Delete" forState:UIControlStateSelected];
-	[self.deleteButton setBackgroundColor:[UIColor redColor]];
+	[self.deleteButton setBackgroundColor:FCOLOR_RED];
 	[self.view addSubview:self.deleteButton];
 	
 }
@@ -155,9 +159,16 @@
 	[self.categoryButton setTitle:categoryTitle forState:UIControlStateNormal];
 	[self.categoryButton setTitle:categoryTitle forState:UIControlStateSelected];
 	
+	UIColor *categoryColor = [[FreshlyFoodItemService sharedInstance] colorForCategory:categoryTitle];
+	
 	[UIView animateWithDuration:0.25 animations:^{
 		[self.categoryPicker setFrame:CGRectMake(0, screenBounds.size.height, screenBounds.size.width, kCategoryPickerHeight)];
 		self.darkBackground.alpha = 0.0;
+		
+		self.imageView.image = [UIImage imageForCategory:categoryTitle withSize:kImageViewSize];
+		self.spaceChooser.tintColor = categoryColor;
+		self.moveToGroceryListButton.backgroundColor = categoryColor;
+		[self.itemDateViewController setBackgroundColor:categoryColor];
 	} completion:^(BOOL finished) {
 		if (finished) {
 			[self.darkBackground removeFromSuperview];

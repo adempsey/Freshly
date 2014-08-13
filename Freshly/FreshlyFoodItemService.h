@@ -13,6 +13,8 @@
 + (FreshlyFoodItemService*)sharedInstance;
 
 - (NSArray*)retrieveItemsForStorage;
+- (UIColor*)colorForCategory:(NSString*)category;
+
 - (BOOL)createItemWithAttributes:(NSDictionary*)attributes;
 - (NSArray*)foodItemCategoryList;
 

@@ -44,6 +44,36 @@
 	return @[@"Dairy", @"Drink", @"Fish", @"Fruit", @"Meat", @"Default", @"Seafood", @"Vegetable"];
 }
 
+- (UIColor*)colorForCategory:(NSString*)category
+{
+	category = [category lowercaseString];
+	
+	if ([category isEqualToString:@"dairy"]) {
+		return COLOR_DAIRY;
+		
+	} else if ([category isEqualToString:@"drink"]) {
+		return COLOR_DRINK;
+		
+	} else if ([category isEqualToString:@"fish"]) {
+		return COLOR_FISH;
+		
+	} else if ([category isEqualToString:@"fruit"]) {
+		return COLOR_FRUIT;
+		
+	} else if ([category isEqualToString:@"meat"]) {
+		return COLOR_MEAT;
+		
+	} else if ([category isEqualToString:@"seafood"]) {
+		return COLOR_SEAFOOD;
+		
+	} else if ([category isEqualToString:@"vegetable"]) {
+		return COLOR_VEGETABLE;
+		
+	}
+	
+	return COLOR_MISC;
+}
+
 #pragma mark - Database Methods
 
 - (NSArray*)retrieveItemsForStorage

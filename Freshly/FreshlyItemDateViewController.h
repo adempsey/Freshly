@@ -13,4 +13,6 @@
 @property (nonatomic, readwrite, strong) NSDate *purchaseDate;
 @property (nonatomic, readwrite, strong) NSDate *expirationDate;
 
+- (void)setBackgroundColor:(UIColor*)color;
+
 @end
