@@ -7,8 +7,10 @@
 //
 
 #import "FreshlyItemViewController.h"
-#import "UIImage+FreshlyAdditions.h"
 #import "FreshlyFoodItemService.h"
+#import "FreshlyItemDateViewController.h"
+
+#import "UIImage+FreshlyAdditions.h"
 
 #define kImageViewSize 100.0
 
@@ -26,6 +28,7 @@
 @property (nonatomic, readwrite, strong) UIImageView *imageView;
 @property (nonatomic, readwrite, strong) UITextField *titleField;
 @property (nonatomic, readwrite, strong) UIButton *categoryButton;
+@property (nonatomic, readwrite, strong) FreshlyItemDateViewController *itemDateViewController;
 
 @property (nonatomic, readwrite, strong) NSArray *categoryList;
 
@@ -44,6 +47,7 @@
 		self.imageView = [[UIImageView alloc] init];
 		self.titleField = [[UITextField alloc] init];
 		self.categoryButton = [[UIButton alloc] init];
+		self.itemDateViewController = [[FreshlyItemDateViewController alloc] init];
 		
 		self.categoryList = [[NSArray alloc] initWithArray:[[FreshlyFoodItemService sharedInstance] foodItemCategoryList]];
 		
@@ -98,6 +102,11 @@
 	[self.categoryButton.titleLabel setFont:[UIFont systemFontOfSize:kCategoryFieldFontSize]];
 	[self.categoryButton addTarget:self action:@selector(presentCategoryPicker) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:self.categoryButton];
+	
+	[self.itemDateViewController.view setFrame:CGRectMake(0, 220, screenBounds.size.width, 90)];
+	[self.view addSubview:self.itemDateViewController.view];
+	
+	
 }
 
 #pragma mark - CategoryPicker

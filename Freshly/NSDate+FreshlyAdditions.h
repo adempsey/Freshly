@@ -10,6 +10,8 @@
 
 @interface NSDate (FreshlyAdditions)
 
+- (NSDateComponents*)calendarDescription;
+- (NSString*)monthAsString;
 - (NSString*)approximateDescription;
 
 @end

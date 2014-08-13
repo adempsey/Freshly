@@ -15,6 +15,18 @@ static const NSUInteger kYEAR   = kMONTH*12;
 
 @implementation NSDate (FreshlyAdditions)
 
+- (NSDateComponents*)calendarDescription
+{
+	return [[NSCalendar currentCalendar] components:NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear fromDate:self];
+}
+
+- (NSString*)monthAsString
+{
+	NSArray *months = @[@"Jan", @"Feb", @"Mar", @"Apr", @"May", @"Jun",
+						@"Jul", @"Aug", @"Sep", @"Oct", @"Nov", @"Dec"];
+	return months[self.calendarDescription.month - 1];
+}
+
 - (NSString*)approximateDescription
 {
     NSInteger timeInterval = [self timeIntervalSinceNow];
