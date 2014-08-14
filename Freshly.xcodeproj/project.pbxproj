@@ -151,7 +151,7 @@
 				63EC4EE61989463A00060C4F /* NSDate+FreshlyAdditions.h */,
 				63EC4EE71989463A00060C4F /* NSDate+FreshlyAdditions.m */,
 			);
-			name = Categories;
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		8DC373E219821DC000DC9731 = {
@@ -200,7 +200,8 @@
 				8DC3743B19822DA300DC9731 /* Models */,
 				8DC373F719821DC000DC9731 /* Supporting Files */,
 			);
-			path = Freshly;
+			name = Freshly;
+			path = Freshly/Freshly;
 			sourceTree = "<group>";
 		};
 		8DC373F719821DC000DC9731 /* Supporting Files */ = {
@@ -213,6 +214,7 @@
 				8DC373FE19821DC000DC9731 /* Freshly-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		8DC3741319821DC000DC9731 /* FreshlyTests */ = {
@@ -239,7 +241,7 @@
 				8DC374311982220700DC9731 /* View */,
 				8DC3742719821F7400DC9731 /* Navigation */,
 			);
-			name = Controllers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		8DC3742719821F7400DC9731 /* Navigation */ = {
@@ -248,7 +250,7 @@
 				8DC37428198220E200DC9731 /* FreshlyMainNavigationController.h */,
 				8DC37429198220E200DC9731 /* FreshlyMainNavigationController.m */,
 			);
-			name = Navigation;
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 		8DC374311982220700DC9731 /* View */ = {
@@ -265,7 +267,7 @@
 				8DEB2AA91988BF3300043285 /* FreshlyStorageViewController.h */,
 				8DEB2AAA1988BF3300043285 /* FreshlyStorageViewController.m */,
 			);
-			name = View;
+			path = View;
 			sourceTree = "<group>";
 		};
 		8DC3743B19822DA300DC9731 /* Models */ = {
@@ -274,7 +276,7 @@
 				8DC3744419823C0C00DC9731 /* FreshlyFoodItem.h */,
 				8DC3744519823C0C00DC9731 /* FreshlyFoodItem.m */,
 			);
-			name = Models;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		8DC3744219822E5000DC9731 /* Services */ = {
@@ -283,7 +285,7 @@
 				8DC3743F19822E3F00DC9731 /* FreshlyFoodItemService.h */,
 				8DC3744019822E3F00DC9731 /* FreshlyFoodItemService.m */,
 			);
-			name = Services;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		8DC3744A198241B500DC9731 /* Views */ = {
@@ -291,7 +293,7 @@
 			children = (
 				8DC3744B198241C300DC9731 /* Cells */,
 			);
-			name = Views;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		8DC3744B198241C300DC9731 /* Cells */ = {
@@ -300,7 +302,7 @@
 				8DEB2AAF1988C3A000043285 /* FreshlyStorageTableViewCell.h */,
 				8DEB2AB01988C3A000043285 /* FreshlyStorageTableViewCell.m */,
 			);
-			name = Cells;
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		8DD7EFC21996F74C00FC0A10 /* 50px */ = {
@@ -314,7 +316,7 @@
 				8DEB2ABB1988CBA800043285 /* misc 50x50.png */,
 				8DEB2ABE1988CBA800043285 /* vegetable 50x50.png */,
 			);
-			name = 50px;
+			path = 50px;
 			sourceTree = "<group>";
 		};
 		8DD7EFD71996F78000FC0A10 /* 100px */ = {
@@ -328,7 +330,7 @@
 				8DD7EFC91996F77B00FC0A10 /* misc 100x100.png */,
 				8DD7EFCC1996F77B00FC0A10 /* vegetable 100x100.png */,
 			);
-			name = 100px;
+			path = 100px;
 			sourceTree = "<group>";
 		};
 		8DEB2AB21988CB5300043285 /* Resources */ = {
@@ -336,7 +338,7 @@
 			children = (
 				8DEB2AB31988CB6000043285 /* Images */,
 			);
-			name = Resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		8DEB2AB31988CB6000043285 /* Images */ = {
@@ -344,7 +346,7 @@
 			children = (
 				8DEB2AB41988CB6700043285 /* Food Categories */,
 			);
-			name = Images;
+			path = Images;
 			sourceTree = "<group>";
 		};
 		8DEB2AB41988CB6700043285 /* Food Categories */ = {
@@ -353,7 +355,7 @@
 				8DD7EFD71996F78000FC0A10 /* 100px */,
 				8DD7EFC21996F74C00FC0A10 /* 50px */,
 			);
-			name = "Food Categories";
+			path = "Food Categories";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
