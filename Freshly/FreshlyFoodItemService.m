@@ -41,7 +41,7 @@
 
 - (NSArray*)foodItemCategoryList
 {
-	return @[@"Dairy", @"Drink", @"Fruit", @"Meat", @"Default", @"Seafood", @"Vegetable"];
+	return @[@"Dairy", @"Drink", @"Fruit", @"Meat", @"Misc", @"Seafood", @"Vegetable"];
 }
 
 - (UIColor*)colorForCategory:(NSString*)category

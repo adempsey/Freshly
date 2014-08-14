@@ -34,7 +34,7 @@
 		8DD7EFCF1996F77B00FC0A10 /* seafood 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD7EFC51996F77B00FC0A10 /* seafood 100x100.png */; };
 		8DD7EFD01996F77B00FC0A10 /* fruit 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD7EFC61996F77B00FC0A10 /* fruit 100x100.png */; };
 		8DD7EFD11996F77B00FC0A10 /* meat 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD7EFC71996F77B00FC0A10 /* meat 100x100.png */; };
-		8DD7EFD31996F77B00FC0A10 /* default 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD7EFC91996F77B00FC0A10 /* default 100x100.png */; };
+		8DD7EFD31996F77B00FC0A10 /* misc 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD7EFC91996F77B00FC0A10 /* misc 100x100.png */; };
 		8DD7EFD61996F77B00FC0A10 /* vegetable 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD7EFCC1996F77B00FC0A10 /* vegetable 100x100.png */; };
 		8DEB2AA81988BC3100043285 /* FreshlyMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEB2AA71988BC3100043285 /* FreshlyMainViewController.m */; };
 		8DEB2AAB1988BF3300043285 /* FreshlyStorageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEB2AAA1988BF3300043285 /* FreshlyStorageViewController.m */; };
@@ -45,7 +45,7 @@
 		8DEB2AC11988CBA800043285 /* seafood 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2AB71988CBA800043285 /* seafood 50x50.png */; };
 		8DEB2AC21988CBA800043285 /* fruit 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2AB81988CBA800043285 /* fruit 50x50.png */; };
 		8DEB2AC31988CBA800043285 /* meat 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2AB91988CBA800043285 /* meat 50x50.png */; };
-		8DEB2AC51988CBA800043285 /* default 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2ABB1988CBA800043285 /* default 50x50.png */; };
+		8DEB2AC51988CBA800043285 /* misc 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2ABB1988CBA800043285 /* misc 50x50.png */; };
 		8DEB2AC81988CBA800043285 /* vegetable 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2ABE1988CBA800043285 /* vegetable 50x50.png */; };
 /* End PBXBuildFile section */
 
@@ -98,7 +98,7 @@
 		8DD7EFC51996F77B00FC0A10 /* seafood 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "seafood 100x100.png"; sourceTree = "<group>"; };
 		8DD7EFC61996F77B00FC0A10 /* fruit 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fruit 100x100.png"; sourceTree = "<group>"; };
 		8DD7EFC71996F77B00FC0A10 /* meat 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "meat 100x100.png"; sourceTree = "<group>"; };
-		8DD7EFC91996F77B00FC0A10 /* default 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default 100x100.png"; sourceTree = "<group>"; };
+		8DD7EFC91996F77B00FC0A10 /* misc 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "misc 100x100.png"; sourceTree = "<group>"; };
 		8DD7EFCC1996F77B00FC0A10 /* vegetable 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vegetable 100x100.png"; sourceTree = "<group>"; };
 		8DEB2AA61988BC3100043285 /* FreshlyMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreshlyMainViewController.h; sourceTree = "<group>"; };
 		8DEB2AA71988BC3100043285 /* FreshlyMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreshlyMainViewController.m; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 		8DEB2AB71988CBA800043285 /* seafood 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "seafood 50x50.png"; sourceTree = "<group>"; };
 		8DEB2AB81988CBA800043285 /* fruit 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fruit 50x50.png"; sourceTree = "<group>"; };
 		8DEB2AB91988CBA800043285 /* meat 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "meat 50x50.png"; sourceTree = "<group>"; };
-		8DEB2ABB1988CBA800043285 /* default 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default 50x50.png"; sourceTree = "<group>"; };
+		8DEB2ABB1988CBA800043285 /* misc 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "misc 50x50.png"; sourceTree = "<group>"; };
 		8DEB2ABE1988CBA800043285 /* vegetable 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vegetable 50x50.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -311,7 +311,7 @@
 				8DEB2AB71988CBA800043285 /* seafood 50x50.png */,
 				8DEB2AB81988CBA800043285 /* fruit 50x50.png */,
 				8DEB2AB91988CBA800043285 /* meat 50x50.png */,
-				8DEB2ABB1988CBA800043285 /* default 50x50.png */,
+				8DEB2ABB1988CBA800043285 /* misc 50x50.png */,
 				8DEB2ABE1988CBA800043285 /* vegetable 50x50.png */,
 			);
 			name = 50px;
@@ -325,7 +325,7 @@
 				8DD7EFC51996F77B00FC0A10 /* seafood 100x100.png */,
 				8DD7EFC61996F77B00FC0A10 /* fruit 100x100.png */,
 				8DD7EFC71996F77B00FC0A10 /* meat 100x100.png */,
-				8DD7EFC91996F77B00FC0A10 /* default 100x100.png */,
+				8DD7EFC91996F77B00FC0A10 /* misc 100x100.png */,
 				8DD7EFCC1996F77B00FC0A10 /* vegetable 100x100.png */,
 			);
 			name = 100px;
@@ -434,8 +434,8 @@
 			files = (
 				8DD7EFCD1996F77B00FC0A10 /* dairy 100x100.png in Resources */,
 				8DEB2ABF1988CBA800043285 /* dairy 50x50.png in Resources */,
-				8DD7EFD31996F77B00FC0A10 /* default 100x100.png in Resources */,
-				8DEB2AC51988CBA800043285 /* default 50x50.png in Resources */,
+				8DD7EFD31996F77B00FC0A10 /* misc 100x100.png in Resources */,
+				8DEB2AC51988CBA800043285 /* misc 50x50.png in Resources */,
 				8DD7EFCE1996F77B00FC0A10 /* drink 100x100.png in Resources */,
 				8DEB2AC01988CBA800043285 /* drink 50x50.png in Resources */,
 				8DC373FB19821DC000DC9731 /* InfoPlist.strings in Resources */,
