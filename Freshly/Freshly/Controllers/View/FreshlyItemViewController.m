@@ -73,6 +73,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	self.view.backgroundColor = [UIColor whiteColor];
+	
 	self.imageView.frame = CGRectMake(20, 80, kImageViewSize, kImageViewSize);
 	NSString *imageTitle = self.item ? self.item.category : @"default";
 	self.imageView.image = [UIImage imageForCategory:imageTitle withSize:kImageViewSize];
@@ -168,6 +171,11 @@
 	self.item.space = [NSNumber numberWithInteger:self.spaceChooser.selectedSegmentIndex];
 	
 	[[FreshlyFoodItemService sharedInstance] updateItem:self.item];
+}
+
+- (BOOL)hidesBottomBarWhenPushed
+{
+	return YES;
 }
 
 - (void)moveItemToGroceryList

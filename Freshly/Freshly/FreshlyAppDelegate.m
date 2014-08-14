@@ -7,8 +7,8 @@
 //
 
 #import "FreshlyAppDelegate.h"
-#import "FreshlyMainNavigationController.h"
-#import "FreshlyMainViewController.h"
+#import "FreshlyStorageViewController.h"
+#import "FreshlyShoppingListViewController.h"
 
 @implementation FreshlyAppDelegate
 
@@ -20,10 +20,18 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
+
+	UITabBarController *tabBarController = [[UITabBarController alloc] init];
 	
-	FreshlyMainViewController *mainStorageViewController = [[FreshlyMainViewController alloc] init];
-	FreshlyMainNavigationController *mainNavigationController = [[FreshlyMainNavigationController alloc] initWithRootViewController:mainStorageViewController];
-	self.window.rootViewController = mainNavigationController;
+	FreshlyStorageViewController *storageViewController = [[FreshlyStorageViewController alloc] init];
+	UINavigationController *storageNavigationController = [[UINavigationController alloc] initWithRootViewController:storageViewController];
+	
+	FreshlyShoppingListViewController *shoppingListViewController = [[FreshlyShoppingListViewController alloc] init];
+	UINavigationController *shoppingListNavigationController = [[UINavigationController alloc] initWithRootViewController:shoppingListViewController];
+	
+	[tabBarController setViewControllers:@[storageNavigationController, shoppingListNavigationController]];
+	
+	self.window.rootViewController = tabBarController;
 	
     [self.window makeKeyAndVisible];
     return YES;

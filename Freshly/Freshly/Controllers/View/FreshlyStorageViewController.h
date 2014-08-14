@@ -10,6 +10,4 @@
 
 @interface FreshlyStorageViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, readwrite, strong) UINavigationController *navigationController;
-
 @end

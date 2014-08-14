@@ -24,7 +24,6 @@
 		8DC3741019821DC000DC9731 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC373F419821DC000DC9731 /* CoreData.framework */; };
 		8DC3741819821DC000DC9731 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DC3741619821DC000DC9731 /* InfoPlist.strings */; };
 		8DC3741A19821DC000DC9731 /* FreshlyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC3741919821DC000DC9731 /* FreshlyTests.m */; };
-		8DC3742A198220E200DC9731 /* FreshlyMainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC37429198220E200DC9731 /* FreshlyMainNavigationController.m */; };
 		8DC3744119822E3F00DC9731 /* FreshlyFoodItemService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC3744019822E3F00DC9731 /* FreshlyFoodItemService.m */; };
 		8DC3744619823C0C00DC9731 /* FreshlyFoodItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC3744519823C0C00DC9731 /* FreshlyFoodItem.m */; };
 		8DD7EFBD1996F3CA00FC0A10 /* FreshlyItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD7EFBC1996F3CA00FC0A10 /* FreshlyItemViewController.m */; };
@@ -36,7 +35,6 @@
 		8DD7EFD11996F77B00FC0A10 /* meat 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD7EFC71996F77B00FC0A10 /* meat 100x100.png */; };
 		8DD7EFD31996F77B00FC0A10 /* misc 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD7EFC91996F77B00FC0A10 /* misc 100x100.png */; };
 		8DD7EFD61996F77B00FC0A10 /* vegetable 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD7EFCC1996F77B00FC0A10 /* vegetable 100x100.png */; };
-		8DEB2AA81988BC3100043285 /* FreshlyMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEB2AA71988BC3100043285 /* FreshlyMainViewController.m */; };
 		8DEB2AAB1988BF3300043285 /* FreshlyStorageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEB2AAA1988BF3300043285 /* FreshlyStorageViewController.m */; };
 		8DEB2AAE1988BF4A00043285 /* FreshlyShoppingListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEB2AAD1988BF4A00043285 /* FreshlyShoppingListViewController.m */; };
 		8DEB2AB11988C3A000043285 /* FreshlyStorageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEB2AB01988C3A000043285 /* FreshlyStorageTableViewCell.m */; };
@@ -82,8 +80,6 @@
 		8DC3741519821DC000DC9731 /* FreshlyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FreshlyTests-Info.plist"; sourceTree = "<group>"; };
 		8DC3741719821DC000DC9731 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8DC3741919821DC000DC9731 /* FreshlyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FreshlyTests.m; sourceTree = "<group>"; };
-		8DC37428198220E200DC9731 /* FreshlyMainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreshlyMainNavigationController.h; sourceTree = "<group>"; };
-		8DC37429198220E200DC9731 /* FreshlyMainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreshlyMainNavigationController.m; sourceTree = "<group>"; };
 		8DC3743F19822E3F00DC9731 /* FreshlyFoodItemService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreshlyFoodItemService.h; sourceTree = "<group>"; };
 		8DC3744019822E3F00DC9731 /* FreshlyFoodItemService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreshlyFoodItemService.m; sourceTree = "<group>"; };
 		8DC374431982333300DC9731 /* FreshlyConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FreshlyConstants.h; sourceTree = "<group>"; };
@@ -100,8 +96,6 @@
 		8DD7EFC71996F77B00FC0A10 /* meat 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "meat 100x100.png"; sourceTree = "<group>"; };
 		8DD7EFC91996F77B00FC0A10 /* misc 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "misc 100x100.png"; sourceTree = "<group>"; };
 		8DD7EFCC1996F77B00FC0A10 /* vegetable 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vegetable 100x100.png"; sourceTree = "<group>"; };
-		8DEB2AA61988BC3100043285 /* FreshlyMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreshlyMainViewController.h; sourceTree = "<group>"; };
-		8DEB2AA71988BC3100043285 /* FreshlyMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreshlyMainViewController.m; sourceTree = "<group>"; };
 		8DEB2AA91988BF3300043285 /* FreshlyStorageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreshlyStorageViewController.h; sourceTree = "<group>"; };
 		8DEB2AAA1988BF3300043285 /* FreshlyStorageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreshlyStorageViewController.m; sourceTree = "<group>"; };
 		8DEB2AAC1988BF4A00043285 /* FreshlyShoppingListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreshlyShoppingListViewController.h; sourceTree = "<group>"; };
@@ -239,18 +233,8 @@
 			isa = PBXGroup;
 			children = (
 				8DC374311982220700DC9731 /* View */,
-				8DC3742719821F7400DC9731 /* Navigation */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		8DC3742719821F7400DC9731 /* Navigation */ = {
-			isa = PBXGroup;
-			children = (
-				8DC37428198220E200DC9731 /* FreshlyMainNavigationController.h */,
-				8DC37429198220E200DC9731 /* FreshlyMainNavigationController.m */,
-			);
-			path = Navigation;
 			sourceTree = "<group>";
 		};
 		8DC374311982220700DC9731 /* View */ = {
@@ -260,8 +244,6 @@
 				8D5C23F61999C2AA007B314B /* FreshlyItemDateViewController.m */,
 				8DD7EFBB1996F3CA00FC0A10 /* FreshlyItemViewController.h */,
 				8DD7EFBC1996F3CA00FC0A10 /* FreshlyItemViewController.m */,
-				8DEB2AA61988BC3100043285 /* FreshlyMainViewController.h */,
-				8DEB2AA71988BC3100043285 /* FreshlyMainViewController.m */,
 				8DEB2AAC1988BF4A00043285 /* FreshlyShoppingListViewController.h */,
 				8DEB2AAD1988BF4A00043285 /* FreshlyShoppingListViewController.m */,
 				8DEB2AA91988BF3300043285 /* FreshlyStorageViewController.h */,
@@ -476,8 +458,6 @@
 				8DEB2AAB1988BF3300043285 /* FreshlyStorageViewController.m in Sources */,
 				8DD7EFBD1996F3CA00FC0A10 /* FreshlyItemViewController.m in Sources */,
 				63EC4EE81989463A00060C4F /* NSDate+FreshlyAdditions.m in Sources */,
-				8DC3742A198220E200DC9731 /* FreshlyMainNavigationController.m in Sources */,
-				8DEB2AA81988BC3100043285 /* FreshlyMainViewController.m in Sources */,
 				8DD7EFC01996F62A00FC0A10 /* UIImage+FreshlyAdditions.m in Sources */,
 				8DC3744619823C0C00DC9731 /* FreshlyFoodItem.m in Sources */,
 				8DC373FD19821DC000DC9731 /* main.m in Sources */,

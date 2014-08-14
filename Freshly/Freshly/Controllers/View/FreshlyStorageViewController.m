@@ -10,9 +10,10 @@
 #import "FreshlyStorageTableViewCell.h"
 #import "FreshlyFoodItemService.h"
 #import "FreshlyFoodItem.h"
+#import "FreshlyItemViewController.h"
+
 #import "NSDate+FreshlyAdditions.h"
 #import "UIImage+FreshlyAdditions.h"
-#import "FreshlyItemViewController.h"
 
 #define kStorageTableViewCellIdentifier @"StorageTableViewCell"
 
