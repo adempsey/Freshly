@@ -77,7 +77,7 @@
 {
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
 	request.entity = [NSEntityDescription entityForName:kFoodItemEntityName inManagedObjectContext:self.managedObjectContext];
-	request.predicate = [NSPredicate predicateWithFormat:@"(inStorage == 1)"];
+	request.predicate = [NSPredicate predicateWithFormat:@"(self.inStorage == 1)"];
 	
 	return [self.managedObjectContext executeFetchRequest:request error:nil];
 }

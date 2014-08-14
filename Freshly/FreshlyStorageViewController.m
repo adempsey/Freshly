@@ -46,8 +46,11 @@
 {
     [super viewDidLoad];
 	
+	// Adjust for tab bar
 	CGRect tableViewFrame = self.view.frame;
+	tableViewFrame.size.height -= 49;
 	self.tableView.frame = tableViewFrame;
+	
 	[self.view addSubview:self.tableView];
 }
 
@@ -58,9 +61,17 @@
 
 - (void)reloadAllTableViewSections
 {
+	[self filterItemsForStorage];
+	
 	NSRange sectionRange = NSMakeRange(0, self.tableView.numberOfSections);
 	NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:sectionRange];
 	[self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)filterItemsForStorage
+{
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(self.inStorage == 1)"];
+	self.items = [self.items filteredArrayUsingPredicate:predicate];
 }
 
 #pragma mark - TableView Datasource

@@ -143,6 +143,7 @@
 	[self.moveToGroceryListButton setTitle:@"Move To Grocery List" forState:UIControlStateNormal];
 	[self.moveToGroceryListButton setTitle:@"Move To Grocery List" forState:UIControlStateSelected];
 	[self.moveToGroceryListButton setBackgroundColor:categoryColor];
+	[self.moveToGroceryListButton addTarget:self action:@selector(moveItemToGroceryList) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:self.moveToGroceryListButton];
 	
 	[self.deleteButton setFrame:CGRectMake(20, 490, screenBounds.size.width - 40, 40)];
@@ -163,6 +164,12 @@
 	self.item.space = [NSNumber numberWithInteger:self.spaceChooser.selectedSegmentIndex];
 	
 	[[FreshlyFoodItemService sharedInstance] updateItem:self.item];
+}
+
+- (void)moveItemToGroceryList
+{
+	self.item.inStorage = [NSNumber numberWithBool:NO];
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Picker Views
