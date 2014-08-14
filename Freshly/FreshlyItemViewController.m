@@ -102,6 +102,7 @@
 	self.categoryPicker.backgroundColor = [UIColor whiteColor];
 	self.categoryPicker.dataSource = self;
 	self.categoryPicker.delegate = self;
+	[self.categoryPicker selectRow:[self indexForCategory:self.item.category] inComponent:0 animated:NO];
 	
 	self.purchaseDatePicker.frame = CGRectMake(0, screenBounds.size.height, screenBounds.size.width, kPickerHeight);
 	self.purchaseDatePicker.backgroundColor = [UIColor whiteColor];
@@ -247,6 +248,12 @@
 			self.currentPicker = nil;
 		}
 	}];
+}
+
+- (NSInteger)indexForCategory:(NSString*)category
+{
+	NSArray *categories = [[FreshlyFoodItemService sharedInstance] foodItemCategoryList];
+	return [categories indexOfObject:category.capitalizedString];
 }
 
 #pragma mark - UIPickerView Delegate
