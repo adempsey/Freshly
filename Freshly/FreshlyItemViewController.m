@@ -81,12 +81,15 @@
 	UIColor *categoryColor = [[FreshlyFoodItemService sharedInstance] colorForCategory:self.item.category];
 	
 	self.titleField.frame = CGRectMake(140, 80, kTextViewWidth, kTextViewHeight);
+	self.titleField.backgroundColor = [UIColor whiteColor];
 	self.titleField.text = self.item ? self.item.name : @"";
 	self.titleField.font = [UIFont systemFontOfSize:kTitleFieldFontSize];
 	self.titleField.placeholder = @"Food";
+	self.titleField.returnKeyType = UIReturnKeyDone;
+	self.titleField.delegate = self;
 	[self.view addSubview:self.titleField];
 	
-	UITapGestureRecognizer *pickerBackgroundTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissActivePicker)];
+	UITapGestureRecognizer *pickerBackgroundTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissInput)];
 	
 	CGRect screenBounds = [[UIScreen mainScreen] bounds];
 	
@@ -193,42 +196,55 @@
 	}];
 }
 
-- (void)dismissActivePicker
+- (void)dismissInput
 {
 	CGRect screenBounds = [[UIScreen mainScreen] bounds];
 	
+	[self.titleField resignFirstResponder];
+	
 	[UIView animateWithDuration:0.25 animations:^{
-		[self.currentPicker setFrame:CGRectMake(0, screenBounds.size.height, screenBounds.size.width, kPickerHeight)];
 		self.darkBackground.alpha = 0.0;
 		
-		if ([self.currentPicker isKindOfClass:[UIPickerView class]] && [self.currentPicker isEqual:self.categoryPicker]) {
-			NSInteger selectedIndex = [self.currentPicker selectedRowInComponent:0];
-			NSString *categoryTitle = [self.categoryList objectAtIndex:selectedIndex];
-			[self.categoryButton setTitle:categoryTitle forState:UIControlStateNormal];
-			[self.categoryButton setTitle:categoryTitle forState:UIControlStateSelected];
+		if (self.currentPicker) {
 			
-			UIColor *categoryColor = [[FreshlyFoodItemService sharedInstance] colorForCategory:categoryTitle];
+			[self.currentPicker setFrame:CGRectMake(0, screenBounds.size.height, screenBounds.size.width, kPickerHeight)];
 			
-			self.imageView.image = [UIImage imageForCategory:categoryTitle withSize:kImageViewSize];
-			self.spaceChooser.tintColor = categoryColor;
-			self.moveToGroceryListButton.backgroundColor = categoryColor;
-			[self.itemDateViewController setBackgroundColor:categoryColor];
+			if ([self.currentPicker isKindOfClass:[UIPickerView class]] && [self.currentPicker isEqual:self.categoryPicker]) {
+				NSInteger selectedIndex = [self.currentPicker selectedRowInComponent:0];
+				NSString *categoryTitle = [self.categoryList objectAtIndex:selectedIndex];
+				[self.categoryButton setTitle:categoryTitle forState:UIControlStateNormal];
+				[self.categoryButton setTitle:categoryTitle forState:UIControlStateSelected];
+				
+				UIColor *categoryColor = [[FreshlyFoodItemService sharedInstance] colorForCategory:categoryTitle];
+				
+				self.imageView.image = [UIImage imageForCategory:categoryTitle withSize:kImageViewSize];
+				self.spaceChooser.tintColor = categoryColor;
+				self.moveToGroceryListButton.backgroundColor = categoryColor;
+				[self.itemDateViewController setBackgroundColor:categoryColor];
+			}
+			
 		}
 		
 	} completion:^(BOOL finished) {
 		if (finished) {
 			[self.darkBackground removeFromSuperview];
-			[self.currentPicker removeFromSuperview];
 			
-			if ([self.currentPicker isKindOfClass:[UIDatePicker class]]) {
+			if (self.currentPicker) {
 				
-				if ([self.currentPicker isEqual:self.purchaseDatePicker]) {
-					self.itemDateViewController.purchaseDate = ((UIDatePicker*) self.currentPicker).date;
+				[self.currentPicker removeFromSuperview];
+				
+				if ([self.currentPicker isKindOfClass:[UIDatePicker class]]) {
 					
-				} else if ([self.currentPicker isEqual:self.expirationDatePicker]) {
-					self.itemDateViewController.expirationDate = ((UIDatePicker*) self.expirationDatePicker).date;
+					if ([self.currentPicker isEqual:self.purchaseDatePicker]) {
+						self.itemDateViewController.purchaseDate = ((UIDatePicker*) self.currentPicker).date;
+						
+					} else if ([self.currentPicker isEqual:self.expirationDatePicker]) {
+						self.itemDateViewController.expirationDate = ((UIDatePicker*) self.expirationDatePicker).date;
+					}
 				}
 			}
+			
+			self.currentPicker = nil;
 		}
 	}];
 }
@@ -261,6 +277,24 @@
 	} else if ([date isEqual:self.itemDateViewController.expirationDate]) {
 		[self presentPicker:self.expirationDatePicker];
 	}
+}
+
+#pragma mark - UITextField Delegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+	[self.view addSubview:self.darkBackground];
+	[self.view bringSubviewToFront:self.titleField];
+	
+	[UIView animateWithDuration:0.25 animations:^{
+		self.darkBackground.alpha = 0.5;
+	}];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	[self dismissInput];
+	return YES;
 }
 
 @end

@@ -10,7 +10,7 @@
 #import "FreshlyFoodItem.h"
 #import "FreshlyItemDateViewController.h"
 
-@interface FreshlyItemViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, FreshlyItemDateProtocol>
+@interface FreshlyItemViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, FreshlyItemDateProtocol, UITextFieldDelegate>
 
 - (instancetype)initWithItem:(FreshlyFoodItem*)item;
 
