@@ -151,6 +151,18 @@
 	
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+	[super viewDidDisappear:animated];
+	self.item.name = self.titleField.text;
+	self.item.category = self.categoryButton.titleLabel.text.lowercaseString;
+	self.item.dateOfPurchase = self.purchaseDatePicker.date;
+	self.item.dateOfExpiration = self.expirationDatePicker.date;
+	self.item.space = [NSNumber numberWithInteger:self.spaceChooser.selectedSegmentIndex];
+	
+	[[FreshlyFoodItemService sharedInstance] updateItem:self.item];
+}
+
 #pragma mark - Picker Views
 
 - (void)presentCategoryPicker

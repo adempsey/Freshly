@@ -97,4 +97,24 @@
 	return YES;
 }
 
+- (BOOL)updateItem:(FreshlyFoodItem*)item
+{
+	NSFetchRequest *oldItemRequest = [[NSFetchRequest alloc] init];
+	oldItemRequest.entity = [NSEntityDescription entityForName:kFoodItemEntityName inManagedObjectContext:self.managedObjectContext];
+	oldItemRequest.predicate = [NSPredicate predicateWithFormat:@"self == %@", item];
+	
+	NSArray *result = [self.managedObjectContext executeFetchRequest:oldItemRequest error:nil];
+	
+	if (result.count == 1) {
+		FreshlyFoodItem *oldItem = result[0];
+		oldItem = item;
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ITEM_UPDATED object:nil];
+		
+		return (![self.managedObjectContext save:nil]);
+	}
+	
+	return NO;
+}
+
 @end

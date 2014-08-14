@@ -36,6 +36,8 @@
 		self.tableView = [[UITableView alloc] init];
 		self.tableView.delegate = self;
 		self.tableView.dataSource = self;
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveItemUpdateNotification:) name:NOTIFICATION_ITEM_UPDATED object:nil];
     }
     return self;
 }
@@ -47,6 +49,18 @@
 	CGRect tableViewFrame = self.view.frame;
 	self.tableView.frame = tableViewFrame;
 	[self.view addSubview:self.tableView];
+}
+
+- (void)didReceiveItemUpdateNotification:(NSNotification*)notification
+{
+	[self reloadAllTableViewSections];
+}
+
+- (void)reloadAllTableViewSections
+{
+	NSRange sectionRange = NSMakeRange(0, self.tableView.numberOfSections);
+	NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:sectionRange];
+	[self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - TableView Datasource

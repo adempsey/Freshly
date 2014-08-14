@@ -41,4 +41,8 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define COLOR_DARK_GREY UIColorFromRGB(0x444444)
 #define COLOR_LIGHT_GREY UIColorFromRGB(0xCCCCCC)
 
+/************** Notifications **************/
+
+#define NOTIFICATION_ITEM_UPDATED @"notificationItemUpdated"
+
 #endif

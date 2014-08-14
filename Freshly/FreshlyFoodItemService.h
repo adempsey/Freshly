@@ -7,16 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FreshlyFoodItem.h"
 
 @interface FreshlyFoodItemService : NSObject
 
 + (FreshlyFoodItemService*)sharedInstance;
 
-- (NSArray*)retrieveItemsForStorage;
 - (UIColor*)colorForCategory:(NSString*)category;
-
-- (BOOL)createItemWithAttributes:(NSDictionary*)attributes;
 - (NSArray*)foodItemCategoryList;
+
+- (NSArray*)retrieveItemsForStorage;
+- (BOOL)createItemWithAttributes:(NSDictionary*)attributes;
+- (BOOL)updateItem:(FreshlyFoodItem*)item;
 
 
 @end
