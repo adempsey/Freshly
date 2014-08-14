@@ -30,11 +30,10 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 #define COLOR_DAIRY UIColorFromRGB(0xF1C94D)
 #define COLOR_DRINK UIColorFromRGB(0x824D98)
-#define COLOR_FISH UIColorFromRGB(0xB0E9)
 #define COLOR_FRUIT UIColorFromRGB(0xA0Cb57)
 #define COLOR_MEAT UIColorFromRGB(0xF1813B)
 #define COLOR_MISC UIColorFromRGB(0x605F61)
-#define COLOR_SEAFOOD UIColorFromRGB(0x5FC5B5)
+#define COLOR_SEAFOOD UIColorFromRGB(0xB0E9)
 #define COLOR_VEGETABLE UIColorFromRGB(0x36B45B)
 
 #define COLOR_WHITISH UIColorFromRGB(0xF6F8F7)

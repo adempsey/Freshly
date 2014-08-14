@@ -41,7 +41,7 @@
 
 - (NSArray*)foodItemCategoryList
 {
-	return @[@"Dairy", @"Drink", @"Fish", @"Fruit", @"Meat", @"Default", @"Seafood", @"Vegetable"];
+	return @[@"Dairy", @"Drink", @"Fruit", @"Meat", @"Default", @"Seafood", @"Vegetable"];
 }
 
 - (UIColor*)colorForCategory:(NSString*)category
@@ -53,9 +53,6 @@
 		
 	} else if ([category isEqualToString:@"drink"]) {
 		return COLOR_DRINK;
-		
-	} else if ([category isEqualToString:@"fish"]) {
-		return COLOR_FISH;
 		
 	} else if ([category isEqualToString:@"fruit"]) {
 		return COLOR_FRUIT;
