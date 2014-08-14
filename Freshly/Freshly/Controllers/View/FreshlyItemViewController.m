@@ -106,12 +106,12 @@
 	
 	self.purchaseDatePicker.frame = CGRectMake(0, screenBounds.size.height, screenBounds.size.width, kPickerHeight);
 	self.purchaseDatePicker.backgroundColor = [UIColor whiteColor];
-	self.purchaseDatePicker.date = self.item.dateOfPurchase;
+	self.purchaseDatePicker.date = self.item.dateOfPurchase ? : [NSDate date];
 	self.purchaseDatePicker.datePickerMode = UIDatePickerModeDate;
 	
 	self.expirationDatePicker.frame = CGRectMake(0, screenBounds.size.height, screenBounds.size.width, kPickerHeight);
 	self.expirationDatePicker.backgroundColor = [UIColor whiteColor];
-	self.expirationDatePicker.date = self.item.dateOfExpiration;
+	self.expirationDatePicker.date = self.item.dateOfExpiration ? : [NSDate date];
 	self.expirationDatePicker.datePickerMode = UIDatePickerModeDate;
 	
 	self.categoryPickerDoneButton.frame = CGRectMake(screenBounds.size.width - 80, 10, 80, 30);
@@ -133,8 +133,8 @@
 	
 	[self.itemDateViewController.view setFrame:CGRectMake(0, 220, screenBounds.size.width, 90)];
 	[self.itemDateViewController setBackgroundColor:categoryColor];
-	self.itemDateViewController.purchaseDate = self.item.dateOfPurchase;
-	self.itemDateViewController.expirationDate = self.item.dateOfExpiration;
+	self.itemDateViewController.purchaseDate = self.item.dateOfPurchase ? : [NSDate date];
+	self.itemDateViewController.expirationDate = self.item.dateOfExpiration ? : [NSDate date];
 	self.itemDateViewController.delegate = self;
 	[self.view addSubview:self.itemDateViewController.view];
 	
@@ -253,7 +253,8 @@
 - (NSInteger)indexForCategory:(NSString*)category
 {
 	NSArray *categories = [[FreshlyFoodItemService sharedInstance] foodItemCategoryList];
-	return [categories indexOfObject:category.capitalizedString];
+	NSString *object = category ? category.capitalizedString : @"Misc";
+	return [categories indexOfObject:object];
 }
 
 #pragma mark - UIPickerView Delegate
