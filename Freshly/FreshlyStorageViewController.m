@@ -51,6 +51,8 @@
 	tableViewFrame.size.height -= 49;
 	self.tableView.frame = tableViewFrame;
 	
+	[self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 80, 0, 0)];
+
 	[self.view addSubview:self.tableView];
 }
 
