@@ -8,22 +8,21 @@
 
 #import "FreshlyStorageTableViewCell.h"
 
+#import "NSDate+FreshlyAdditions.h"
+#import "UIImage+FreshlyAdditions.h"
+
 @implementation FreshlyStorageTableViewCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (instancetype)initWithItem:(FreshlyFoodItem *)item
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
+	if (self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:TABLE_VIEW_CELL_STORAGE_IDENTIFIER]) {
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
+		self.textLabel.text = item.name;
+		self.detailTextLabel.text = [NSString stringWithFormat:@"Purchased %@", item.dateOfPurchase.approximateDescription];
+		self.imageView.image = [UIImage imageForCategory:item.category withSize:50];
 
-    // Configure the view for the selected state
+	}
+	return self;
 }
 
 @end

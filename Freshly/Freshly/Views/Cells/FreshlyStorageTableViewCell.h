@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FreshlyFoodItem.h"
+
+#define TABLE_VIEW_CELL_STORAGE_IDENTIFIER @"StorageTableViewCell"
 
 @interface FreshlyStorageTableViewCell : UITableViewCell
+
+- (instancetype)initWithItem:(FreshlyFoodItem*)item;
 
 @end

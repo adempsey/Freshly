@@ -12,11 +12,6 @@
 #import "FreshlyFoodItem.h"
 #import "FreshlyItemViewController.h"
 
-#import "NSDate+FreshlyAdditions.h"
-#import "UIImage+FreshlyAdditions.h"
-
-#define kStorageTableViewCellIdentifier @"StorageTableViewCell"
-
 @interface FreshlyStorageViewController ()
 
 @property (nonatomic, readwrite, strong) NSArray *items;
@@ -91,19 +86,9 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	FreshlyStorageTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kStorageTableViewCellIdentifier];
-	
-	if (!cell) {
-		cell = [[FreshlyStorageTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kStorageTableViewCellIdentifier];
-	}
-	
 	FreshlyFoodItem *item = self.items[indexPath.row];
-	
-	cell.textLabel.text = item.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Purchased %@", item.dateOfPurchase.approximateDescription];
-	cell.imageView.image = [UIImage imageForCategory:item.category withSize:50];
-	
-	return cell;
+	FreshlyStorageTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:TABLE_VIEW_CELL_STORAGE_IDENTIFIER];
+	return cell ? : [[FreshlyStorageTableViewCell alloc] initWithItem:item];
 }
 
 #pragma mark - TableView Delegate
