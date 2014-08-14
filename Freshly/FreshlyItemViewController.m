@@ -129,6 +129,8 @@
 	
 	[self.itemDateViewController.view setFrame:CGRectMake(0, 220, screenBounds.size.width, 90)];
 	[self.itemDateViewController setBackgroundColor:categoryColor];
+	self.itemDateViewController.purchaseDate = self.item.dateOfPurchase;
+	self.itemDateViewController.expirationDate = self.item.dateOfExpiration;
 	self.itemDateViewController.delegate = self;
 	[self.view addSubview:self.itemDateViewController.view];
 	
