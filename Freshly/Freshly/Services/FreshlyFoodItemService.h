@@ -16,7 +16,7 @@
 - (UIColor*)colorForCategory:(NSString*)category;
 - (NSArray*)foodItemCategoryList;
 
-- (NSArray*)retrieveItemsForStorage;
+- (void)retrieveItemsForStorageWithBlock:(void (^)(NSArray*))completionBlock;
 - (BOOL)createItemWithAttributes:(NSDictionary*)attributes;
 - (BOOL)updateItem:(FreshlyFoodItem*)item;
 

@@ -12,6 +12,8 @@
 #import "FreshlyFoodItem.h"
 #import "FreshlyItemViewController.h"
 
+#import "FreshlyItemViewController+NewItem.h"
+
 @interface FreshlyStorageViewController ()
 
 @property (nonatomic, readwrite, strong) NSArray *items;
@@ -27,7 +29,10 @@
     if (self) {
 		self.title = FRESHLY_SPACE_STORAGE;
 		
-		self.items = [[NSArray alloc] initWithArray:[[FreshlyFoodItemService sharedInstance] retrieveItemsForStorage]];
+		self.items = [[NSArray alloc] init];
+		[[FreshlyFoodItemService sharedInstance] retrieveItemsForStorageWithBlock:^(NSArray *items) {
+			self.items = items;
+		}];
 		
 		self.tableView = [[UITableView alloc] init];
 		self.tableView.delegate = self;
@@ -46,10 +51,11 @@
 	CGRect tableViewFrame = self.view.frame;
 	tableViewFrame.size.height -= 49;
 	self.tableView.frame = tableViewFrame;
-	
 	[self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 80, 0, 0)];
-
 	[self.view addSubview:self.tableView];
+
+	UIBarButtonItem *addNewItemButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewItemView)];
+	self.navigationItem.rightBarButtonItem = addNewItemButton;
 }
 
 - (void)didReceiveItemUpdateNotification:(NSNotification*)notification
@@ -57,19 +63,31 @@
 	[self reloadAllTableViewSections];
 }
 
-- (void)reloadAllTableViewSections
+- (void)presentNewItemView
 {
-	[self filterItemsForStorage];
+	FreshlyItemViewController *newItemViewController = [[FreshlyItemViewController alloc] initWithItem:nil];
+	UINavigationController *newItemNavigationController = [[UINavigationController alloc] initWithRootViewController:newItemViewController];
+
+	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+																	 style:UIBarButtonItemStylePlain
+																	target:newItemViewController
+																	action:@selector(cancelNewItemCreation)];
 	
-	NSRange sectionRange = NSMakeRange(0, self.tableView.numberOfSections);
-	NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:sectionRange];
-	[self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
+	newItemViewController.navigationItem.leftBarButtonItem = cancelButton;
+
+	[self presentViewController:newItemNavigationController animated:YES completion:nil];
 }
 
-- (void)filterItemsForStorage
+#pragma mark - TableView methods
+
+- (void)reloadAllTableViewSections
 {
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(self.inStorage == 1)"];
-	self.items = [self.items filteredArrayUsingPredicate:predicate];
+	[[FreshlyFoodItemService sharedInstance] retrieveItemsForStorageWithBlock:^(NSArray *items) {
+		self.items = items;
+		NSRange sectionRange = NSMakeRange(0, self.tableView.numberOfSections);
+		NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:sectionRange];
+		[self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
+	}];
 }
 
 #pragma mark - TableView Datasource
@@ -88,7 +106,14 @@
 {
 	FreshlyFoodItem *item = self.items[indexPath.row];
 	FreshlyStorageTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:TABLE_VIEW_CELL_STORAGE_IDENTIFIER];
-	return cell ? : [[FreshlyStorageTableViewCell alloc] initWithItem:item];
+	
+	if (!cell) {
+		cell = [[FreshlyStorageTableViewCell alloc] initWithItem:item];
+	} else {
+		[cell setItem:item];
+	}
+	
+	return cell;
 }
 
 #pragma mark - TableView Delegate

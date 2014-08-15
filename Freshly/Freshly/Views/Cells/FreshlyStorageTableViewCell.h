@@ -14,5 +14,6 @@
 @interface FreshlyStorageTableViewCell : UITableViewCell
 
 - (instancetype)initWithItem:(FreshlyFoodItem*)item;
+- (void)setItem:(FreshlyFoodItem*)item;
 
 @end

@@ -33,6 +33,8 @@
 @property (nonatomic, readwrite, strong) UIButton *moveToGroceryListButton;
 @property (nonatomic, readwrite, strong) UIButton *deleteButton;
 
+@property (nonatomic, readwrite, strong) UIButton *saveButton;
+
 @property (nonatomic, readwrite, strong) NSArray *categoryList;
 
 @property (nonatomic, readwrite, strong) UIPickerView *categoryPicker;
@@ -41,6 +43,8 @@
 @property (nonatomic, readwrite, strong) UIButton *categoryPickerDoneButton;
 @property (nonatomic, readwrite, strong) UIView *darkBackground;
 @property (nonatomic, readwrite, weak) id currentPicker;
+
+@property (nonatomic, readwrite, assign) BOOL itemExists;
 
 @end
 
@@ -59,6 +63,8 @@
 		self.moveToGroceryListButton = [[UIButton alloc] init];
 		self.deleteButton = [[UIButton alloc] init];
 		
+		self.saveButton = [[UIButton alloc] init];
+		
 		self.categoryList = [[NSArray alloc] initWithArray:[[FreshlyFoodItemService sharedInstance] foodItemCategoryList]];
 		
 		self.categoryPicker = [[UIPickerView alloc] init];
@@ -66,6 +72,8 @@
 		self.expirationDatePicker = [[UIDatePicker alloc] init];
 		self.categoryPickerDoneButton = [[UIButton alloc] init];
 		self.darkBackground = [[UIView alloc] init];
+		
+		self.itemExists = (item != nil);
 	}
 	return self;
 }
@@ -146,31 +154,44 @@
 	self.spaceChooser.tintColor = categoryColor;
 	[self.view addSubview:self.spaceChooser];
 	
-	[self.moveToGroceryListButton setFrame:CGRectMake(20, 420, screenBounds.size.width - 40, 40)];
-	[self.moveToGroceryListButton setTitle:@"Move To Grocery List" forState:UIControlStateNormal];
-	[self.moveToGroceryListButton setTitle:@"Move To Grocery List" forState:UIControlStateSelected];
-	[self.moveToGroceryListButton setBackgroundColor:categoryColor];
-	[self.moveToGroceryListButton addTarget:self action:@selector(moveItemToGroceryList) forControlEvents:UIControlEventTouchUpInside];
-	[self.view addSubview:self.moveToGroceryListButton];
-	
-	[self.deleteButton setFrame:CGRectMake(20, 490, screenBounds.size.width - 40, 40)];
-	[self.deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
-	[self.deleteButton setTitle:@"Delete" forState:UIControlStateSelected];
-	[self.deleteButton setBackgroundColor:FCOLOR_RED];
-	[self.view addSubview:self.deleteButton];
-	
+	if (self.itemExists) {
+		[self.moveToGroceryListButton setFrame:CGRectMake(20, 420, screenBounds.size.width - 40, 40)];
+		[self.moveToGroceryListButton setTitle:@"Move To Grocery List" forState:UIControlStateNormal];
+		[self.moveToGroceryListButton setTitle:@"Move To Grocery List" forState:UIControlStateSelected];
+		[self.moveToGroceryListButton setBackgroundColor:categoryColor];
+		[self.moveToGroceryListButton addTarget:self action:@selector(moveItemToGroceryList) forControlEvents:UIControlEventTouchUpInside];
+		[self.view addSubview:self.moveToGroceryListButton];
+
+		[self.deleteButton setFrame:CGRectMake(20, 490, screenBounds.size.width - 40, 40)];
+		[self.deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
+		[self.deleteButton setTitle:@"Delete" forState:UIControlStateSelected];
+		[self.deleteButton setBackgroundColor:FCOLOR_RED];
+		[self.view addSubview:self.deleteButton];
+		
+	} else {
+		[self.saveButton setFrame:CGRectMake(20, 460, screenBounds.size.width - 40, 40)];
+		[self.saveButton setTitle:@"Save" forState:UIControlStateNormal];
+		[self.saveButton setTitle:@"Save" forState:UIControlStateSelected];
+		[self.saveButton setBackgroundColor:categoryColor];
+		[self.saveButton addTarget:self action:@selector(saveNewItem) forControlEvents:UIControlEventTouchUpInside];
+		[self.view addSubview:self.saveButton];
+		
+	}
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
 	[super viewDidDisappear:animated];
-	self.item.name = self.titleField.text;
-	self.item.category = self.categoryButton.titleLabel.text.lowercaseString;
-	self.item.dateOfPurchase = self.purchaseDatePicker.date;
-	self.item.dateOfExpiration = self.expirationDatePicker.date;
-	self.item.space = [NSNumber numberWithInteger:self.spaceChooser.selectedSegmentIndex];
 	
-	[[FreshlyFoodItemService sharedInstance] updateItem:self.item];
+	if (self.itemExists) {
+		self.item.name = self.titleField.text;
+		self.item.category = self.categoryButton.titleLabel.text.lowercaseString;
+		self.item.dateOfPurchase = self.purchaseDatePicker.date;
+		self.item.dateOfExpiration = self.expirationDatePicker.date;
+		self.item.space = [NSNumber numberWithInteger:self.spaceChooser.selectedSegmentIndex];
+
+		[[FreshlyFoodItemService sharedInstance] updateItem:self.item];
+	}
 }
 
 - (BOOL)hidesBottomBarWhenPushed
@@ -182,6 +203,21 @@
 {
 	self.item.inStorage = [NSNumber numberWithBool:NO];
 	[self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)saveNewItem
+{
+	NSDictionary *attributes = @{@"name": self.titleField.text,
+								 @"category": [self.categoryButton.titleLabel.text lowercaseString],
+								 @"space": [NSNumber numberWithInteger: self.spaceChooser.selectedSegmentIndex],
+								 @"inStorage": [NSNumber numberWithBool:YES],
+								 @"brand": @"",
+								 @"dateOfExpiration": self.itemDateViewController.purchaseDate,
+								 @"dateOfPurchase": self.itemDateViewController.expirationDate};
+
+	[[FreshlyFoodItemService sharedInstance] createItemWithAttributes:attributes];
+	
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Picker Views
@@ -230,6 +266,7 @@
 				self.spaceChooser.tintColor = categoryColor;
 				self.moveToGroceryListButton.backgroundColor = categoryColor;
 				[self.itemDateViewController setBackgroundColor:categoryColor];
+				self.saveButton.backgroundColor = categoryColor;
 			}
 			
 		}

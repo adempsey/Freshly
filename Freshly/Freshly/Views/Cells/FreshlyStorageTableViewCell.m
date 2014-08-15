@@ -16,13 +16,16 @@
 - (instancetype)initWithItem:(FreshlyFoodItem *)item
 {
 	if (self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:TABLE_VIEW_CELL_STORAGE_IDENTIFIER]) {
-
-		self.textLabel.text = item.name;
-		self.detailTextLabel.text = [NSString stringWithFormat:@"Purchased %@", item.dateOfPurchase.approximateDescription];
-		self.imageView.image = [UIImage imageForCategory:item.category withSize:50];
-
+		[self setItem:item];
 	}
 	return self;
+}
+
+- (void)setItem:(FreshlyFoodItem *)item
+{
+	self.textLabel.text = item.name;
+	self.detailTextLabel.text = [NSString stringWithFormat:@"Purchased %@", item.dateOfPurchase.approximateDescription];
+	self.imageView.image = [UIImage imageForCategory:item.category withSize:50];
 }
 
 @end

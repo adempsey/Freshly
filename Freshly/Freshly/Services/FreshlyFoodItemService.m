@@ -73,13 +73,13 @@
 
 #pragma mark - Database Methods
 
-- (NSArray*)retrieveItemsForStorage
+- (void)retrieveItemsForStorageWithBlock:(void (^)(NSArray*))completionBlock
 {
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
 	request.entity = [NSEntityDescription entityForName:kFoodItemEntityName inManagedObjectContext:self.managedObjectContext];
 	request.predicate = [NSPredicate predicateWithFormat:@"(self.inStorage == 1)"];
 	
-	return [self.managedObjectContext executeFetchRequest:request error:nil];
+	completionBlock([self.managedObjectContext executeFetchRequest:request error:nil]);
 }
 
 - (BOOL)createItemWithAttributes:(NSDictionary*)attributes
@@ -87,11 +87,9 @@
 	NSManagedObject *newItem = [NSEntityDescription insertNewObjectForEntityForName:kFoodItemEntityName inManagedObjectContext:self.managedObjectContext];
 	[newItem setValuesForKeysWithDictionary:attributes];
 	
-	if (![self.managedObjectContext save:nil]) {
-		return NO;
-	}
+	[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ITEM_UPDATED object:nil];
 	
-	return YES;
+	return ![self.managedObjectContext save:nil];
 }
 
 - (BOOL)updateItem:(FreshlyFoodItem*)item
