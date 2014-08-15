@@ -47,10 +47,7 @@
 {
     [super viewDidLoad];
 	
-	// Adjust for tab bar
-	CGRect tableViewFrame = self.view.frame;
-	tableViewFrame.size.height -= 49;
-	self.tableView.frame = tableViewFrame;
+	self.tableView.frame = self.view.frame;
 	[self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 80, 0, 0)];
 	[self.view addSubview:self.tableView];
 
