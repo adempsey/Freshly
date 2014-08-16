@@ -21,9 +21,21 @@
 	static id sharedInstance = nil;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		sharedInstance = [[self alloc] init];
+		sharedInstance = [[self alloc] initRootStructure];
 	});
 	return sharedInstance;
+}
+
+- (instancetype)initRootStructure
+{
+	if (self = [self init]) {
+		NSDictionary *foodItemData = [self loadFoodData];
+		
+		if (foodItemData) {
+			[self insertData:foodItemData];
+		}
+	}
+	return self;
 }
 
 - (instancetype)init
@@ -47,7 +59,38 @@
 	[((FreshlyFoodAutoCompletionService*) self.keys[key]) insertString:[string substringFromIndex:1]];
 }
 
-- (NSArray*)wordsWithPrefix:(NSString*)prefix
+
+- (void)insertData:(NSDictionary*)data
+{
+	for (NSString *itemName in data) {
+		[self insertString:itemName];
+	}
+}
+
+- (NSDictionary *)loadFoodData
+{
+	NSString *jsonFilePath = [[NSBundle mainBundle] pathForResource:@"minFoodSource" ofType:@"json"];
+	
+	NSError *error;
+	
+	NSData *foodData = [NSData dataWithContentsOfFile:jsonFilePath options:NSDataReadingMappedIfSafe error:&error];
+	
+	if (error) {
+		NSLog(@"Error loading food JSON file");
+		return nil;
+	} else {
+		NSDictionary *foodDictionary = [NSJSONSerialization JSONObjectWithData:foodData options:NSJSONReadingAllowFragments error:&error];
+		
+		if (error || ![foodDictionary isKindOfClass:[NSDictionary class]]) {
+			NSLog(@"Error parsing JSON file");
+			return nil;
+		}
+		
+		return foodDictionary;
+	}
+}
+
+- (NSArray*)itemsWithPrefix:(NSString*)prefix
 {
 	NSArray *words = [[NSArray alloc] initWithArray:[self wordsWithPrefix:prefix forList:self]];
 	

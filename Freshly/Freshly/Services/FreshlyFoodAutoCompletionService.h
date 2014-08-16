@@ -11,7 +11,6 @@
 @interface FreshlyFoodAutoCompletionService : NSObject
 
 + (FreshlyFoodAutoCompletionService*)sharedInstance;
-- (void)insertString:(NSString*)string;
-- (NSArray*)wordsWithPrefix:(NSString*)prefix;
+- (NSArray*)itemsWithPrefix:(NSString*)prefix;
 
 @end
