@@ -41,29 +41,33 @@
 
 - (NSArray*)foodItemCategoryList
 {
-	return @[@"Dairy", @"Drink", @"Fruit", @"Meat", @"Misc", @"Seafood", @"Vegetable"];
+	return @[FRESHLY_CATEGORY_DAIRY,
+			 FRESHLY_CATEGORY_DRINK,
+			 FRESHLY_CATEGORY_FRUIT,
+			 FRESHLY_CATEGORY_MEAT,
+			 FRESHLY_CATEGORY_MISC,
+			 FRESHLY_CATEGORY_SEAFOOD,
+			 FRESHLY_CATEGORY_VEGETABLE];
 }
 
 - (UIColor*)colorForCategory:(NSString*)category
-{
-	category = [category lowercaseString];
-	
-	if ([category isEqualToString:@"dairy"]) {
+{	
+	if ([category isEqualToString:FRESHLY_CATEGORY_DAIRY]) {
 		return FRESHLY_CATEGORY_COLOR_DAIRY;
 		
-	} else if ([category isEqualToString:@"drink"]) {
+	} else if ([category isEqualToString:FRESHLY_CATEGORY_DRINK]) {
 		return FRESHLY_CATEGORY_COLOR_DRINK;
 		
-	} else if ([category isEqualToString:@"fruit"]) {
+	} else if ([category isEqualToString:FRESHLY_CATEGORY_FRUIT]) {
 		return FRESHLY_CATEGORY_COLOR_FRUIT;
 		
-	} else if ([category isEqualToString:@"meat"]) {
+	} else if ([category isEqualToString:FRESHLY_CATEGORY_MEAT]) {
 		return FRESHLY_CATEGORY_COLOR_MEAT;
 		
-	} else if ([category isEqualToString:@"seafood"]) {
+	} else if ([category isEqualToString:FRESHLY_CATEGORY_SEAFOOD]) {
 		return FRESHLY_CATEGORY_COLOR_SEAFOOD;
 		
-	} else if ([category isEqualToString:@"vegetable"]) {
+	} else if ([category isEqualToString:FRESHLY_CATEGORY_VEGETABLE]) {
 		return FRESHLY_CATEGORY_COLOR_VEGETABLE;
 		
 	}

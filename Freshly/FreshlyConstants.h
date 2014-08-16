@@ -9,10 +9,22 @@
 #ifndef Freshly_FreshlyConstants_h
 #define Freshly_FreshlyConstants_h
 
-/************** Spaces **************/
+/************** Strings **************/
 
-#define FRESHLY_SPACE_STORAGE		@"Storage"
-#define FRESHLY_SPACE_SHOPPING_LIST @"Shopping List"
+#define FRESHLY_SECTION_STORAGE			@"Storage"
+#define FRESHLY_SECTION_SHOPPING_LIST	@"Shopping List"
+
+#define FRESHLY_SPACE_REFRIGERATOR		@"Refrigerator"
+#define FRESHLY_SPACE_FREEZER			@"Freezer"
+#define FRESHLY_SPACE_PANTRY			@"Pantry"
+
+#define FRESHLY_CATEGORY_DAIRY			@"Dairy"
+#define FRESHLY_CATEGORY_DRINK			@"Drink"
+#define FRESHLY_CATEGORY_FRUIT			@"Fruit"
+#define FRESHLY_CATEGORY_MEAT			@"Meat"
+#define FRESHLY_CATEGORY_MISC			@"Misc"
+#define FRESHLY_CATEGORY_SEAFOOD		@"Seafood"
+#define FRESHLY_CATEGORY_VEGETABLE		@"Vegetable"
 
 /************** Colors **************/
 

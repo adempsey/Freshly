@@ -58,7 +58,7 @@
 		self.titleField = [[UITextField alloc] init];
 		self.categoryButton = [[UIButton alloc] init];
 		self.itemDateViewController = [[FreshlyItemDateViewController alloc] init];
-		self.spaceChooser = [[UISegmentedControl alloc] initWithItems:@[@"Refrigerator", @"Freezer", @"Pantry"]];
+		self.spaceChooser = [[UISegmentedControl alloc] initWithItems:@[FRESHLY_SPACE_REFRIGERATOR, FRESHLY_SPACE_FREEZER, FRESHLY_SPACE_PANTRY]];
 		
 		self.moveToGroceryListButton = [[UIButton alloc] init];
 		self.deleteButton = [[UIButton alloc] init];
@@ -85,7 +85,7 @@
 	self.view.backgroundColor = [UIColor whiteColor];
 	
 	self.imageView.frame = CGRectMake(20, 80, kImageViewSize, kImageViewSize);
-	NSString *imageTitle = self.item ? self.item.category : @"default";
+	NSString *imageTitle = self.item ? self.item.category : FRESHLY_CATEGORY_MISC;
 	self.imageView.image = [UIImage imageForCategory:imageTitle withSize:kImageViewSize];
 	[self.view addSubview:self.imageView];
 	
@@ -133,8 +133,8 @@
 	[self.categoryPicker addSubview:self.categoryPickerDoneButton];
 	
 	self.categoryButton.frame = CGRectMake(140, 120, kTextViewWidth, kTextViewHeight);
-	[self.categoryButton setTitle:[(self.item ? self.item.category : @"Category") capitalizedString] forState:UIControlStateNormal];
-	[self.categoryButton setTitle:[(self.item ? self.item.category : @"Category") capitalizedString] forState:UIControlStateSelected];
+	[self.categoryButton setTitle:(self.item ? self.item.category : @"Category") forState:UIControlStateNormal];
+	[self.categoryButton setTitle:(self.item ? self.item.category : @"Category") forState:UIControlStateSelected];
 	[self.categoryButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 	[self.categoryButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
 	[self.categoryButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
@@ -218,7 +218,7 @@
 - (void)saveNewItem
 {
 	NSDictionary *attributes = @{@"name": self.titleField.text,
-								 @"category": [self.categoryButton.titleLabel.text lowercaseString],
+								 @"category": self.categoryButton.titleLabel.text,
 								 @"space": [NSNumber numberWithInteger: self.spaceChooser.selectedSegmentIndex],
 								 @"inStorage": [NSNumber numberWithBool:YES],
 								 @"brand": @"",
@@ -276,7 +276,7 @@
 			
 			if ([self.currentPicker isKindOfClass:[UIPickerView class]] && [self.currentPicker isEqual:self.categoryPicker]) {
 				NSInteger selectedIndex = [self.currentPicker selectedRowInComponent:0];
-				NSString *categoryTitle = [self.categoryList objectAtIndex:selectedIndex];
+				NSString *categoryTitle = self.categoryList[selectedIndex];
 				[self.categoryButton setTitle:categoryTitle forState:UIControlStateNormal];
 				[self.categoryButton setTitle:categoryTitle forState:UIControlStateSelected];
 				
@@ -318,7 +318,7 @@
 - (NSInteger)indexForCategory:(NSString*)category
 {
 	NSArray *categories = [[FreshlyFoodItemService sharedInstance] foodItemCategoryList];
-	NSString *object = category ? category.capitalizedString : @"Misc";
+	NSString *object = category ? : FRESHLY_CATEGORY_MISC;
 	return [categories indexOfObject:object];
 }
 

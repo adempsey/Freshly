@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		63EC4EE81989463A00060C4F /* NSDate+FreshlyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 63EC4EE71989463A00060C4F /* NSDate+FreshlyAdditions.m */; };
+		8D1B6AB6199F280F00B6D69C /* Freshly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8D1B6AB4199F280F00B6D69C /* Freshly.xcdatamodeld */; };
 		8D5C23F71999C2AA007B314B /* FreshlyItemDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C23F61999C2AA007B314B /* FreshlyItemDateViewController.m */; };
 		8DA66B75199D5F2E00A129A3 /* FreshlyItemViewController+NewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA66B74199D5F2E00A129A3 /* FreshlyItemViewController+NewItem.m */; };
 		8DA66B78199EE2A200A129A3 /* FreshlyShoppingListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA66B77199EE2A200A129A3 /* FreshlyShoppingListTableViewCell.m */; };
@@ -18,7 +19,6 @@
 		8DC373FB19821DC000DC9731 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DC373F919821DC000DC9731 /* InfoPlist.strings */; };
 		8DC373FD19821DC000DC9731 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC373FC19821DC000DC9731 /* main.m */; };
 		8DC3740119821DC000DC9731 /* FreshlyAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC3740019821DC000DC9731 /* FreshlyAppDelegate.m */; };
-		8DC3740419821DC000DC9731 /* Freshly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8DC3740219821DC000DC9731 /* Freshly.xcdatamodeld */; };
 		8DC3740619821DC000DC9731 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DC3740519821DC000DC9731 /* Images.xcassets */; };
 		8DC3740D19821DC000DC9731 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC3740C19821DC000DC9731 /* XCTest.framework */; };
 		8DC3740E19821DC000DC9731 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC373EE19821DC000DC9731 /* Foundation.framework */; };
@@ -62,6 +62,7 @@
 /* Begin PBXFileReference section */
 		63EC4EE61989463A00060C4F /* NSDate+FreshlyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+FreshlyAdditions.h"; sourceTree = "<group>"; };
 		63EC4EE71989463A00060C4F /* NSDate+FreshlyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+FreshlyAdditions.m"; sourceTree = "<group>"; };
+		8D1B6AB5199F280F00B6D69C /* Freshly.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Freshly.xcdatamodel; sourceTree = "<group>"; };
 		8D5C23F51999C2AA007B314B /* FreshlyItemDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreshlyItemDateViewController.h; sourceTree = "<group>"; };
 		8D5C23F61999C2AA007B314B /* FreshlyItemDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreshlyItemDateViewController.m; sourceTree = "<group>"; };
 		8DA66B73199D5F2E00A129A3 /* FreshlyItemViewController+NewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FreshlyItemViewController+NewItem.h"; sourceTree = "<group>"; };
@@ -79,7 +80,6 @@
 		8DC373FE19821DC000DC9731 /* Freshly-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Freshly-Prefix.pch"; sourceTree = "<group>"; };
 		8DC373FF19821DC000DC9731 /* FreshlyAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FreshlyAppDelegate.h; sourceTree = "<group>"; };
 		8DC3740019821DC000DC9731 /* FreshlyAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FreshlyAppDelegate.m; sourceTree = "<group>"; };
-		8DC3740319821DC000DC9731 /* Freshly.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Freshly.xcdatamodel; sourceTree = "<group>"; };
 		8DC3740519821DC000DC9731 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8DC3740B19821DC000DC9731 /* FreshlyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreshlyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DC3740C19821DC000DC9731 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -198,7 +198,7 @@
 				8DC3740019821DC000DC9731 /* FreshlyAppDelegate.m */,
 				8DC3742619821F6700DC9731 /* Controllers */,
 				8DC3740519821DC000DC9731 /* Images.xcassets */,
-				8DC3740219821DC000DC9731 /* Freshly.xcdatamodeld */,
+				8D1B6AB4199F280F00B6D69C /* Freshly.xcdatamodeld */,
 				8DC3743B19822DA300DC9731 /* Models */,
 				8DC373F719821DC000DC9731 /* Supporting Files */,
 			);
@@ -462,10 +462,10 @@
 			files = (
 				8DEB2AAE1988BF4A00043285 /* FreshlyShoppingListViewController.m in Sources */,
 				8DEB2AB11988C3A000043285 /* FreshlyStorageTableViewCell.m in Sources */,
-				8DC3740419821DC000DC9731 /* Freshly.xcdatamodeld in Sources */,
 				8DA66B75199D5F2E00A129A3 /* FreshlyItemViewController+NewItem.m in Sources */,
 				8D5C23F71999C2AA007B314B /* FreshlyItemDateViewController.m in Sources */,
 				8DA66B78199EE2A200A129A3 /* FreshlyShoppingListTableViewCell.m in Sources */,
+				8D1B6AB6199F280F00B6D69C /* Freshly.xcdatamodeld in Sources */,
 				8DC3740119821DC000DC9731 /* FreshlyAppDelegate.m in Sources */,
 				8DEB2AAB1988BF3300043285 /* FreshlyStorageViewController.m in Sources */,
 				8DD7EFBD1996F3CA00FC0A10 /* FreshlyItemViewController.m in Sources */,
@@ -690,12 +690,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		8DC3740219821DC000DC9731 /* Freshly.xcdatamodeld */ = {
+		8D1B6AB4199F280F00B6D69C /* Freshly.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				8DC3740319821DC000DC9731 /* Freshly.xcdatamodel */,
+				8D1B6AB5199F280F00B6D69C /* Freshly.xcdatamodel */,
 			);
-			currentVersion = 8DC3740319821DC000DC9731 /* Freshly.xcdatamodel */;
+			currentVersion = 8D1B6AB5199F280F00B6D69C /* Freshly.xcdatamodel */;
 			path = Freshly.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

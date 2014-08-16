@@ -27,7 +27,7 @@
 {
     self = [super init];
     if (self) {
-		self.title = FRESHLY_SPACE_STORAGE;
+		self.title = FRESHLY_SECTION_STORAGE;
 		
 		self.items = [[NSArray alloc] init];
 		[[FreshlyFoodItemService sharedInstance] retrieveItemsForStorageWithBlock:^(NSArray *items) {

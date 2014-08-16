@@ -23,7 +23,7 @@
 {
     self = [super init];
     if (self) {
-		self.title = FRESHLY_SPACE_SHOPPING_LIST;
+		self.title = FRESHLY_SECTION_SHOPPING_LIST;
 		
 		self.items = [[NSArray alloc] init];
 		[[FreshlyFoodItemService sharedInstance] retrieveItemsForShoppingListWithBlock:^(NSArray *items) {
