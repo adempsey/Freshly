@@ -49,26 +49,26 @@
 	category = [category lowercaseString];
 	
 	if ([category isEqualToString:@"dairy"]) {
-		return COLOR_DAIRY;
+		return FRESHLY_CATEGORY_COLOR_DAIRY;
 		
 	} else if ([category isEqualToString:@"drink"]) {
-		return COLOR_DRINK;
+		return FRESHLY_CATEGORY_COLOR_DRINK;
 		
 	} else if ([category isEqualToString:@"fruit"]) {
-		return COLOR_FRUIT;
+		return FRESHLY_CATEGORY_COLOR_FRUIT;
 		
 	} else if ([category isEqualToString:@"meat"]) {
-		return COLOR_MEAT;
+		return FRESHLY_CATEGORY_COLOR_MEAT;
 		
 	} else if ([category isEqualToString:@"seafood"]) {
-		return COLOR_SEAFOOD;
+		return FRESHLY_CATEGORY_COLOR_SEAFOOD;
 		
 	} else if ([category isEqualToString:@"vegetable"]) {
-		return COLOR_VEGETABLE;
+		return FRESHLY_CATEGORY_COLOR_VEGETABLE;
 		
 	}
 	
-	return COLOR_MISC;
+	return FRESHLY_CATEGORY_COLOR_MISC;
 }
 
 #pragma mark - Database Methods
