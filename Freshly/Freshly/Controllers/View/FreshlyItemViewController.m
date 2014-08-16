@@ -186,7 +186,7 @@
 	
 	if (self.itemExists) {
 		self.item.name = self.titleField.text;
-		self.item.category = self.categoryButton.titleLabel.text.lowercaseString;
+		self.item.category = self.categoryButton.titleLabel.text;
 		self.item.dateOfPurchase = self.purchaseDatePicker.date;
 		self.item.dateOfExpiration = self.expirationDatePicker.date;
 		self.item.space = [NSNumber numberWithInteger:self.spaceChooser.selectedSegmentIndex];
