@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "FreshlyFoodItem.h"
 #import "FreshlyItemDateViewController.h"
+#import "FreshlyFoodAutoCompletionViewController.h"
 
-@interface FreshlyItemViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, FreshlyItemDateProtocol, UITextFieldDelegate, UIActionSheetDelegate>
+@interface FreshlyItemViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, FreshlyItemDateProtocol, UITextFieldDelegate, UIActionSheetDelegate, FreshlyAutoCompletionViewControllerDelegate>
 
 - (instancetype)initWithItem:(FreshlyFoodItem*)item;
 

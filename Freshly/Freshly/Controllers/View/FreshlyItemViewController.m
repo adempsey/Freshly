@@ -44,6 +44,8 @@
 @property (nonatomic, readwrite, strong) UIView *darkBackground;
 @property (nonatomic, readwrite, weak) id currentPicker;
 
+@property (nonatomic, readwrite, strong) FreshlyFoodAutoCompletionViewController *autoCompletionViewController;
+
 @property (nonatomic, readwrite, assign) BOOL itemExists;
 
 @end
@@ -73,6 +75,8 @@
 		self.categoryPickerDoneButton = [[UIButton alloc] init];
 		self.darkBackground = [[UIView alloc] init];
 		
+		self.autoCompletionViewController = [[FreshlyFoodAutoCompletionViewController alloc] init];
+		
 		self.itemExists = (item != nil);
 	}
 	return self;
@@ -98,6 +102,8 @@
 	self.titleField.placeholder = @"Food";
 	self.titleField.returnKeyType = UIReturnKeyDone;
 	self.titleField.delegate = self;
+	self.titleField.autocorrectionType = UITextAutocorrectionTypeNo;
+	[self.titleField addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
 	[self.view addSubview:self.titleField];
 	
 	UITapGestureRecognizer *pickerBackgroundTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissInput)];
@@ -178,6 +184,9 @@
 		[self.view addSubview:self.saveButton];
 		
 	}
+	
+	self.autoCompletionViewController.view.alpha = 0.0;
+	self.autoCompletionViewController.delegate = self;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -240,6 +249,31 @@
 	[deleteActionSheet showInView:self.view];
 }
 
+#pragma mark - TextField
+
+- (void)textFieldDidChange
+{
+	[self.autoCompletionViewController setPrefix:self.titleField.text.lowercaseString];
+	
+	if (self.titleField.text.length > 0) {
+		if (![self.autoCompletionViewController.view isDescendantOfView:self.view]) {
+			[self.view addSubview:self.autoCompletionViewController.view];
+			
+			[UIView animateWithDuration:0.25 animations:^{
+				self.autoCompletionViewController.view.alpha = 1.0;
+			}];
+		}
+	} else {
+		[UIView animateWithDuration:0.25 animations:^{
+			self.autoCompletionViewController.view.alpha = 0.0;
+		} completion:^(BOOL finished) {
+			if (finished) {
+				[self.autoCompletionViewController.view removeFromSuperview];
+			}
+		}];
+	}
+}
+
 #pragma mark - Picker Views
 
 - (void)presentCategoryPicker
@@ -291,6 +325,10 @@
 			
 		}
 		
+		if ([self.autoCompletionViewController.view isDescendantOfView:self.view]) {
+			self.autoCompletionViewController.view.alpha = 0.0;
+		}
+		
 	} completion:^(BOOL finished) {
 		if (finished) {
 			[self.darkBackground removeFromSuperview];
@@ -308,6 +346,10 @@
 						self.itemDateViewController.expirationDate = ((UIDatePicker*) self.expirationDatePicker).date;
 					}
 				}
+			}
+			
+			if ([self.autoCompletionViewController.view isDescendantOfView:self.view]) {
+				[self.autoCompletionViewController.view removeFromSuperview];
 			}
 			
 			self.currentPicker = nil;
@@ -377,6 +419,15 @@
 	if (buttonIndex == 0) {
 		[self deleteItem];
 	}
+}
+
+#pragma mark - AutoCompletion Delegate
+
+- (void)didSelectAutoCompletedItem:(NSString *)item
+{
+	[self dismissInput];
+	self.titleField.text = item.capitalizedString;
+	[self.autoCompletionViewController setPrefix:@""];
 }
 
 @end
