@@ -82,23 +82,25 @@
 	completionBlock([self.managedObjectContext executeFetchRequest:request error:nil]);
 }
 
-- (BOOL)createItemWithAttributes:(NSDictionary*)attributes
+- (void)createItemWithAttributes:(NSDictionary*)attributes
 {
 	NSManagedObject *newItem = [NSEntityDescription insertNewObjectForEntityForName:kFoodItemEntityName inManagedObjectContext:self.managedObjectContext];
 	[newItem setValuesForKeysWithDictionary:attributes];
-	
+	[self.managedObjectContext save:nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ITEM_UPDATED object:nil];
-	
-	return ![self.managedObjectContext save:nil];
 }
 
-- (BOOL)updateItem:(FreshlyFoodItem*)item
+- (void)updateItem:(FreshlyFoodItem*)item
 {
+	[self.managedObjectContext save:nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ITEM_UPDATED object:nil];
-	
-	return (![self.managedObjectContext save:nil]);
+}
 
-	return NO;
+- (void)deleteItem:(FreshlyFoodItem*)item
+{
+	[self.managedObjectContext deleteObject:item];
+	[self.managedObjectContext save:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ITEM_UPDATED object:nil];
 }
 
 @end

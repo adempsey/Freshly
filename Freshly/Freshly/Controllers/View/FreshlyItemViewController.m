@@ -166,6 +166,7 @@
 		[self.deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
 		[self.deleteButton setTitle:@"Delete" forState:UIControlStateSelected];
 		[self.deleteButton setBackgroundColor:FCOLOR_RED];
+		[self.deleteButton addTarget:self action:@selector(showDeleteActionSheet) forControlEvents:UIControlEventTouchUpInside];
 		[self.view addSubview:self.deleteButton];
 		
 	} else {
@@ -199,6 +200,15 @@
 	return YES;
 }
 
+- (void)deleteItem
+{
+	[[FreshlyFoodItemService sharedInstance] deleteItem:self.item];
+	self.itemExists = NO;
+	[self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - Actions
+
 - (void)moveItemToGroceryList
 {
 	self.item.inStorage = [NSNumber numberWithBool:NO];
@@ -218,6 +228,16 @@
 	[[FreshlyFoodItemService sharedInstance] createItemWithAttributes:attributes];
 	
 	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)showDeleteActionSheet
+{
+	UIActionSheet *deleteActionSheet = [[UIActionSheet alloc] initWithTitle:@"Are you sure you want to delete this item?"
+																   delegate:self
+														  cancelButtonTitle:@"Cancel"
+													 destructiveButtonTitle:@"Delete"
+														  otherButtonTitles:nil];
+	[deleteActionSheet showInView:self.view];
 }
 
 #pragma mark - Picker Views
@@ -348,6 +368,15 @@
 {
 	[self dismissInput];
 	return YES;
+}
+
+#pragma mark - UIActionSheet Delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if (buttonIndex == 0) {
+		[self deleteItem];
+	}
 }
 
 @end
