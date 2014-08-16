@@ -17,6 +17,7 @@
 - (NSArray*)foodItemCategoryList;
 
 - (void)retrieveItemsForStorageWithBlock:(void (^)(NSArray*))completionBlock;
+- (void)retrieveItemsForShoppingListWithBlock:(void (^)(NSArray*))completionBlock;
 - (void)createItemWithAttributes:(NSDictionary*)attributes;
 - (void)updateItem:(FreshlyFoodItem*)item;
 - (void)deleteItem:(FreshlyFoodItem*)item;

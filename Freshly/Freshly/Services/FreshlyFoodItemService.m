@@ -82,6 +82,15 @@
 	completionBlock([self.managedObjectContext executeFetchRequest:request error:nil]);
 }
 
+- (void)retrieveItemsForShoppingListWithBlock:(void (^)(NSArray*))completionBlock
+{
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	request.entity = [NSEntityDescription entityForName:kFoodItemEntityName inManagedObjectContext:self.managedObjectContext];
+	request.predicate = [NSPredicate predicateWithFormat:@"(self.inStorage == 0)"];
+	
+	completionBlock([self.managedObjectContext executeFetchRequest:request error:nil]);
+}
+
 - (void)createItemWithAttributes:(NSDictionary*)attributes
 {
 	NSManagedObject *newItem = [NSEntityDescription insertNewObjectForEntityForName:kFoodItemEntityName inManagedObjectContext:self.managedObjectContext];

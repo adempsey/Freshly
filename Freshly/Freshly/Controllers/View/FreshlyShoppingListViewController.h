@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FreshlyShoppingListViewController : UIViewController
+@interface FreshlyShoppingListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end
