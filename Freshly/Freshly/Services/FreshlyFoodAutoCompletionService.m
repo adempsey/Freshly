@@ -7,6 +7,7 @@
 //
 
 #import "FreshlyFoodAutoCompletionService.h"
+#import "FreshlyFoodItemService.h"
 
 @interface FreshlyFoodAutoCompletionService ()
 
@@ -29,7 +30,7 @@
 - (instancetype)initRootStructure
 {
 	if (self = [self init]) {
-		NSDictionary *foodItemData = [self loadFoodData];
+		NSDictionary *foodItemData = [[FreshlyFoodItemService sharedInstance] defaultFoodItemData];
 		
 		if (foodItemData) {
 			[self insertData:foodItemData];
@@ -64,29 +65,6 @@
 {
 	for (NSString *itemName in data) {
 		[self insertString:itemName];
-	}
-}
-
-- (NSDictionary *)loadFoodData
-{
-	NSString *jsonFilePath = [[NSBundle mainBundle] pathForResource:@"minFoodSource" ofType:@"json"];
-	
-	NSError *error;
-	
-	NSData *foodData = [NSData dataWithContentsOfFile:jsonFilePath options:NSDataReadingMappedIfSafe error:&error];
-	
-	if (error) {
-		NSLog(@"Error loading food JSON file");
-		return nil;
-	} else {
-		NSDictionary *foodDictionary = [NSJSONSerialization JSONObjectWithData:foodData options:NSJSONReadingAllowFragments error:&error];
-		
-		if (error || ![foodDictionary isKindOfClass:[NSDictionary class]]) {
-			NSLog(@"Error parsing JSON file");
-			return nil;
-		}
-		
-		return foodDictionary;
 	}
 }
 

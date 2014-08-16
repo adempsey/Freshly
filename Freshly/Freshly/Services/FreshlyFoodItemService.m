@@ -75,6 +75,32 @@
 	return FRESHLY_CATEGORY_COLOR_MISC;
 }
 
+- (NSDictionary*)defaultFoodItemData
+{
+	if (!_defaultFoodItemData) {
+
+		_defaultFoodItemData = [[NSDictionary alloc] init];
+
+		NSString *jsonFilePath = [[NSBundle mainBundle] pathForResource:@"minFoodSource" ofType:@"json"];
+		NSError *error;
+		NSData *foodData = [NSData dataWithContentsOfFile:jsonFilePath options:NSDataReadingMappedIfSafe error:&error];
+
+		if (error) {
+			NSLog(@"Error loading food JSON file");
+			return nil;
+		} else {
+			NSDictionary *foodDictionary = [NSJSONSerialization JSONObjectWithData:foodData options:NSJSONReadingAllowFragments error:&error];
+
+			if (error || ![foodDictionary isKindOfClass:[NSDictionary class]]) {
+				NSLog(@"Error parsing JSON file");
+				return nil;
+			}
+			_defaultFoodItemData = foodDictionary;
+		}
+	}
+	return _defaultFoodItemData;
+}
+
 #pragma mark - Database Methods
 
 - (void)retrieveItemsForStorageWithBlock:(void (^)(NSArray*))completionBlock

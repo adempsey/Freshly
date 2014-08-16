@@ -13,6 +13,8 @@
 
 + (FreshlyFoodItemService*)sharedInstance;
 
+@property (nonatomic, readwrite, strong) NSDictionary *defaultFoodItemData;
+
 - (UIColor*)colorForCategory:(NSString*)category;
 - (NSArray*)foodItemCategoryList;
 
