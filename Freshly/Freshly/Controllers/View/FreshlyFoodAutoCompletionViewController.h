@@ -17,7 +17,7 @@
 
 @interface FreshlyFoodAutoCompletionViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, readwrite, strong) id<FreshlyAutoCompletionViewControllerDelegate> delegate;
+@property (nonatomic, readwrite, weak) id<FreshlyAutoCompletionViewControllerDelegate> delegate;
 @property (nonatomic, readwrite, strong) NSString *prefix;
 
 @end
