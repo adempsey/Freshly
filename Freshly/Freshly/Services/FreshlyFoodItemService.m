@@ -75,6 +75,12 @@
 	return FRESHLY_CATEGORY_COLOR_MISC;
 }
 
+- (NSString*)categoryForFoodItemName:(NSString*)itemName
+{
+	NSString *category = self.defaultFoodItemData[itemName][@"category"];
+	return category ? : FRESHLY_CATEGORY_MISC;
+}
+
 - (NSDictionary*)defaultFoodItemData
 {
 	if (!_defaultFoodItemData) {

@@ -10,7 +10,8 @@
 
 @protocol FreshlyAutoCompletionViewControllerDelegate <NSObject>
 
-- (void)didSelectAutoCompletedItem:(NSString*)item;
+@required
+- (void)didSelectAutoCompletedItem:(NSString*)item withCategory:(NSString*)category;
 
 @end
 

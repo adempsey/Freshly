@@ -17,6 +17,7 @@
 
 - (UIColor*)colorForCategory:(NSString*)category;
 - (NSArray*)foodItemCategoryList;
+- (NSString*)categoryForFoodItemName:(NSString*)itemName;
 
 - (void)retrieveItemsForStorageWithBlock:(void (^)(NSArray*))completionBlock;
 - (void)retrieveItemsForShoppingListWithBlock:(void (^)(NSArray*))completionBlock;

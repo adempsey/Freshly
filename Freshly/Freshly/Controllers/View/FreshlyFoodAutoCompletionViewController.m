@@ -8,6 +8,8 @@
 
 #import "FreshlyFoodAutoCompletionViewController.h"
 #import "FreshlyFoodAutoCompletionService.h"
+#import "FreshlyAutoCompletionTableViewCell.h"
+#import "FreshlyFoodItemService.h"
 
 @interface FreshlyFoodAutoCompletionViewController ()
 
@@ -61,21 +63,17 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
-	if (!cell) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-	}
-	NSString *titleString = self.items[indexPath.row];
-	cell.textLabel.text = titleString.capitalizedString;
-	return cell;
+	NSString *title = self.items[indexPath.row];
+	return [[FreshlyAutoCompletionTableViewCell alloc] initWithName:title];
 }
 
 #pragma mark - TableView Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	[self.delegate didSelectAutoCompletedItem:self.items[indexPath.row]];
 	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+	NSString *itemName = self.items[indexPath.row];
+	[self.delegate didSelectAutoCompletedItem:itemName withCategory:[[FreshlyFoodItemService sharedInstance] categoryForFoodItemName:itemName]];
 }
 
 @end

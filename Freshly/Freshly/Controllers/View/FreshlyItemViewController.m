@@ -423,10 +423,26 @@
 
 #pragma mark - AutoCompletion Delegate
 
-- (void)didSelectAutoCompletedItem:(NSString *)item
+- (void)didSelectAutoCompletedItem:(NSString *)item withCategory:(NSString *)category
 {
-	[self dismissInput];
 	self.titleField.text = item.capitalizedString;
+	
+	[self.categoryButton setTitle:category forState:UIControlStateNormal];
+	[self.categoryButton setTitle:category forState:UIControlStateSelected];
+	NSInteger categoryIndex = [self.categoryList indexOfObject:category];
+	[self.categoryPicker selectRow:categoryIndex inComponent:0 animated:NO];
+	
+	UIColor *categoryColor = [[FreshlyFoodItemService sharedInstance] colorForCategory:category];
+	
+	[UIView animateWithDuration:0.25 animations:^{
+		self.imageView.image = [UIImage imageForCategory:category withSize:kImageViewSize];
+		self.spaceChooser.tintColor = categoryColor;
+		self.moveToGroceryListButton.backgroundColor = categoryColor;
+		[self.itemDateViewController setBackgroundColor:categoryColor];
+		self.saveButton.backgroundColor = categoryColor;
+	}];
+	
+	[self dismissInput];
 	[self.autoCompletionViewController setPrefix:@""];
 }
 
