@@ -231,8 +231,8 @@
 								 @"space": [NSNumber numberWithInteger: self.spaceChooser.selectedSegmentIndex],
 								 @"inStorage": [NSNumber numberWithBool:YES],
 								 @"brand": @"",
-								 @"dateOfExpiration": self.itemDateViewController.purchaseDate,
-								 @"dateOfPurchase": self.itemDateViewController.expirationDate};
+								 @"dateOfPurchase": self.itemDateViewController.purchaseDate,
+								 @"dateOfExpiration": self.itemDateViewController.expirationDate};
 
 	[[FreshlyFoodItemService sharedInstance] createItemWithAttributes:attributes];
 	
