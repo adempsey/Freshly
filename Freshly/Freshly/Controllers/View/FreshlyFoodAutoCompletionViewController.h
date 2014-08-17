@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol FreshlyAutoCompletionViewControllerDelegate <NSObject>
+@protocol FreshlyAutoCompletionDelegate <NSObject>
 
 @required
 - (void)didSelectAutoCompletedItem:(NSString*)item withCategory:(NSString*)category;
@@ -17,7 +17,7 @@
 
 @interface FreshlyFoodAutoCompletionViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, readwrite, weak) id<FreshlyAutoCompletionViewControllerDelegate> delegate;
+@property (nonatomic, readwrite, weak) id<FreshlyAutoCompletionDelegate> delegate;
 @property (nonatomic, readwrite, strong) NSString *prefix;
 
 @end
