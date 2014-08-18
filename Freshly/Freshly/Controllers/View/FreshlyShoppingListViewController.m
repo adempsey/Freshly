@@ -202,6 +202,15 @@
 	return cell;
 }
 
+#pragma mark - TableView Delegate
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if (editingStyle == UITableViewCellEditingStyleDelete) {
+		[[FreshlyFoodItemService sharedInstance] deleteItem:self.items[indexPath.row]];
+	}
+}
+
 #pragma mark - TextField Delegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
