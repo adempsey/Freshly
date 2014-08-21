@@ -226,16 +226,16 @@
 
 - (void)saveNewItem
 {
-	NSDictionary *attributes = @{@"name": self.titleField.text,
-								 @"category": self.categoryButton.titleLabel.text,
-								 @"space": [NSNumber numberWithInteger: self.spaceChooser.selectedSegmentIndex],
-								 @"inStorage": [NSNumber numberWithBool:YES],
-								 @"brand": @"",
-								 @"dateOfPurchase": self.itemDateViewController.purchaseDate,
-								 @"dateOfExpiration": self.itemDateViewController.expirationDate};
-
-	[[FreshlyFoodItemService sharedInstance] createItemWithAttributes:attributes];
+	NSDictionary *attributes = @{FRESHLY_ITEM_ATTRIBUTE_NAME: self.titleField.text,
+								 FRESHLY_ITEM_ATTRIBUTE_CATEGORY: self.categoryButton.titleLabel.text,
+								 FRESHLY_ITEM_ATTRIBUTE_SPACE: [NSNumber numberWithInteger: self.spaceChooser.selectedSegmentIndex],
+								 FRESHLY_ITEM_ATTRIBUTE_IN_STORAGE: [NSNumber numberWithBool:YES],
+								 FRESHLY_ITEM_ATTRIBUTE_BRAND: @"",
+								 FRESHLY_ITEM_ATTRIBUTE_PURCHASE_DATE: self.itemDateViewController.purchaseDate,
+								 FRESHLY_ITEM_ATTRIBUTE_EXPIRATION_DATE: self.itemDateViewController.expirationDate};
 	
+	[[FreshlyFoodItemService sharedInstance] createItemWithAttributes:attributes];
+
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 

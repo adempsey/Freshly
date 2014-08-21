@@ -14,17 +14,25 @@
 #define FRESHLY_SECTION_STORAGE			@"Storage"
 #define FRESHLY_SECTION_SHOPPING_LIST	@"Shopping List"
 
-#define FRESHLY_SPACE_REFRIGERATOR		@"Refrigerator"
-#define FRESHLY_SPACE_FREEZER			@"Freezer"
-#define FRESHLY_SPACE_PANTRY			@"Pantry"
+#define FRESHLY_SPACE_REFRIGERATOR	@"Refrigerator"
+#define FRESHLY_SPACE_FREEZER		@"Freezer"
+#define FRESHLY_SPACE_PANTRY		@"Pantry"
 
-#define FRESHLY_CATEGORY_DAIRY			@"Dairy"
-#define FRESHLY_CATEGORY_DRINK			@"Drink"
-#define FRESHLY_CATEGORY_FRUIT			@"Fruit"
-#define FRESHLY_CATEGORY_MEAT			@"Meat"
-#define FRESHLY_CATEGORY_MISC			@"Misc"
-#define FRESHLY_CATEGORY_SEAFOOD		@"Seafood"
-#define FRESHLY_CATEGORY_VEGETABLE		@"Vegetable"
+#define FRESHLY_CATEGORY_DAIRY		@"Dairy"
+#define FRESHLY_CATEGORY_DRINK		@"Drink"
+#define FRESHLY_CATEGORY_FRUIT		@"Fruit"
+#define FRESHLY_CATEGORY_MEAT		@"Meat"
+#define FRESHLY_CATEGORY_MISC		@"Misc"
+#define FRESHLY_CATEGORY_SEAFOOD	@"Seafood"
+#define FRESHLY_CATEGORY_VEGETABLE	@"Vegetable"
+
+#define FRESHLY_ITEM_ATTRIBUTE_NAME				@"name"
+#define FRESHLY_ITEM_ATTRIBUTE_CATEGORY			@"category"
+#define FRESHLY_ITEM_ATTRIBUTE_SPACE			@"space"
+#define FRESHLY_ITEM_ATTRIBUTE_IN_STORAGE		@"inStorage"
+#define FRESHLY_ITEM_ATTRIBUTE_BRAND			@"brand"
+#define FRESHLY_ITEM_ATTRIBUTE_PURCHASE_DATE	@"dateOfPurchase"
+#define FRESHLY_ITEM_ATTRIBUTE_EXPIRATION_DATE	@"dateOfExpiration"
 
 /************** Colors **************/
 

@@ -112,13 +112,13 @@
 
 - (void)saveItemToShoppingList:(NSString*)itemName withCategory:(NSString*)category
 {
-	NSDictionary *attributes = @{@"name": itemName.capitalizedString,
-								 @"category": category,
-								 @"space": [NSNumber numberWithInteger:0],
-								 @"inStorage": [NSNumber numberWithBool:NO],
-								 @"brand": @"",
-								 @"dateOfPurchase": [NSDate date],
-								 @"dateOfExpiration": [NSDate date]};
+	NSDictionary *attributes = @{FRESHLY_ITEM_ATTRIBUTE_NAME: itemName.capitalizedString,
+								 FRESHLY_ITEM_ATTRIBUTE_CATEGORY: category,
+								 FRESHLY_ITEM_ATTRIBUTE_SPACE: [NSNumber numberWithInteger:0],
+								 FRESHLY_ITEM_ATTRIBUTE_IN_STORAGE: [NSNumber numberWithBool:NO],
+								 FRESHLY_ITEM_ATTRIBUTE_BRAND: @"",
+								 FRESHLY_ITEM_ATTRIBUTE_PURCHASE_DATE: [NSDate date],
+								 FRESHLY_ITEM_ATTRIBUTE_EXPIRATION_DATE: [NSDate date]};
 	
 	[[FreshlyFoodItemService sharedInstance] createItemWithAttributes:attributes];
 }

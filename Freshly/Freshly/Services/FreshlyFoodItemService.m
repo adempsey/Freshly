@@ -77,7 +77,7 @@
 
 - (NSString*)categoryForFoodItemName:(NSString*)itemName
 {
-	NSString *category = self.defaultFoodItemData[itemName][@"category"];
+	NSString *category = self.defaultFoodItemData[itemName][FRESHLY_ITEM_ATTRIBUTE_CATEGORY];
 	return category ? : FRESHLY_CATEGORY_MISC;
 }
 
