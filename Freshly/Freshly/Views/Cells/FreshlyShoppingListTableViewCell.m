@@ -43,6 +43,19 @@
 	self.imageView.image = [UIImage imageForCategory:item.category withSize:50];
 }
 
+- (void)setChecked:(BOOL)checked
+{
+	_checked = checked;
+
+	NSString *checkboxImageName = checked ? @"checkbox_checked" : @"checkbox_empty";
+	[self.checkBox setBackgroundImage:[UIImage imageNamed:checkboxImageName] forState:UIControlStateNormal];
+
+	[UIView animateWithDuration:0.25 animations:^{
+		self.textLabel.alpha = checked ? 0.3 : 1.0;
+		self.imageView.alpha = checked ? 0.3 : 1.0;
+	}];
+}
+
 - (void)layoutSubviews
 {
 	[super layoutSubviews];
@@ -63,13 +76,7 @@
 
 - (void)toggleItemCheck
 {
-	if (self.checked) {
-		[self.checkBox setBackgroundImage:[UIImage imageNamed:@"checkbox_empty"] forState:UIControlStateNormal];
-		self.checked = NO;
-	} else {
-		[self.checkBox setBackgroundImage:[UIImage imageNamed:@"checkbox_checked"] forState:UIControlStateNormal];
-		self.checked = YES;
-	}
+	self.checked = !self.checked;
 }
 
 @end
