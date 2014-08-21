@@ -16,7 +16,6 @@
 @interface FreshlyShoppingListTableViewCell ()
 
 @property (nonatomic, readwrite, strong) UIButton *checkBox;
-@property (nonatomic, readwrite, assign) BOOL checked;
 
 @end
 
@@ -49,6 +48,7 @@
 
 	NSString *checkboxImageName = checked ? @"checkbox_checked" : @"checkbox_empty";
 	[self.checkBox setBackgroundImage:[UIImage imageNamed:checkboxImageName] forState:UIControlStateNormal];
+	[self.delegate shoppingListCell:self didChangeCheckboxValue:checked];
 
 	[UIView animateWithDuration:0.25 animations:^{
 		self.textLabel.alpha = checked ? 0.3 : 1.0;

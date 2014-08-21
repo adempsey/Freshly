@@ -8,11 +8,11 @@
 
 #import "FreshlyShoppingListViewController.h"
 #import "FreshlyFoodItemService.h"
-#import "FreshlyShoppingListTableViewCell.h"
 
 @interface FreshlyShoppingListViewController ()
 
 @property (nonatomic, readwrite, strong) NSArray *items;
+@property (atomic, readwrite, strong) NSMutableArray *checkedItems;
 @property (nonatomic, readwrite, strong) UITableView *tableView;
 
 @property (nonatomic, readwrite, strong) UIView *addNewItemView;
@@ -31,12 +31,14 @@
     self = [super init];
     if (self) {
 		self.title = FRESHLY_SECTION_SHOPPING_LIST;
-		
+
 		self.items = [[NSArray alloc] init];
 		[[FreshlyFoodItemService sharedInstance] retrieveItemsForShoppingListWithBlock:^(NSArray *items) {
 			self.items = items;
 		}];
-		
+
+		self.checkedItems = [[NSMutableArray alloc] init];
+
 		self.tableView = [[UITableView alloc] init];
 		self.tableView.delegate = self;
 		self.tableView.dataSource = self;
@@ -87,6 +89,12 @@
 	self.autoCompletionViewController.delegate = self;
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+	[self moveSelectedItemsToStorage];
+}
+
 - (void)didReceiveItemUpdateNotification:(NSNotification*)notification
 {
 	[self reloadAllTableViewSections];
@@ -113,6 +121,16 @@
 								 @"dateOfExpiration": [NSDate date]};
 	
 	[[FreshlyFoodItemService sharedInstance] createItemWithAttributes:attributes];
+}
+
+- (void)moveSelectedItemsToStorage
+{
+	NSArray *checkedItemsCopy = [NSArray arrayWithArray:[self.checkedItems copy]];
+	for (FreshlyFoodItem *item in checkedItemsCopy) {
+		item.inStorage = [NSNumber numberWithBool:YES];
+		[[FreshlyFoodItemService sharedInstance] updateItem:item];
+	}
+	[self.checkedItems removeAllObjects];
 }
 
 #pragma mark - Actions
@@ -193,8 +211,10 @@
 	
 	if (!cell) {
 		cell = [[FreshlyShoppingListTableViewCell alloc] initWithItem:item];
+		cell.delegate = self;
 	} else {
 		[cell setItem:item];
+		cell.checked = [self.checkedItems containsObject:item];
 	}
 	
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -208,6 +228,20 @@
 {
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
 		[[FreshlyFoodItemService sharedInstance] deleteItem:self.items[indexPath.row]];
+	}
+}
+
+#pragma mark - ShoppingListCell Delegate
+
+- (void)shoppingListCell:(FreshlyShoppingListTableViewCell *)cell didChangeCheckboxValue:(BOOL)value
+{
+	NSIndexPath *cellIndex = [self.tableView indexPathForCell:cell];
+	__weak FreshlyFoodItem *changedItem = self.items[cellIndex.row];
+
+	if (value) {
+		[self.checkedItems addObject:changedItem];
+	} else {
+		[self.checkedItems removeObject:changedItem];
 	}
 }
 

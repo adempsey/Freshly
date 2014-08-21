@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "FreshlyFoodAutoCompletionViewController.h"
+#import "FreshlyShoppingListTableViewCell.h"
 
-@interface FreshlyShoppingListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, FreshlyAutoCompletionDelegate, UITextFieldDelegate>
+@interface FreshlyShoppingListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, FreshlyAutoCompletionDelegate, UITextFieldDelegate, FreshlyShoppingListCellDelegate>
 
 @end
