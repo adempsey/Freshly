@@ -185,8 +185,8 @@
 		
 	}
 	
-	self.autoCompletionViewController.view.alpha = 0.0;
 	self.autoCompletionViewController.delegate = self;
+	[self.view addSubview:self.autoCompletionViewController.view];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -254,24 +254,6 @@
 - (void)textFieldDidChange
 {
 	[self.autoCompletionViewController setPrefix:self.titleField.text.lowercaseString];
-	
-	if (self.titleField.text.length > 0) {
-		if (![self.autoCompletionViewController.view isDescendantOfView:self.view]) {
-			[self.view addSubview:self.autoCompletionViewController.view];
-			
-			[UIView animateWithDuration:0.25 animations:^{
-				self.autoCompletionViewController.view.alpha = 1.0;
-			}];
-		}
-	} else {
-		[UIView animateWithDuration:0.25 animations:^{
-			self.autoCompletionViewController.view.alpha = 0.0;
-		} completion:^(BOOL finished) {
-			if (finished) {
-				[self.autoCompletionViewController.view removeFromSuperview];
-			}
-		}];
-	}
 }
 
 #pragma mark - Picker Views
@@ -348,10 +330,6 @@
 				}
 			}
 			
-			if ([self.autoCompletionViewController.view isDescendantOfView:self.view]) {
-				[self.autoCompletionViewController.view removeFromSuperview];
-			}
-			
 			self.currentPicker = nil;
 		}
 	}];
@@ -400,6 +378,7 @@
 {
 	[self.view addSubview:self.darkBackground];
 	[self.view bringSubviewToFront:self.titleField];
+	[self.view bringSubviewToFront:self.autoCompletionViewController.view];
 	
 	[UIView animateWithDuration:0.25 animations:^{
 		self.darkBackground.alpha = 0.5;

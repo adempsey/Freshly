@@ -31,6 +31,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+	self.view.alpha = 0.0;
+
 	CGRect screenBounds = [UIScreen mainScreen].bounds;
 	self.view.frame = CGRectMake(0, 200, screenBounds.size.width, 152);
 	self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
@@ -42,11 +45,13 @@
 - (void)setPrefix:(NSString *)prefix
 {
 	_prefix = prefix;
-	
-	if (prefix.length > 0) {
-		self.items = [[FreshlyFoodAutoCompletionService sharedInstance] itemsWithPrefix:prefix];
-		[self.tableView reloadData];
-	}
+
+	self.items = [[FreshlyFoodAutoCompletionService sharedInstance] itemsWithPrefix:prefix];
+	[self.tableView reloadData];
+
+	[UIView animateWithDuration:0.25 animations:^{
+		self.view.alpha = (self.items.count > 0) ? 1.0 : 0.0;
+	}];
 }
 
 #pragma mark - TableView Datasource

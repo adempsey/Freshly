@@ -74,12 +74,14 @@
 	
 	NSMutableArray *wordsWithPrefixes = [[NSMutableArray alloc] init];
 	
-	prefix = [prefix substringToIndex:prefix.length - 1];
-	
-	for (NSString *word in words) {
-		[wordsWithPrefixes addObject:[prefix stringByAppendingString:word]];
+	if (prefix.length > 0) {
+		prefix = [prefix substringToIndex:prefix.length - 1];
+
+		for (NSString *word in words) {
+			[wordsWithPrefixes addObject:[prefix stringByAppendingString:word]];
+		}
 	}
-	
+
 	return wordsWithPrefixes;
 }
 

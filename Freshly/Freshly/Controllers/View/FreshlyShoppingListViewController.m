@@ -85,8 +85,8 @@
 	UIBarButtonItem *addNewItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(beginAddNewItem)];
 	self.navigationItem.rightBarButtonItem = addNewItem;
 	
-	self.autoCompletionViewController.view.alpha = 0.0;
 	self.autoCompletionViewController.delegate = self;
+	[self.view addSubview:self.autoCompletionViewController.view];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -139,6 +139,7 @@
 {
 	[self.view addSubview:self.darkBackground];
 	[self.view addSubview:self.addNewItemView];
+	[self.view bringSubviewToFront:self.autoCompletionViewController.view];
 	[self.addNewItemTextField becomeFirstResponder];
 	
 	[UIView animateWithDuration:0.25 animations:^{
@@ -164,7 +165,6 @@
 	} completion:^(BOOL finished) {
 		[self.darkBackground removeFromSuperview];
 		[self.addNewItemView removeFromSuperview];
-		[self.autoCompletionViewController.view removeFromSuperview];
 		self.addNewItemTextField.text = @"";
 	}];
 }
@@ -174,22 +174,6 @@
 - (void)textFieldDidChange
 {
 	[self.autoCompletionViewController setPrefix:self.addNewItemTextField.text.lowercaseString];
-	
-	if (self.addNewItemTextField.text.length > 0) {
-		if (![self.autoCompletionViewController.view isDescendantOfView:self.view]) {
-			[self.view addSubview:self.autoCompletionViewController.view];
-			
-			[UIView animateWithDuration:0.25 animations:^{
-				self.autoCompletionViewController.view.alpha = 1.0;
-			}];
-		}
-	} else {
-		[UIView animateWithDuration:0.25 animations:^{
-			self.autoCompletionViewController.view.alpha = 0.0;
-		} completion:^(BOOL finished) {
-			[self.autoCompletionViewController.view removeFromSuperview];
-		}];
-	}
 }
 
 #pragma mark - TableView Datasource
