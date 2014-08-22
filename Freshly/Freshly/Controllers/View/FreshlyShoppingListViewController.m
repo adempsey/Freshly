@@ -71,6 +71,7 @@
 	self.addNewItemTextField.backgroundColor = [UIColor whiteColor];
 	self.addNewItemTextField.returnKeyType = UIReturnKeyDone;
 	self.addNewItemTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+	self.addNewItemTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
 	self.addNewItemTextField.delegate = self;
 	[self.addNewItemTextField addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
 	[self.addNewItemView addSubview:self.addNewItemTextField];

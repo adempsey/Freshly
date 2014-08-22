@@ -101,6 +101,7 @@
 	self.titleField.font = [UIFont systemFontOfSize:kTitleFieldFontSize];
 	self.titleField.placeholder = @"Food";
 	self.titleField.returnKeyType = UIReturnKeyDone;
+	self.titleField.clearButtonMode = UITextFieldViewModeWhileEditing;
 	self.titleField.delegate = self;
 	self.titleField.autocorrectionType = UITextAutocorrectionTypeNo;
 	[self.titleField addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
