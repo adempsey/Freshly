@@ -34,6 +34,8 @@
 
 	self.view.alpha = 0.0;
 
+	self.tableView.separatorInset = UIEdgeInsetsZero;
+
 	CGRect screenBounds = [UIScreen mainScreen].bounds;
 	CGFloat viewHeight = [self.delegate heightForAutoCompletionTableView];
 	CGFloat viewOrigin = screenBounds.size.height - 216.0 - viewHeight;
