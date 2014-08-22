@@ -388,7 +388,9 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-	[self dismissInput];
+	if (![self.autoCompletionViewController hasUniqueItemAvailable]) {
+		[self dismissInput];
+	}
 	return YES;
 }
 

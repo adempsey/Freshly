@@ -21,4 +21,6 @@
 @property (nonatomic, readwrite, weak) id<FreshlyAutoCompletionDelegate> delegate;
 @property (nonatomic, readwrite, strong) NSString *prefix;
 
+- (BOOL)hasUniqueItemAvailable;
+
 @end

@@ -48,12 +48,38 @@
 {
 	_prefix = prefix;
 
-	self.items = [[FreshlyFoodAutoCompletionService sharedInstance] itemsWithPrefix:prefix];
-	[self.tableView reloadData];
+	NSUInteger oldCount = self.items.count;
 
-	[UIView animateWithDuration:0.25 animations:^{
-		self.view.alpha = (self.items.count > 0) ? 1.0 : 0.0;
-	}];
+	self.items = [[FreshlyFoodAutoCompletionService sharedInstance] itemsWithPrefix:prefix];
+
+	if (oldCount != self.items.count) {
+
+		[self.tableView reloadData];
+
+		[UIView animateWithDuration:0.25 animations:^{
+
+			if (self.items.count > 0) {
+				self.view.alpha = 1.0;
+
+				if (self.items.count == 1) {
+					FreshlyAutoCompletionTableViewCell *cell = (FreshlyAutoCompletionTableViewCell*) [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+					cell.backgroundColor = FRESHLY_COLOR_SELECTED;
+				}
+
+			} else {
+				self.view.alpha = 0.0;
+			}
+		}];
+	}
+}
+
+- (BOOL)hasUniqueItemAvailable
+{
+	if (self.items.count == 1) {
+		[self.tableView.delegate tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+		return YES;
+	}
+	return NO;
 }
 
 #pragma mark - TableView Datasource

@@ -235,7 +235,9 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
 	[self saveItemToShoppingList:textField.text withCategory:FRESHLY_CATEGORY_MISC];
-	[self dismissInput];
+	if (![self.autoCompletionViewController hasUniqueItemAvailable]) {
+		[self dismissInput];
+	}
 	return YES;
 }
 
