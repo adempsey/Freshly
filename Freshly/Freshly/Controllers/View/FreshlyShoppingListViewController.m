@@ -246,4 +246,9 @@
 	[self dismissInput];
 }
 
+- (CGFloat)heightForAutoCompletionTableView
+{
+	return 242.0;
+}
+
 @end

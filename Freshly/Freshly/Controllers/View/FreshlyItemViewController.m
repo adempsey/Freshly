@@ -425,4 +425,9 @@
 	[self.autoCompletionViewController setPrefix:@""];
 }
 
+- (CGFloat)heightForAutoCompletionTableView
+{
+	return 152.0;
+}
+
 @end

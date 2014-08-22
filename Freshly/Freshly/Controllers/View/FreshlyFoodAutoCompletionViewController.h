@@ -12,6 +12,7 @@
 
 @required
 - (void)didSelectAutoCompletedItem:(NSString*)item withCategory:(NSString*)category;
+- (CGFloat)heightForAutoCompletionTableView;
 
 @end
 
