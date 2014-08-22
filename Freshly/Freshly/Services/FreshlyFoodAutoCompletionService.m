@@ -96,19 +96,26 @@
 	
 	NSMutableArray *words = [[NSMutableArray alloc] init];
 	
-	for (NSString *key in newList.keys) {
+	if (list.keys.count > 0 && list.keys[prefix]) {
 		
-		if (((FreshlyFoodAutoCompletionService*)newList.keys[key]).keys.count) {
-			NSArray *newListWords = [self wordsWithPrefix:key forList:newList];
+		for (NSString *key in newList.keys) {
 			
-			for (NSString *word in newListWords) {
-				[words addObject:[prefix stringByAppendingString:word]];
+			if (((FreshlyFoodAutoCompletionService*)newList.keys[key]).keys.count) {
+				NSArray *newListWords = [self wordsWithPrefix:key forList:newList];
+
+				for (NSString *word in newListWords) {
+					[words addObject:[prefix stringByAppendingString:word]];
+				}
+
+			} else {
+				[words addObject:[prefix stringByAppendingString:key]];
 			}
 			
-		} else {
-			[words addObject:[prefix stringByAppendingString:key]];
 		}
 		
+		if (words.count == 0) {
+			return @[prefix];
+		}
 	}
 	
 	return words;
