@@ -11,6 +11,8 @@
 #import "FreshlyShoppingListViewController.h"
 #import "FreshlySettingsService.h"
 
+#import "UIFont+FreshlyAdditions.h"
+
 @implementation FreshlyAppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -21,6 +23,12 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
+	
+	[[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil]
+	 setTitleTextAttributes:
+	 @{NSForegroundColorAttributeName:FRESHLY_COLOR_DARK,
+	   NSFontAttributeName:[UIFont boldFreshlyFontOfSize:16.0]}
+	 forState:UIControlStateNormal];
 
 	UITabBarController *tabBarController = [[UITabBarController alloc] init];
 	

@@ -9,6 +9,7 @@
 #import "FreshlyShoppingListTableViewCell.h"
 
 #import "UIImage+FreshlyAdditions.h"
+#import "UIFont+FreshlyAdditions.h"
 
 #define kItemOffset 20.0
 #define kImageViewSize 25.0
@@ -27,6 +28,7 @@
 		[self setItem:item];
 
 		self.textLabel.textColor = FRESHLY_COLOR_DARK;
+		self.textLabel.font = [UIFont freshlyFontOfSize:18.0];
 
 		self.checkBox = [[UIButton alloc] init];
 		[self.checkBox setBackgroundImage:[UIImage imageNamed:@"checkbox_empty"] forState:UIControlStateNormal];

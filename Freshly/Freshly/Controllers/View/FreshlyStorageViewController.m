@@ -15,6 +15,7 @@
 #import "FreshlyStorageSettingsViewController.h"
 
 #import "FreshlyItemViewController+NewItem.h"
+#import "UIFont+FreshlyAdditions.h"
 
 @interface FreshlyStorageViewController ()
 
@@ -52,7 +53,8 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 		UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
 		titleLabel.text = FRESHLY_SECTION_STORAGE;
 		titleLabel.textColor = FRESHLY_COLOR_DARK;
-		titleLabel.font = [UIFont boldSystemFontOfSize:18.0];
+//		titleLabel.font = [UIFont boldSystemFontOfSize:18.0];
+		titleLabel.font = [UIFont boldFreshlyFontOfSize:18.0];
 		titleLabel.textAlignment = NSTextAlignmentCenter;
 		self.navigationItem.titleView = titleLabel;
 

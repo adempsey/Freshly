@@ -10,6 +10,8 @@
 #import "FreshlyFoodItemService.h"
 #import "FreshlySettingsService.h"
 
+#import "UIFont+FreshlyAdditions.h"
+
 @interface FreshlyShoppingListViewController ()
 
 @property (nonatomic, readwrite, strong) NSArray *items;
@@ -36,7 +38,7 @@
 		UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
 		titleLabel.text = FRESHLY_SECTION_SHOPPING_LIST;
 		titleLabel.textColor = FRESHLY_COLOR_DARK;
-		titleLabel.font = [UIFont boldSystemFontOfSize:18.0];
+		titleLabel.font = [UIFont boldFreshlyFontOfSize:18.0];
 		titleLabel.textAlignment = NSTextAlignmentCenter;
 		self.navigationItem.titleView = titleLabel;
 
@@ -77,6 +79,7 @@
 	self.addNewItemView.alpha = 0.0;
 	
 	self.addNewItemTextField.frame = CGRectMake(10, 15, self.view.frame.size.width - 20, 25);
+	self.addNewItemTextField.font = [UIFont freshlyFontOfSize:18.0];
 	self.addNewItemTextField.placeholder = @"Add New Item";
 	self.addNewItemTextField.backgroundColor = [UIColor whiteColor];
 	self.addNewItemTextField.returnKeyType = UIReturnKeyDone;

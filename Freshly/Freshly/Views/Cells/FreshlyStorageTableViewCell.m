@@ -10,6 +10,7 @@
 
 #import "NSDate+FreshlyAdditions.h"
 #import "UIImage+FreshlyAdditions.h"
+#import "UIFont+FreshlyAdditions.h"
 
 #define kSpaceLabelWidth 10.0
 #define kSpaceLabelHeight 10.0
@@ -29,7 +30,10 @@
 		self.backgroundColor = FRESHLY_COLOR_LIGHT;
 		
 		self.textLabel.textColor = FRESHLY_COLOR_DARK;
+		self.textLabel.font = [UIFont freshlyFontOfSize:24.0];
+		
 		self.detailTextLabel.textColor = FRESHLY_COLOR_DARK;
+		self.detailTextLabel.font = [UIFont freshlyFontOfSize:12.0];
 		
 		self.spaceLabel = [[UILabel alloc] init];
 		self.spaceLabel.font = [UIFont boldSystemFontOfSize:10.0];

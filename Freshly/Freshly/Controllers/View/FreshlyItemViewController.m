@@ -10,6 +10,7 @@
 #import "FreshlyFoodItemService.h"
 
 #import "UIImage+FreshlyAdditions.h"
+#import "UIFont+FreshlyAdditions.h"
 
 #define kImageViewSize 100.0
 
@@ -103,7 +104,7 @@
 	self.titleField.text = self.item ? self.item.name : @"";
 	self.titleField.textColor = FRESHLY_COLOR_DARK;
 	self.titleField.tintColor = FRESHLY_COLOR_DARK;
-	self.titleField.font = [UIFont systemFontOfSize:kTitleFieldFontSize];
+	self.titleField.font = [UIFont boldFreshlyFontOfSize:kTitleFieldFontSize];
 	self.titleField.placeholder = @"Food";
 	self.titleField.returnKeyType = UIReturnKeyDone;
 	self.titleField.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -144,7 +145,7 @@
 	[self.categoryButton setTitleColor:FRESHLY_COLOR_DARK forState:UIControlStateNormal];
 	[self.categoryButton setTitleColor:FRESHLY_COLOR_DARK forState:UIControlStateSelected];
 	[self.categoryButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-	[self.categoryButton.titleLabel setFont:[UIFont systemFontOfSize:kCategoryFieldFontSize]];
+	[self.categoryButton.titleLabel setFont:[UIFont freshlyFontOfSize:kCategoryFieldFontSize]];
 	[self.categoryButton addTarget:self action:@selector(presentCategoryPicker) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:self.categoryButton];
 	
@@ -158,12 +159,14 @@
 	[self.spaceChooser setFrame:CGRectMake(20, 350, screenBounds.size.width - 40, 30)];
 	self.spaceChooser.selectedSegmentIndex = [self.item.space integerValue];
 	self.spaceChooser.tintColor = categoryColor;
+	[self.spaceChooser setTitleTextAttributes:@{NSFontAttributeName: [UIFont freshlyFontOfSize:14.0]} forState:UIControlStateNormal];
 	[self.view addSubview:self.spaceChooser];
 	
 	if (self.itemExists) {
 		[self.moveToGroceryListButton setFrame:CGRectMake(20, 420, screenBounds.size.width - 40, 40)];
 		[self.moveToGroceryListButton setTitle:@"Move To Grocery List" forState:UIControlStateNormal];
 		[self.moveToGroceryListButton setTitle:@"Move To Grocery List" forState:UIControlStateSelected];
+		self.moveToGroceryListButton.titleLabel.font = [UIFont freshlyFontOfSize:18.0];
 		[self.moveToGroceryListButton setBackgroundColor:categoryColor];
 		[self.moveToGroceryListButton addTarget:self action:@selector(moveItemToGroceryList) forControlEvents:UIControlEventTouchUpInside];
 		[self.view addSubview:self.moveToGroceryListButton];
@@ -171,6 +174,7 @@
 		[self.deleteButton setFrame:CGRectMake(20, 490, screenBounds.size.width - 40, 40)];
 		[self.deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
 		[self.deleteButton setTitle:@"Delete" forState:UIControlStateSelected];
+		self.deleteButton.titleLabel.font = [UIFont freshlyFontOfSize:18.0];
 		[self.deleteButton setBackgroundColor:FRESHLY_COLOR_RED];
 		[self.deleteButton addTarget:self action:@selector(showDeleteActionSheet) forControlEvents:UIControlEventTouchUpInside];
 		[self.view addSubview:self.deleteButton];
@@ -179,6 +183,7 @@
 		[self.saveButton setFrame:CGRectMake(20, 460, screenBounds.size.width - 40, 40)];
 		[self.saveButton setTitle:@"Save" forState:UIControlStateNormal];
 		[self.saveButton setTitle:@"Save" forState:UIControlStateSelected];
+		self.saveButton.titleLabel.font = [UIFont freshlyFontOfSize:18.0];
 		[self.saveButton setBackgroundColor:categoryColor];
 		[self.saveButton addTarget:self action:@selector(saveNewItem) forControlEvents:UIControlEventTouchUpInside];
 		[self.view addSubview:self.saveButton];
