@@ -8,8 +8,9 @@
 
 #import "FreshlySettingsService.h"
 
-#define kFRESHLY_SETTINGS_KEY_SELECTED_SECTION @"selectedSection"
-#define kFRESHLY_SETTINGS_KEY_STORAGE_SORTING @"storageSorting"
+#define kFRESHLY_SETTINGS_KEY_SELECTED_SECTION	@"selectedSection"
+#define kFRESHLY_SETTINGS_KEY_STORAGE_SORTING	@"storageSorting"
+#define kFRESHLY_SETTINGS_KEY_STORAGE_GROUPING	@"storageGrouping"
 
 @implementation FreshlySettingsService
 
@@ -42,6 +43,19 @@
 {
 	if (self.storageSorting != storageSorting) {
 		[self setInteger:storageSorting forKey:kFRESHLY_SETTINGS_KEY_STORAGE_SORTING];
+		[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_STORAGE_SETTINGS_UPDATED object:nil];
+	}
+}
+
+- (NSInteger)storageGrouping
+{
+	return [self integerForKey:kFRESHLY_SETTINGS_KEY_STORAGE_GROUPING];
+}
+
+- (void)setStorageGrouping:(NSInteger)storageGrouping
+{
+	if (self.storageGrouping != storageGrouping) {
+		[self setInteger:storageGrouping forKey:kFRESHLY_SETTINGS_KEY_STORAGE_GROUPING];
 		[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_STORAGE_SETTINGS_UPDATED object:nil];
 	}
 }

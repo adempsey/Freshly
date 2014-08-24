@@ -32,6 +32,7 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 @interface FreshlyStorageSettingsViewController ()
 
 @property (nonatomic, readwrite, assign) NSInteger selectedSortingSetting;
+@property (nonatomic, readwrite, assign) NSInteger selectedGroupingSetting;
 
 @end
 
@@ -41,6 +42,7 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 {
 	if (self = [super initWithStyle:UITableViewStyleGrouped]) {
 		self.selectedSortingSetting = [[FreshlySettingsService sharedInstance] storageSorting];
+		self.selectedGroupingSetting = [[FreshlySettingsService sharedInstance] storageGrouping];
 	}
 	return self;
 }
@@ -59,6 +61,7 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 {
 	[self dismissViewControllerAnimated:YES completion:^{
 		[[FreshlySettingsService sharedInstance] setStorageSorting:self.selectedSortingSetting];
+		[[FreshlySettingsService sharedInstance] setStorageGrouping:self.selectedGroupingSetting];
 	}];
 }
 
@@ -139,8 +142,11 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
     cell.textLabel.text = [self titleForCellAtIndexPath:indexPath];
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-	if (indexPath.section == FreshlyStorageSettingsSectionSorting && indexPath.row == self.selectedSortingSetting) {
+	if ((indexPath.section == FreshlyStorageSettingsSectionSorting && indexPath.row == self.selectedSortingSetting) ||
+		(indexPath.section == FreshlyStorageSettingsSectionGrouping && indexPath.row == self.selectedGroupingSetting)) {
+
 		cell.accessoryType = UITableViewCellAccessoryCheckmark;
+
 	} else {
 		cell.accessoryType = UITableViewCellAccessoryNone;
 	}
@@ -170,6 +176,9 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 	switch (indexPath.section) {
 		case FreshlyStorageSettingsSectionSorting:
 			self.selectedSortingSetting = indexPath.row;
+			break;
+		case FreshlyStorageSettingsSectionGrouping:
+			self.selectedGroupingSetting = indexPath.row;
 			break;
 		default:
 			break;

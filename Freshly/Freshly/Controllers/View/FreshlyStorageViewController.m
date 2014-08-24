@@ -49,7 +49,7 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 		self.title = FRESHLY_SECTION_STORAGE;
 
 		self.sortingAttribute = [[FreshlySettingsService sharedInstance] storageSorting];
-		self.groupingAttribute = FreshlyItemGroupingAttributeAll;
+		self.groupingAttribute = [[FreshlySettingsService sharedInstance] storageGrouping];
 
 		[[FreshlyFoodItemService sharedInstance] retrieveItemsForStorageWithBlock:^(NSArray *items) {
 			self.items = items;
@@ -194,14 +194,20 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 - (void)reloadAllTableViewSections
 {
 	[[FreshlyFoodItemService sharedInstance] retrieveItemsForStorageWithBlock:^(NSArray *items) {
-		
+
 		self.sortingAttribute = [[FreshlySettingsService sharedInstance] storageSorting];
-		
+		self.groupingAttribute = [[FreshlySettingsService sharedInstance] storageGrouping];
+
 		self.items = items;
 		[self sortItemsInTableView];
 		NSRange sectionRange = NSMakeRange(0, self.tableView.numberOfSections);
 		NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:sectionRange];
-		[self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
+
+		if (self.tableView.numberOfSections == self.items.count) {
+			[self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
+		} else {
+			[self.tableView reloadData];
+		}
 	}];
 }
 

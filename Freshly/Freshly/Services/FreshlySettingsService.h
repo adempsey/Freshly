@@ -12,6 +12,7 @@
 
 @property (nonatomic, readwrite, assign) NSInteger selectedSection;
 @property (nonatomic, readwrite, assign) NSInteger storageSorting;
+@property (nonatomic, readwrite, assign) NSInteger storageGrouping;
 
 + (FreshlySettingsService*)sharedInstance;
 
