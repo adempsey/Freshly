@@ -25,8 +25,15 @@
 - (instancetype)initWithItem:(FreshlyFoodItem *)item
 {
 	if (self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:TABLE_VIEW_CELL_STORAGE_IDENTIFIER]) {
+		
+		self.backgroundColor = FRESHLY_COLOR_LIGHT;
+		
+		self.textLabel.textColor = FRESHLY_COLOR_DARK;
+		self.detailTextLabel.textColor = FRESHLY_COLOR_DARK;
+		
 		self.spaceLabel = [[UILabel alloc] init];
 		self.spaceLabel.font = [UIFont boldSystemFontOfSize:10.0];
+		self.spaceLabel.textColor = FRESHLY_COLOR_DARK;
 		[self addSubview:self.spaceLabel];
 		[self setItem:item];
 	}

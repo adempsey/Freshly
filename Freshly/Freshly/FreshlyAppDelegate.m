@@ -26,12 +26,18 @@
 	
 	FreshlyStorageViewController *storageViewController = [[FreshlyStorageViewController alloc] init];
 	UINavigationController *storageNavigationController = [[UINavigationController alloc] initWithRootViewController:storageViewController];
+	storageNavigationController.navigationBar.backgroundColor = FRESHLY_COLOR_LIGHT;
+	storageNavigationController.navigationBar.tintColor = FRESHLY_COLOR_DARK;
 	
 	FreshlyShoppingListViewController *shoppingListViewController = [[FreshlyShoppingListViewController alloc] init];
 	UINavigationController *shoppingListNavigationController = [[UINavigationController alloc] initWithRootViewController:shoppingListViewController];
+	shoppingListNavigationController.navigationBar.backgroundColor = FRESHLY_COLOR_LIGHT;
+	shoppingListNavigationController.navigationBar.tintColor = FRESHLY_COLOR_DARK;
 	
 	[tabBarController setViewControllers:@[storageNavigationController, shoppingListNavigationController]];
 	tabBarController.selectedIndex = [[FreshlySettingsService sharedInstance] selectedSection];
+	tabBarController.tabBar.tintColor = FRESHLY_COLOR_SELECTED;
+	tabBarController.tabBar.barTintColor = FRESHLY_COLOR_SECONDARY;
 	
 	self.window.rootViewController = tabBarController;
 	

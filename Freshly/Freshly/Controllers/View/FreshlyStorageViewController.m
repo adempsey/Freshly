@@ -46,7 +46,15 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 {
     self = [super init];
     if (self) {
+
 		self.title = FRESHLY_SECTION_STORAGE;
+
+		UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+		titleLabel.text = FRESHLY_SECTION_STORAGE;
+		titleLabel.textColor = FRESHLY_COLOR_DARK;
+		titleLabel.font = [UIFont boldSystemFontOfSize:18.0];
+		titleLabel.textAlignment = NSTextAlignmentCenter;
+		self.navigationItem.titleView = titleLabel;
 
 		self.sortingAttribute = [[FreshlySettingsService sharedInstance] storageSorting];
 		self.groupingAttribute = [[FreshlySettingsService sharedInstance] storageGrouping];
@@ -68,6 +76,8 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	self.tableView.backgroundColor = FRESHLY_COLOR_PRIMARY;
 	
 	self.tableView.frame = self.view.frame;
 	[self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 80, 0, 0)];

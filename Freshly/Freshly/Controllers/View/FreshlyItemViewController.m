@@ -86,7 +86,10 @@
 {
     [super viewDidLoad];
 	
-	self.view.backgroundColor = [UIColor whiteColor];
+	self.view.backgroundColor = FRESHLY_COLOR_PRIMARY;
+	
+	self.navigationController.navigationBar.backgroundColor = FRESHLY_COLOR_LIGHT;
+	self.navigationController.navigationBar.tintColor = FRESHLY_COLOR_DARK;
 	
 	self.imageView.frame = CGRectMake(20, 80, kImageViewSize, kImageViewSize);
 	NSString *imageTitle = self.item ? self.item.category : FRESHLY_CATEGORY_MISC;
@@ -96,8 +99,10 @@
 	UIColor *categoryColor = [[FreshlyFoodItemService sharedInstance] colorForCategory:self.item.category];
 	
 	self.titleField.frame = CGRectMake(140, 80, kTextViewWidth, kTextViewHeight);
-	self.titleField.backgroundColor = [UIColor whiteColor];
+	self.titleField.backgroundColor = FRESHLY_COLOR_PRIMARY;
 	self.titleField.text = self.item ? self.item.name : @"";
+	self.titleField.textColor = FRESHLY_COLOR_DARK;
+	self.titleField.tintColor = FRESHLY_COLOR_DARK;
 	self.titleField.font = [UIFont systemFontOfSize:kTitleFieldFontSize];
 	self.titleField.placeholder = @"Food";
 	self.titleField.returnKeyType = UIReturnKeyDone;
@@ -117,33 +122,27 @@
 	[self.darkBackground addGestureRecognizer:pickerBackgroundTapRecognizer];
 	
 	self.categoryPicker.frame = CGRectMake(0, screenBounds.size.height, screenBounds.size.width, kPickerHeight);
-	self.categoryPicker.backgroundColor = [UIColor whiteColor];
+	self.categoryPicker.backgroundColor = FRESHLY_COLOR_PRIMARY;
+	self.categoryPicker.tintColor = [UIColor redColor];
 	self.categoryPicker.dataSource = self;
 	self.categoryPicker.delegate = self;
 	[self.categoryPicker selectRow:[self indexForCategory:self.item.category] inComponent:0 animated:NO];
 	
 	self.purchaseDatePicker.frame = CGRectMake(0, screenBounds.size.height, screenBounds.size.width, kPickerHeight);
-	self.purchaseDatePicker.backgroundColor = [UIColor whiteColor];
+	self.purchaseDatePicker.backgroundColor = FRESHLY_COLOR_PRIMARY;
 	self.purchaseDatePicker.date = self.item.dateOfPurchase ? : [NSDate date];
 	self.purchaseDatePicker.datePickerMode = UIDatePickerModeDate;
 	
 	self.expirationDatePicker.frame = CGRectMake(0, screenBounds.size.height, screenBounds.size.width, kPickerHeight);
-	self.expirationDatePicker.backgroundColor = [UIColor whiteColor];
+	self.expirationDatePicker.backgroundColor = FRESHLY_COLOR_PRIMARY;
 	self.expirationDatePicker.date = self.item.dateOfExpiration ? : [NSDate date];
 	self.expirationDatePicker.datePickerMode = UIDatePickerModeDate;
-	
-	self.categoryPickerDoneButton.frame = CGRectMake(screenBounds.size.width - 80, 10, 80, 30);
-	self.categoryPickerDoneButton.backgroundColor = [UIColor clearColor];
-	[self.categoryPickerDoneButton setTitle:@"Done" forState:UIControlStateNormal];
-	[self.categoryPickerDoneButton setTitle:@"Done" forState:UIControlStateSelected];
-	[self.categoryPickerDoneButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-	[self.categoryPicker addSubview:self.categoryPickerDoneButton];
 	
 	self.categoryButton.frame = CGRectMake(140, 120, kTextViewWidth, kTextViewHeight);
 	[self.categoryButton setTitle:(self.item ? self.item.category : @"Category") forState:UIControlStateNormal];
 	[self.categoryButton setTitle:(self.item ? self.item.category : @"Category") forState:UIControlStateSelected];
-	[self.categoryButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	[self.categoryButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+	[self.categoryButton setTitleColor:FRESHLY_COLOR_DARK forState:UIControlStateNormal];
+	[self.categoryButton setTitleColor:FRESHLY_COLOR_DARK forState:UIControlStateSelected];
 	[self.categoryButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
 	[self.categoryButton.titleLabel setFont:[UIFont systemFontOfSize:kCategoryFieldFontSize]];
 	[self.categoryButton addTarget:self action:@selector(presentCategoryPicker) forControlEvents:UIControlEventTouchUpInside];
@@ -172,7 +171,7 @@
 		[self.deleteButton setFrame:CGRectMake(20, 490, screenBounds.size.width - 40, 40)];
 		[self.deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
 		[self.deleteButton setTitle:@"Delete" forState:UIControlStateSelected];
-		[self.deleteButton setBackgroundColor:FCOLOR_RED];
+		[self.deleteButton setBackgroundColor:FRESHLY_COLOR_RED];
 		[self.deleteButton addTarget:self action:@selector(showDeleteActionSheet) forControlEvents:UIControlEventTouchUpInside];
 		[self.view addSubview:self.deleteButton];
 		

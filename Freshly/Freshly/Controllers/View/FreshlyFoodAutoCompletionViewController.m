@@ -65,7 +65,7 @@
 
 				if (self.items.count == 1) {
 					FreshlyAutoCompletionTableViewCell *cell = (FreshlyAutoCompletionTableViewCell*) [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
-					cell.backgroundColor = FRESHLY_COLOR_SELECTED;
+					cell.backgroundColor = FRESHLY_COLOR_SELECTED_LIGHT;
 				}
 
 			} else {

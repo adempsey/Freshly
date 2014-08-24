@@ -26,6 +26,8 @@
 	if (self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:TABLE_VIEW_CELL_SHOPPING_LIST_IDENTIFIER]) {
 		[self setItem:item];
 
+		self.textLabel.textColor = FRESHLY_COLOR_DARK;
+
 		self.checkBox = [[UIButton alloc] init];
 		[self.checkBox setBackgroundImage:[UIImage imageNamed:@"checkbox_empty"] forState:UIControlStateNormal];
 		[self.checkBox addTarget:self action:@selector(toggleItemCheck) forControlEvents:UIControlEventTouchUpInside];

@@ -51,6 +51,17 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 {
     [super viewDidLoad];
 	self.navigationItem.title = @"Storage Settings";
+	
+	UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+	titleLabel.text = @"Storage Settings";
+	titleLabel.textColor = FRESHLY_COLOR_DARK;
+	titleLabel.font = [UIFont boldSystemFontOfSize:18.0];
+	titleLabel.textAlignment = NSTextAlignmentCenter;
+	self.navigationItem.titleView = titleLabel;
+	
+	self.tableView.backgroundColor = FRESHLY_COLOR_PRIMARY;
+	self.navigationController.navigationBar.tintColor = FRESHLY_COLOR_DARK;
+	
 	UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
 																				target:self
 																				action:@selector(dismissSettings)];
@@ -139,7 +150,14 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell = [[UITableViewCell alloc] init];
+	
+	cell.backgroundColor = FRESHLY_COLOR_LIGHT;
+	
     cell.textLabel.text = [self titleForCellAtIndexPath:indexPath];
+	cell.textLabel.textColor = FRESHLY_COLOR_DARK;
+	
+	cell.tintColor = FRESHLY_COLOR_SELECTED;
+	
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
 	if ((indexPath.section == FreshlyStorageSettingsSectionSorting && indexPath.row == self.selectedSortingSetting) ||

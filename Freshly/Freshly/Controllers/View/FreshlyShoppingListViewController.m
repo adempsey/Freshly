@@ -32,6 +32,13 @@
     self = [super init];
     if (self) {
 		self.title = FRESHLY_SECTION_SHOPPING_LIST;
+		
+		UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+		titleLabel.text = FRESHLY_SECTION_SHOPPING_LIST;
+		titleLabel.textColor = FRESHLY_COLOR_DARK;
+		titleLabel.font = [UIFont boldSystemFontOfSize:18.0];
+		titleLabel.textAlignment = NSTextAlignmentCenter;
+		self.navigationItem.titleView = titleLabel;
 
 		self.items = [[NSArray alloc] init];
 		[[FreshlyFoodItemService sharedInstance] retrieveItemsForShoppingListWithBlock:^(NSArray *items) {
@@ -66,7 +73,7 @@
 	[self.view addSubview:self.tableView];
 	
 	self.addNewItemView.frame = CGRectMake(0, 10, self.view.frame.size.width, 50);
-	self.addNewItemView.backgroundColor = [UIColor grayColor];
+	self.addNewItemView.backgroundColor = FRESHLY_COLOR_PRIMARY;
 	self.addNewItemView.alpha = 0.0;
 	
 	self.addNewItemTextField.frame = CGRectMake(10, 15, self.view.frame.size.width - 20, 25);
@@ -75,6 +82,8 @@
 	self.addNewItemTextField.returnKeyType = UIReturnKeyDone;
 	self.addNewItemTextField.autocorrectionType = UITextAutocorrectionTypeNo;
 	self.addNewItemTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+	self.addNewItemTextField.textColor = FRESHLY_COLOR_DARK;
+	self.addNewItemTextField.tintColor = FRESHLY_COLOR_DARK;
 	self.addNewItemTextField.delegate = self;
 	[self.addNewItemTextField addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
 	[self.addNewItemView addSubview:self.addNewItemTextField];
