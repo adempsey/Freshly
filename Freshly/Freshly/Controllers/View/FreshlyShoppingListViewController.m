@@ -60,6 +60,8 @@
     [super viewDidLoad];
 	
 	self.tableView.frame = self.view.frame;
+	NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:FRESHLY_ITEM_ATTRIBUTE_NAME ascending:YES];
+	self.items = [self.items sortedArrayUsingDescriptors:@[sortDescriptor]];
 	[self.view addSubview:self.tableView];
 	
 	self.addNewItemView.frame = CGRectMake(0, 10, self.view.frame.size.width, 50);
@@ -105,6 +107,8 @@
 {
 	[[FreshlyFoodItemService sharedInstance] retrieveItemsForShoppingListWithBlock:^(NSArray *items) {
 		self.items = items;
+		NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:FRESHLY_ITEM_ATTRIBUTE_NAME ascending:YES];
+		self.items = [self.items sortedArrayUsingDescriptors:@[sortDescriptor]];
 		NSRange sectionRange = NSMakeRange(0, self.tableView.numberOfSections);
 		NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:sectionRange];
 		[self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];

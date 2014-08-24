@@ -19,9 +19,17 @@
 @property (nonatomic, readwrite, strong) NSArray *items;
 @property (nonatomic, readwrite, strong) UITableView *tableView;
 
+@property (nonatomic, readwrite, assign) NSInteger sortingAttribute;
+
 @end
 
 @implementation FreshlyStorageViewController
+
+typedef NS_ENUM(NSInteger, FreshlyItemSortingCategories) {
+	FreshlyItemSortingCategoryName = 0,
+	FreshlyItemSortingCategoryPurchaseDate,
+	FreshlyItemSortingCategoryExpirationDate
+};
 
 - (id)init
 {
@@ -39,6 +47,8 @@
 		self.tableView.dataSource = self;
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveItemUpdateNotification:) name:NOTIFICATION_ITEM_UPDATED object:nil];
+		
+		self.sortingAttribute = FreshlyItemSortingCategoryName; //switch to nsuserdefaults
     }
     return self;
 }
@@ -49,7 +59,12 @@
 	
 	self.tableView.frame = self.view.frame;
 	[self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 80, 0, 0)];
+	[self sortItemsInTableView];
 	[self.view addSubview:self.tableView];
+	
+	NSString *unicodeGear = @"\u2699";
+	UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithTitle:unicodeGear style:UIBarButtonItemStylePlain target:self action:@selector(presentSettingsActionSheet)];
+	self.navigationItem.leftBarButtonItem = settingsButton;
 
 	UIBarButtonItem *addNewItemButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewItemView)];
 	self.navigationItem.rightBarButtonItem = addNewItemButton;
@@ -75,12 +90,57 @@
 	[self presentViewController:newItemNavigationController animated:YES completion:nil];
 }
 
+- (void)presentSettingsActionSheet
+{
+	UIActionSheet *settingsActionSheet = [[UIActionSheet alloc] initWithTitle:@"Choose an attribute to sort items by"
+																	 delegate:self
+															cancelButtonTitle:@"Done"
+													   destructiveButtonTitle:nil
+															otherButtonTitles:@"Name", @"Purchase Date", @"Expiration Date", nil];
+	[settingsActionSheet showInView:self.view];
+}
+
+- (void)sortItemsInTableView
+{
+	NSString *sortingDescriptorKey = nil;
+	BOOL ascending = YES;
+	
+	switch (self.sortingAttribute) {
+		case FreshlyItemSortingCategoryName:
+			sortingDescriptorKey = FRESHLY_ITEM_ATTRIBUTE_NAME;
+			break;
+		case FreshlyItemSortingCategoryPurchaseDate:
+			sortingDescriptorKey = FRESHLY_ITEM_ATTRIBUTE_PURCHASE_DATE;
+			ascending = NO;
+			break;
+		case FreshlyItemSortingCategoryExpirationDate:
+			sortingDescriptorKey = FRESHLY_ITEM_ATTRIBUTE_EXPIRATION_DATE;
+			ascending = NO;
+			break;
+		default:
+			break;
+	}
+	
+	NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:sortingDescriptorKey ascending:ascending];
+	self.items = [self.items sortedArrayUsingDescriptors:@[sortDescriptor]];
+}
+
+#pragma mark - UIActionSheet Delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	self.sortingAttribute = buttonIndex;
+	[self sortItemsInTableView];
+	[self reloadAllTableViewSections];
+}
+
 #pragma mark - TableView methods
 
 - (void)reloadAllTableViewSections
 {
 	[[FreshlyFoodItemService sharedInstance] retrieveItemsForStorageWithBlock:^(NSArray *items) {
 		self.items = items;
+		[self sortItemsInTableView];
 		NSRange sectionRange = NSMakeRange(0, self.tableView.numberOfSections);
 		NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:sectionRange];
 		[self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
