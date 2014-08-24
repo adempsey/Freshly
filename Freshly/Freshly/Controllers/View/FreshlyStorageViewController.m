@@ -21,6 +21,7 @@
 @property (nonatomic, readwrite, strong) UITableView *tableView;
 
 @property (nonatomic, readwrite, assign) NSInteger sortingAttribute;
+@property (nonatomic, readwrite, assign) NSInteger groupingAttribute;
 
 @end
 
@@ -33,24 +34,31 @@ typedef NS_ENUM(NSInteger, FreshlyItemSortingCategories) {
 	FreshlyItemSortingCategoryCount
 };
 
+typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
+	FreshlyItemGroupingAttributeAll = 0,
+	FreshlyItemGroupingAttributeCategory,
+	FreshlyItemGroupingAttributeSpace,
+	FreshlyItemGroupingAttributeCount
+};
+
 - (id)init
 {
     self = [super init];
     if (self) {
 		self.title = FRESHLY_SECTION_STORAGE;
 		
-		self.items = [[NSArray alloc] init];
+		self.sortingAttribute = [[FreshlySettingsService sharedInstance] storageSorting];
+		self.groupingAttribute = FreshlyItemGroupingAttributeAll;
+
 		[[FreshlyFoodItemService sharedInstance] retrieveItemsForStorageWithBlock:^(NSArray *items) {
 			self.items = items;
 		}];
 		
-		self.tableView = [[UITableView alloc] init];
+		self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped];
 		self.tableView.delegate = self;
 		self.tableView.dataSource = self;
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveItemUpdateNotification:) name:NOTIFICATION_ITEM_UPDATED object:nil];
-		
-		self.sortingAttribute = [[FreshlySettingsService sharedInstance] storageSorting];
     }
     return self;
 }
@@ -76,6 +84,40 @@ typedef NS_ENUM(NSInteger, FreshlyItemSortingCategories) {
 {
 	[super viewDidAppear:animated];
 	[[FreshlySettingsService sharedInstance] setSelectedSection:0];
+}
+
+- (void)setItems:(NSArray *)items
+{
+	if (!_items) {
+		_items = [[NSArray alloc] init];
+	}
+
+	if (self.groupingAttribute == FreshlyItemGroupingAttributeAll) {
+		_items = @[items];
+
+	} else if (self.groupingAttribute == FreshlyItemGroupingAttributeCategory) {
+		NSArray *categories = [[FreshlyFoodItemService sharedInstance] foodItemCategoryList];
+		NSMutableArray *categorySectionItems = [[NSMutableArray alloc] init];
+
+		for (NSString *category in categories) {
+			NSPredicate *categoryPredicate = [NSPredicate predicateWithFormat:@"(self.category == %@)", category];
+			NSArray *filteredArray = [items filteredArrayUsingPredicate:categoryPredicate];
+			[categorySectionItems addObject:filteredArray];
+		}
+
+		_items = categorySectionItems;
+
+	} else if (self.groupingAttribute == FreshlyItemGroupingAttributeSpace) {
+		NSMutableArray *spaceSectionItems = [[NSMutableArray alloc] init];
+
+		for (NSInteger space = FreshlySpaceRefrigerator; space < FreshlySpaceCount; ++space) {
+			NSPredicate *spacePredicate = [NSPredicate predicateWithFormat:@"(self.space == %@)", [NSNumber numberWithInteger:space]];
+			NSArray *filteredArray = [items filteredArrayUsingPredicate:spacePredicate];
+			[spaceSectionItems addObject:filteredArray];
+		}
+
+		_items = spaceSectionItems;
+	}
 }
 
 - (void)didReceiveItemUpdateNotification:(NSNotification*)notification
@@ -112,7 +154,7 @@ typedef NS_ENUM(NSInteger, FreshlyItemSortingCategories) {
 {
 	NSString *sortingDescriptorKey = nil;
 	BOOL ascending = YES;
-	
+
 	switch (self.sortingAttribute) {
 		case FreshlyItemSortingCategoryName:
 			sortingDescriptorKey = FRESHLY_ITEM_ATTRIBUTE_NAME;
@@ -128,10 +170,16 @@ typedef NS_ENUM(NSInteger, FreshlyItemSortingCategories) {
 		default:
 			break;
 	}
-	
+
 	if (sortingDescriptorKey) {
 		NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:sortingDescriptorKey ascending:ascending];
-		self.items = [self.items sortedArrayUsingDescriptors:@[sortDescriptor]];
+		NSMutableArray *newItems = [[NSMutableArray alloc] init];
+
+		for (NSArray *array in self.items) {
+			[newItems addObject:[array sortedArrayUsingDescriptors:@[sortDescriptor]]];
+		}
+
+		_items = newItems;
 	}
 }
 
@@ -164,17 +212,20 @@ typedef NS_ENUM(NSInteger, FreshlyItemSortingCategories) {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return self.items.count;
+	if (self.items[section]) {
+		return ((NSArray*)self.items[section]).count;
+	}
+	return 0;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	return 1;
+	return self.items.count;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	FreshlyFoodItem *item = self.items[indexPath.row];
+	FreshlyFoodItem *item = self.items[indexPath.section][indexPath.row];
 	FreshlyStorageTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:TABLE_VIEW_CELL_STORAGE_IDENTIFIER];
 	
 	if (!cell) {
@@ -195,7 +246,7 @@ typedef NS_ENUM(NSInteger, FreshlyItemSortingCategories) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	FreshlyFoodItem *item = self.items[indexPath.row];
+	FreshlyFoodItem *item = self.items[indexPath.section][indexPath.row];
 	FreshlyItemViewController *itemViewController = [[FreshlyItemViewController alloc] initWithItem:item];
 	[self.navigationController pushViewController:itemViewController animated:YES];
 	
@@ -205,7 +256,37 @@ typedef NS_ENUM(NSInteger, FreshlyItemSortingCategories) {
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
-		[[FreshlyFoodItemService sharedInstance] deleteItem:self.items[indexPath.row]];
+		[[FreshlyFoodItemService sharedInstance] deleteItem:self.items[indexPath.section][indexPath.row]];
+	}
+}
+
+- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+	switch (self.groupingAttribute) {
+		case FreshlyItemGroupingAttributeAll:
+			return @"All Items";
+			break;
+		case FreshlyItemGroupingAttributeCategory:
+			return [[FreshlyFoodItemService sharedInstance] foodItemCategoryList][section];
+			break;
+		case FreshlyItemGroupingAttributeSpace:
+			switch (section) {
+				case FreshlySpaceRefrigerator:
+					return FRESHLY_SPACE_REFRIGERATOR;
+					break;
+				case FreshlySpaceFreezer:
+					return FRESHLY_SPACE_FREEZER;
+					break;
+				case FreshlySpacePantry:
+					return FRESHLY_SPACE_PANTRY;
+				default:
+					return @"";
+					break;
+			}
+			break;
+		default:
+			return @"";
+			break;
 	}
 }
 

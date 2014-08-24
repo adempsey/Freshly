@@ -9,6 +9,13 @@
 #ifndef Freshly_FreshlyConstants_h
 #define Freshly_FreshlyConstants_h
 
+typedef NS_ENUM(NSInteger, FreshlySpaces) {
+	FreshlySpaceRefrigerator = 0,
+	FreshlySpaceFreezer,
+	FreshlySpacePantry,
+	FreshlySpaceCount
+};
+
 /************** Strings **************/
 
 #define FRESHLY_SECTION_STORAGE			@"Storage"
