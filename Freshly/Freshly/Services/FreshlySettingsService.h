@@ -11,6 +11,7 @@
 @interface FreshlySettingsService : NSObject
 
 @property (nonatomic, readwrite, assign) NSInteger selectedSection;
+@property (nonatomic, readwrite, assign) NSInteger storageSorting;
 
 + (FreshlySettingsService*)sharedInstance;
 

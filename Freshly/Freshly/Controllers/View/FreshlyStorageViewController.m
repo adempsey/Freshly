@@ -49,7 +49,7 @@ typedef NS_ENUM(NSInteger, FreshlyItemSortingCategories) {
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveItemUpdateNotification:) name:NOTIFICATION_ITEM_UPDATED object:nil];
 		
-		self.sortingAttribute = FreshlyItemSortingCategoryName; //switch to nsuserdefaults
+		self.sortingAttribute = [[FreshlySettingsService sharedInstance] storageSorting];
     }
     return self;
 }
@@ -137,6 +137,7 @@ typedef NS_ENUM(NSInteger, FreshlyItemSortingCategories) {
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	self.sortingAttribute = buttonIndex;
+	[[FreshlySettingsService sharedInstance] setStorageSorting:buttonIndex];
 	[self sortItemsInTableView];
 	[self reloadAllTableViewSections];
 }

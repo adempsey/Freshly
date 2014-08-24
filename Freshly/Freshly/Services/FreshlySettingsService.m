@@ -9,6 +9,7 @@
 #import "FreshlySettingsService.h"
 
 #define kFRESHLY_SETTINGS_KEY_SELECTED_SECTION @"selectedSection"
+#define kFRESHLY_SETTINGS_KEY_STORAGE_SORTING @"storageSorting"
 
 @implementation FreshlySettingsService
 
@@ -30,6 +31,16 @@
 - (void)setSelectedSection:(NSInteger)selectedSection
 {
 	[self setInteger:selectedSection forKey:kFRESHLY_SETTINGS_KEY_SELECTED_SECTION];
+}
+
+- (NSInteger)storageSorting
+{
+	return [self integerForKey:kFRESHLY_SETTINGS_KEY_STORAGE_SORTING];
+}
+
+- (void)setStorageSorting:(NSInteger)storageSorting
+{
+	[self setInteger:storageSorting forKey:kFRESHLY_SETTINGS_KEY_STORAGE_SORTING];
 }
 
 #pragma mark - User Defaults Accessors
