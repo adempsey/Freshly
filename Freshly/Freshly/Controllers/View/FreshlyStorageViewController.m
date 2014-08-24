@@ -29,7 +29,8 @@
 typedef NS_ENUM(NSInteger, FreshlyItemSortingCategories) {
 	FreshlyItemSortingCategoryName = 0,
 	FreshlyItemSortingCategoryPurchaseDate,
-	FreshlyItemSortingCategoryExpirationDate
+	FreshlyItemSortingCategoryExpirationDate,
+	FreshlyItemSortingCategoryCount
 };
 
 - (id)init
@@ -128,18 +129,22 @@ typedef NS_ENUM(NSInteger, FreshlyItemSortingCategories) {
 			break;
 	}
 	
-	NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:sortingDescriptorKey ascending:ascending];
-	self.items = [self.items sortedArrayUsingDescriptors:@[sortDescriptor]];
+	if (sortingDescriptorKey) {
+		NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:sortingDescriptorKey ascending:ascending];
+		self.items = [self.items sortedArrayUsingDescriptors:@[sortDescriptor]];
+	}
 }
 
 #pragma mark - UIActionSheet Delegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	self.sortingAttribute = buttonIndex;
-	[[FreshlySettingsService sharedInstance] setStorageSorting:buttonIndex];
-	[self sortItemsInTableView];
-	[self reloadAllTableViewSections];
+	if (buttonIndex < FreshlyItemSortingCategoryCount) {
+		self.sortingAttribute = buttonIndex;
+		[[FreshlySettingsService sharedInstance] setStorageSorting:buttonIndex];
+		[self sortItemsInTableView];
+		[self reloadAllTableViewSections];
+	}
 }
 
 #pragma mark - TableView methods
