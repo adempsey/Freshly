@@ -40,7 +40,10 @@
 
 - (void)setStorageSorting:(NSInteger)storageSorting
 {
-	[self setInteger:storageSorting forKey:kFRESHLY_SETTINGS_KEY_STORAGE_SORTING];
+	if (self.storageSorting != storageSorting) {
+		[self setInteger:storageSorting forKey:kFRESHLY_SETTINGS_KEY_STORAGE_SORTING];
+		[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_STORAGE_SETTINGS_UPDATED object:nil];
+	}
 }
 
 #pragma mark - User Defaults Accessors

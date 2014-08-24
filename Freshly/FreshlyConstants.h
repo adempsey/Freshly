@@ -73,6 +73,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 /************** Notifications **************/
 
-#define NOTIFICATION_ITEM_UPDATED @"notificationItemUpdated"
+#define NOTIFICATION_ITEM_UPDATED	@"notificationItemUpdated"
+#define NOTIFICATION_STORAGE_SETTINGS_UPDATED	@"notificationStorageSettingsUpdated"
 
 #endif

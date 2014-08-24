@@ -12,6 +12,7 @@
 #import "FreshlyFoodItem.h"
 #import "FreshlyItemViewController.h"
 #import "FreshlySettingsService.h"
+#import "FreshlyStorageSettingsViewController.h"
 
 #import "FreshlyItemViewController+NewItem.h"
 
@@ -46,19 +47,20 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
     self = [super init];
     if (self) {
 		self.title = FRESHLY_SECTION_STORAGE;
-		
+
 		self.sortingAttribute = [[FreshlySettingsService sharedInstance] storageSorting];
 		self.groupingAttribute = FreshlyItemGroupingAttributeAll;
 
 		[[FreshlyFoodItemService sharedInstance] retrieveItemsForStorageWithBlock:^(NSArray *items) {
 			self.items = items;
 		}];
-		
+
 		self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped];
 		self.tableView.delegate = self;
 		self.tableView.dataSource = self;
 		
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveItemUpdateNotification:) name:NOTIFICATION_ITEM_UPDATED object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadAllTableViewSections) name:NOTIFICATION_ITEM_UPDATED object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadAllTableViewSections) name:NOTIFICATION_STORAGE_SETTINGS_UPDATED object:nil];
     }
     return self;
 }
@@ -120,11 +122,6 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 	}
 }
 
-- (void)didReceiveItemUpdateNotification:(NSNotification*)notification
-{
-	[self reloadAllTableViewSections];
-}
-
 - (void)presentNewItemView
 {
 	FreshlyItemViewController *newItemViewController = [[FreshlyItemViewController alloc] initWithItem:nil];
@@ -142,12 +139,9 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 
 - (void)presentSettingsActionSheet
 {
-	UIActionSheet *settingsActionSheet = [[UIActionSheet alloc] initWithTitle:@"Choose an attribute to sort items by"
-																	 delegate:self
-															cancelButtonTitle:@"Done"
-													   destructiveButtonTitle:nil
-															otherButtonTitles:@"Name", @"Purchase Date", @"Expiration Date", nil];
-	[settingsActionSheet showInView:self.view];
+	FreshlyStorageSettingsViewController *settingsViewController = [[FreshlyStorageSettingsViewController alloc] init];
+	UINavigationController *settingsNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
+	[self presentViewController:settingsNavigationController animated:YES completion:nil];
 }
 
 - (void)sortItemsInTableView
@@ -200,6 +194,9 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 - (void)reloadAllTableViewSections
 {
 	[[FreshlyFoodItemService sharedInstance] retrieveItemsForStorageWithBlock:^(NSArray *items) {
+		
+		self.sortingAttribute = [[FreshlySettingsService sharedInstance] storageSorting];
+		
 		self.items = items;
 		[self sortItemsInTableView];
 		NSRange sectionRange = NSMakeRange(0, self.tableView.numberOfSections);
