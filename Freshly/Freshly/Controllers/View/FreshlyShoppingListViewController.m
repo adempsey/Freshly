@@ -8,6 +8,7 @@
 
 #import "FreshlyShoppingListViewController.h"
 #import "FreshlyFoodItemService.h"
+#import "FreshlySettingsService.h"
 
 @interface FreshlyShoppingListViewController ()
 
@@ -90,6 +91,12 @@
 	
 	self.autoCompletionViewController.delegate = self;
 	[self.view addSubview:self.autoCompletionViewController.view];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	[[FreshlySettingsService sharedInstance] setSelectedSection:1];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

@@ -9,6 +9,7 @@
 #import "FreshlyAppDelegate.h"
 #import "FreshlyStorageViewController.h"
 #import "FreshlyShoppingListViewController.h"
+#import "FreshlySettingsService.h"
 
 @implementation FreshlyAppDelegate
 
@@ -30,6 +31,7 @@
 	UINavigationController *shoppingListNavigationController = [[UINavigationController alloc] initWithRootViewController:shoppingListViewController];
 	
 	[tabBarController setViewControllers:@[storageNavigationController, shoppingListNavigationController]];
+	tabBarController.selectedIndex = [[FreshlySettingsService sharedInstance] selectedSection];
 	
 	self.window.rootViewController = tabBarController;
 	

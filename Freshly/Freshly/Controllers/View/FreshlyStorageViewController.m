@@ -11,6 +11,7 @@
 #import "FreshlyFoodItemService.h"
 #import "FreshlyFoodItem.h"
 #import "FreshlyItemViewController.h"
+#import "FreshlySettingsService.h"
 
 #import "FreshlyItemViewController+NewItem.h"
 
@@ -68,6 +69,12 @@ typedef NS_ENUM(NSInteger, FreshlyItemSortingCategories) {
 
 	UIBarButtonItem *addNewItemButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewItemView)];
 	self.navigationItem.rightBarButtonItem = addNewItemButton;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	[[FreshlySettingsService sharedInstance] setSelectedSection:0];
 }
 
 - (void)didReceiveItemUpdateNotification:(NSNotification*)notification
