@@ -17,6 +17,8 @@
 		8D916B5C19A08EB7003CEF8D /* checkbox_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D916B5B19A08EB7003CEF8D /* checkbox_empty.png */; };
 		8D916B5E19A0915B003CEF8D /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D916B5D19A0915B003CEF8D /* checkbox_checked.png */; };
 		8DA08C9319A99E0C00F13CE4 /* FreshlySettingsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA08C9219A99E0C00F13CE4 /* FreshlySettingsService.m */; };
+		8DA08C9519A9B56100F13CE4 /* grain 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA08C9419A9B56100F13CE4 /* grain 100x100.png */; };
+		8DA08C9719A9B59D00F13CE4 /* grain 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA08C9619A9B59D00F13CE4 /* grain 50x50.png */; };
 		8DA66B75199D5F2E00A129A3 /* FreshlyItemViewController+NewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA66B74199D5F2E00A129A3 /* FreshlyItemViewController+NewItem.m */; };
 		8DA66B78199EE2A200A129A3 /* FreshlyShoppingListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA66B77199EE2A200A129A3 /* FreshlyShoppingListTableViewCell.m */; };
 		8DC373EF19821DC000DC9731 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC373EE19821DC000DC9731 /* Foundation.framework */; };
@@ -83,6 +85,8 @@
 		8D916B5D19A0915B003CEF8D /* checkbox_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_checked.png; sourceTree = "<group>"; };
 		8DA08C9119A99E0C00F13CE4 /* FreshlySettingsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreshlySettingsService.h; sourceTree = "<group>"; };
 		8DA08C9219A99E0C00F13CE4 /* FreshlySettingsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreshlySettingsService.m; sourceTree = "<group>"; };
+		8DA08C9419A9B56100F13CE4 /* grain 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grain 100x100.png"; sourceTree = "<group>"; };
+		8DA08C9619A9B59D00F13CE4 /* grain 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grain 50x50.png"; sourceTree = "<group>"; };
 		8DA66B73199D5F2E00A129A3 /* FreshlyItemViewController+NewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FreshlyItemViewController+NewItem.h"; sourceTree = "<group>"; };
 		8DA66B74199D5F2E00A129A3 /* FreshlyItemViewController+NewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FreshlyItemViewController+NewItem.m"; sourceTree = "<group>"; };
 		8DA66B76199EE2A200A129A3 /* FreshlyShoppingListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreshlyShoppingListTableViewCell.h; sourceTree = "<group>"; };
@@ -355,6 +359,7 @@
 				8DEB2AB61988CBA800043285 /* drink 50x50.png */,
 				8DEB2AB71988CBA800043285 /* seafood 50x50.png */,
 				8DEB2AB81988CBA800043285 /* fruit 50x50.png */,
+				8DA08C9619A9B59D00F13CE4 /* grain 50x50.png */,
 				8DEB2AB91988CBA800043285 /* meat 50x50.png */,
 				8DEB2ABB1988CBA800043285 /* misc 50x50.png */,
 				8DEB2ABE1988CBA800043285 /* vegetable 50x50.png */,
@@ -369,6 +374,7 @@
 				8DD7EFC41996F77B00FC0A10 /* drink 100x100.png */,
 				8DD7EFC51996F77B00FC0A10 /* seafood 100x100.png */,
 				8DD7EFC61996F77B00FC0A10 /* fruit 100x100.png */,
+				8DA08C9419A9B56100F13CE4 /* grain 100x100.png */,
 				8DD7EFC71996F77B00FC0A10 /* meat 100x100.png */,
 				8DD7EFC91996F77B00FC0A10 /* misc 100x100.png */,
 				8DD7EFCC1996F77B00FC0A10 /* vegetable 100x100.png */,
@@ -494,10 +500,12 @@
 				8DEB2AC31988CBA800043285 /* meat 50x50.png in Resources */,
 				8DD7EFCF1996F77B00FC0A10 /* seafood 100x100.png in Resources */,
 				8D916B5C19A08EB7003CEF8D /* checkbox_empty.png in Resources */,
+				8DA08C9719A9B59D00F13CE4 /* grain 50x50.png in Resources */,
 				8D916B5E19A0915B003CEF8D /* checkbox_checked.png in Resources */,
 				8DEB2AC11988CBA800043285 /* seafood 50x50.png in Resources */,
 				8DD7EFD61996F77B00FC0A10 /* vegetable 100x100.png in Resources */,
 				8DEB2AC81988CBA800043285 /* vegetable 50x50.png in Resources */,
+				8DA08C9519A9B56100F13CE4 /* grain 100x100.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
