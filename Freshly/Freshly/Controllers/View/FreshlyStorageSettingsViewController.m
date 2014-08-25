@@ -181,10 +181,10 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 {
 	switch (section) {
 		case FreshlyStorageSettingsSectionSorting:
-			return @"Sort items by";
+			return @"Sort items by...";
 			break;
 		case FreshlyStorageSettingsSectionGrouping:
-			return @"Group items by";
+			return @"Group items by...";
 			break;
 		default:
 			return @"";
@@ -207,6 +207,22 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 
 	[self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 	[self.tableView reloadData];
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+	UIView *view = [[UIView alloc] init];
+	view.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, 50.0);
+
+	UILabel *titleLabel = [[UILabel alloc] init];
+	CGFloat originY = section == 0 ? view.frame.size.height - 20.0 - 10.0 : view.frame.size.height - 50.0;
+	titleLabel.frame = CGRectMake(16.0, originY, 200.0, 20.0);
+	titleLabel.font = [UIFont freshlyFontOfSize:18.0];
+	titleLabel.text = [self tableView:tableView titleForHeaderInSection:section];
+	titleLabel.textColor = FRESHLY_COLOR_DARK;
+	[view addSubview:titleLabel];
+
+	return view;
 }
 
 @end
