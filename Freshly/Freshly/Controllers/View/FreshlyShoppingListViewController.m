@@ -77,8 +77,13 @@
 	self.addNewItemView.frame = CGRectMake(0, 10, self.view.frame.size.width, 50);
 	self.addNewItemView.backgroundColor = FRESHLY_COLOR_PRIMARY;
 	self.addNewItemView.alpha = 0.0;
-	
+
 	self.addNewItemTextField.frame = CGRectMake(10, 15, self.view.frame.size.width - 20, 25);
+
+	UIView *textFieldPadding = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 25)];
+	self.addNewItemTextField.leftView = textFieldPadding;
+	self.addNewItemTextField.leftViewMode = UITextFieldViewModeAlways;
+
 	self.addNewItemTextField.font = [UIFont freshlyFontOfSize:18.0];
 	self.addNewItemTextField.placeholder = @"Add New Item";
 	self.addNewItemTextField.backgroundColor = [UIColor whiteColor];
