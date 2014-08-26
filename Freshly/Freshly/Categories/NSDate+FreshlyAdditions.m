@@ -27,9 +27,16 @@ static const NSUInteger kYEAR   = kMONTH*12;
 	return months[self.calendarDescription.month - 1];
 }
 
+- (NSDate*)normalizedDate
+{
+	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	NSDateComponents *components = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:self];
+	return [gregorian dateFromComponents:components];
+}
+
 - (NSString*)approximateDescription
 {
-    NSInteger timeInterval = [self timeIntervalSinceNow];
+    NSInteger timeInterval = [[self normalizedDate] timeIntervalSinceNow];
     BOOL inPast = (timeInterval < 0);
     NSUInteger timeSince = abs(timeInterval);
     
