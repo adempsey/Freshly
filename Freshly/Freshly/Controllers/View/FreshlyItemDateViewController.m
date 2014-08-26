@@ -13,6 +13,9 @@
 
 #define kTimeIntervalTwoWeeks 1209600
 
+#define kItemHorizontalOffset 20.0
+#define kItemVerticalOffset 5.0
+
 @interface FreshlyItemDateViewController ()
 
 @property (nonatomic, readwrite, assign) BOOL expirationDateSet;
@@ -66,17 +69,16 @@
 {
     [super viewDidLoad];
 	
-	CGRect screenBounds = [[UIScreen mainScreen] bounds];
-	[self.view setBounds:CGRectMake(0, 0, screenBounds.size.width, 100)];
-	self.view.backgroundColor = [UIColor grayColor];
+	CGRect screenBounds = CGRectMake(0, 0, 280, 200);
+	self.view.backgroundColor = FRESHLY_CATEGORY_COLOR_MISC;
 	
-	[self.purchaseTitleLabel setFrame:CGRectMake(20, 5, 120, 20)];
+	[self.purchaseTitleLabel setFrame:CGRectMake(kItemHorizontalOffset, kItemVerticalOffset, 120, 20)];
 	self.purchaseTitleLabel.font = [UIFont freshlyFontOfSize:14.0];
 	self.purchaseTitleLabel.text = @"Purchased";
 	self.purchaseTitleLabel.textColor = [UIColor whiteColor];
 	[self.view addSubview:self.purchaseTitleLabel];
 	
-	[self.purchaseDayLabel setFrame:CGRectMake(20, 25, 60, 60)];
+	[self.purchaseDayLabel setFrame:CGRectMake(kItemHorizontalOffset, 25, 60, 60)];
 	self.purchaseDayLabel.font = [UIFont boldFreshlyFontOfSize:48.0];
 	self.purchaseDayLabel.textColor = [UIColor whiteColor];
 	[self.view addSubview:self.purchaseDayLabel];

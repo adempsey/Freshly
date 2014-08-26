@@ -14,13 +14,14 @@
 
 #define kImageViewSize 100.0
 
-#define kTextViewWidth 160.0
 #define kTextViewHeight 30.0
 
 #define kPickerHeight 162.0
 
 #define kTitleFieldFontSize 22.0
 #define kCategoryFieldFontSize 18.0
+
+#define kItemOffset 20.0
 
 @interface FreshlyItemViewController ()
 
@@ -92,15 +93,19 @@
 	self.navigationController.navigationBar.backgroundColor = FRESHLY_COLOR_LIGHT;
 	self.navigationController.navigationBar.tintColor = FRESHLY_COLOR_DARK;
 	
-	self.imageView.frame = CGRectMake(20, 80, kImageViewSize, kImageViewSize);
+	UIView *whiteBackground = [[UIView alloc] initWithFrame:CGRectMake(kItemOffset, 90, self.view.frame.size.width - (kItemOffset*2), self.view.frame.size.height - 110)];
+	whiteBackground.backgroundColor = FRESHLY_COLOR_LIGHT;
+	[self.view addSubview:whiteBackground];
+	
+	self.imageView.frame = CGRectMake(kItemOffset, kItemOffset, kImageViewSize, kImageViewSize);
 	NSString *imageTitle = self.item ? self.item.category : FRESHLY_CATEGORY_MISC;
 	self.imageView.image = [UIImage imageForCategory:imageTitle withSize:kImageViewSize];
-	[self.view addSubview:self.imageView];
+	[whiteBackground addSubview:self.imageView];
 	
 	UIColor *categoryColor = [[FreshlyFoodItemService sharedInstance] colorForCategory:self.item.category];
 	
-	self.titleField.frame = CGRectMake(140, 80, kTextViewWidth, kTextViewHeight);
-	self.titleField.backgroundColor = FRESHLY_COLOR_PRIMARY;
+	self.titleField.frame = CGRectMake(160, 110, 120, kTextViewHeight);
+	self.titleField.backgroundColor = FRESHLY_COLOR_LIGHT;
 	self.titleField.text = self.item ? self.item.name : @"";
 	self.titleField.textColor = FRESHLY_COLOR_DARK;
 	self.titleField.tintColor = FRESHLY_COLOR_DARK;
@@ -108,6 +113,7 @@
 	self.titleField.placeholder = @"Food";
 	self.titleField.returnKeyType = UIReturnKeyDone;
 	self.titleField.clearButtonMode = UITextFieldViewModeWhileEditing;
+	self.titleField.adjustsFontSizeToFitWidth = YES;
 	self.titleField.delegate = self;
 	self.titleField.autocorrectionType = UITextAutocorrectionTypeNo;
 	[self.titleField addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
@@ -139,7 +145,10 @@
 	self.expirationDatePicker.date = self.item.dateOfExpiration ? : [NSDate date];
 	self.expirationDatePicker.datePickerMode = UIDatePickerModeDate;
 	
-	self.categoryButton.frame = CGRectMake(140, 120, kTextViewWidth, kTextViewHeight);
+	self.categoryButton.frame = CGRectMake(self.imageView.frame.origin.x + self.imageView.frame.size.width + kItemOffset,
+										   50,
+										   160.0,
+										   kTextViewHeight);
 	[self.categoryButton setTitle:(self.item ? self.item.category : @"Category") forState:UIControlStateNormal];
 	[self.categoryButton setTitle:(self.item ? self.item.category : @"Category") forState:UIControlStateSelected];
 	[self.categoryButton setTitleColor:FRESHLY_COLOR_DARK forState:UIControlStateNormal];
@@ -147,46 +156,61 @@
 	[self.categoryButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
 	[self.categoryButton.titleLabel setFont:[UIFont freshlyFontOfSize:kCategoryFieldFontSize]];
 	[self.categoryButton addTarget:self action:@selector(presentCategoryPicker) forControlEvents:UIControlEventTouchUpInside];
-	[self.view addSubview:self.categoryButton];
+	[whiteBackground addSubview:self.categoryButton];
 	
-	[self.itemDateViewController.view setFrame:CGRectMake(0, 220, screenBounds.size.width, 90)];
+	[self.itemDateViewController.view setFrame:CGRectMake(0,
+														  self.imageView.frame.origin.y + self.imageView.frame.size.height + kItemOffset,
+														  whiteBackground.frame.size.width,
+														  80)];
 	[self.itemDateViewController setBackgroundColor:categoryColor];
 	self.itemDateViewController.purchaseDate = self.item.dateOfPurchase ? : [NSDate date];
 	self.itemDateViewController.expirationDate = self.item.dateOfExpiration ? : [NSDate date];
 	self.itemDateViewController.delegate = self;
-	[self.view addSubview:self.itemDateViewController.view];
+	[whiteBackground addSubview:self.itemDateViewController.view];
 	
-	[self.spaceChooser setFrame:CGRectMake(20, 350, screenBounds.size.width - 40, 30)];
+	[self.spaceChooser setFrame:CGRectMake(kItemOffset,
+										   self.itemDateViewController.view.frame.origin.y + self.itemDateViewController.view.frame.size.height + 2*kItemOffset,
+										   whiteBackground.frame.size.width - (kItemOffset*2),
+										   30)];
 	self.spaceChooser.selectedSegmentIndex = [self.item.space integerValue];
 	self.spaceChooser.tintColor = categoryColor;
 	[self.spaceChooser setTitleTextAttributes:@{NSFontAttributeName: [UIFont freshlyFontOfSize:14.0]} forState:UIControlStateNormal];
-	[self.view addSubview:self.spaceChooser];
+	[whiteBackground addSubview:self.spaceChooser];
 	
 	if (self.itemExists) {
-		[self.moveToGroceryListButton setFrame:CGRectMake(20, 420, screenBounds.size.width - 40, 40)];
+		[self.moveToGroceryListButton setFrame:CGRectMake(kItemOffset,
+														  (whiteBackground.frame.size.height + self.spaceChooser.frame.origin.y)/2 - 40,
+														  self.spaceChooser.frame.size.width,
+														  40)];
 		[self.moveToGroceryListButton setTitle:@"Move To Grocery List" forState:UIControlStateNormal];
 		[self.moveToGroceryListButton setTitle:@"Move To Grocery List" forState:UIControlStateSelected];
 		self.moveToGroceryListButton.titleLabel.font = [UIFont freshlyFontOfSize:18.0];
 		[self.moveToGroceryListButton setBackgroundColor:categoryColor];
 		[self.moveToGroceryListButton addTarget:self action:@selector(moveItemToGroceryList) forControlEvents:UIControlEventTouchUpInside];
-		[self.view addSubview:self.moveToGroceryListButton];
+		[whiteBackground addSubview:self.moveToGroceryListButton];
 
-		[self.deleteButton setFrame:CGRectMake(20, 490, screenBounds.size.width - 40, 40)];
+		[self.deleteButton setFrame:CGRectMake(kItemOffset,
+											   (whiteBackground.frame.size.height + self.spaceChooser.frame.origin.y)/2 + 30,
+											   self.spaceChooser.frame.size.width,
+											   40)];
 		[self.deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
 		[self.deleteButton setTitle:@"Delete" forState:UIControlStateSelected];
 		self.deleteButton.titleLabel.font = [UIFont freshlyFontOfSize:18.0];
 		[self.deleteButton setBackgroundColor:FRESHLY_COLOR_RED];
 		[self.deleteButton addTarget:self action:@selector(showDeleteActionSheet) forControlEvents:UIControlEventTouchUpInside];
-		[self.view addSubview:self.deleteButton];
+		[whiteBackground addSubview:self.deleteButton];
 		
 	} else {
-		[self.saveButton setFrame:CGRectMake(20, 460, screenBounds.size.width - 40, 40)];
+		[self.saveButton setFrame:CGRectMake(kItemOffset,
+											 (whiteBackground.frame.size.height + self.spaceChooser.frame.origin.y)/2,
+											 self.spaceChooser.frame.size.width,
+											 40)];
 		[self.saveButton setTitle:@"Save" forState:UIControlStateNormal];
 		[self.saveButton setTitle:@"Save" forState:UIControlStateSelected];
 		self.saveButton.titleLabel.font = [UIFont freshlyFontOfSize:18.0];
 		[self.saveButton setBackgroundColor:categoryColor];
 		[self.saveButton addTarget:self action:@selector(saveNewItem) forControlEvents:UIControlEventTouchUpInside];
-		[self.view addSubview:self.saveButton];
+		[whiteBackground addSubview:self.saveButton];
 		
 	}
 	
