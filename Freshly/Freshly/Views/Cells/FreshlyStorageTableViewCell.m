@@ -29,7 +29,7 @@
 		
 		self.backgroundColor = FRESHLY_COLOR_LIGHT;
 		
-		self.textLabel.textColor = FRESHLY_COLOR_DARK;
+		self.textLabel.textColor = (item.dateOfExpiration.timeIntervalSinceNow >= 0.0) ? FRESHLY_COLOR_DARK : FRESHLY_COLOR_RED;
 		self.textLabel.font = [UIFont freshlyFontOfSize:24.0];
 		
 		self.detailTextLabel.textColor = FRESHLY_COLOR_DARK;
