@@ -27,14 +27,20 @@
 	return sharedInstance;
 }
 
+#pragma mark - Auto Completion Data Structure
+
 - (instancetype)initRootStructure
 {
 	if (self = [self init]) {
 		NSDictionary *foodItemData = [[FreshlyFoodItemService sharedInstance] defaultFoodItemData];
-		
+
 		if (foodItemData) {
 			[self insertData:foodItemData];
 		}
+
+		[self loadUserFoodSources];
+
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadUserFoodSources) name:NOTIFICATION_CUSTOM_USER_FOOD_SOURCES_UPDATED object:nil];
 	}
 	return self;
 }
@@ -45,6 +51,15 @@
 		self.keys = [[NSMutableDictionary alloc] init];
 	}
 	return self;
+}
+
+-  (void)loadUserFoodSources
+{
+	NSDictionary *userFoodItemData = [[FreshlyFoodItemService sharedInstance] userFoodSources];
+
+	if (userFoodItemData) {
+		[self insertData:userFoodItemData];
+	}
 }
 
 - (void)insertString:(NSString*)string
@@ -64,7 +79,7 @@
 - (void)insertData:(NSDictionary*)data
 {
 	for (NSString *itemName in data) {
-		[self insertString:itemName];
+		[self insertString:itemName.lowercaseString];
 	}
 }
 

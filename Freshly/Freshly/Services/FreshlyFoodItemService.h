@@ -19,6 +19,8 @@
 - (NSArray*)foodItemCategoryList;
 - (NSString*)categoryForFoodItemName:(NSString*)itemName;
 
+- (NSDictionary*)userFoodSources;
+
 - (void)retrieveItemsForStorageWithBlock:(void (^)(NSArray*))completionBlock;
 - (void)retrieveItemsForShoppingListWithBlock:(void (^)(NSArray*))completionBlock;
 - (void)createItemWithAttributes:(NSDictionary*)attributes;
