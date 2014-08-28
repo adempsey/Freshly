@@ -20,6 +20,7 @@
 @interface FreshlyStorageViewController ()
 
 @property (nonatomic, readwrite, strong) NSArray *items;
+@property (nonatomic, readwrite, strong) NSArray *sectionTitles;
 @property (nonatomic, readwrite, strong) UITableView *tableView;
 
 @property (nonatomic, readwrite, assign) NSInteger sortingAttribute;
@@ -111,25 +112,38 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 	} else if (self.groupingAttribute == FreshlyItemGroupingAttributeCategory) {
 		NSArray *categories = [[FreshlyFoodItemService sharedInstance] foodItemCategoryList];
 		NSMutableArray *categorySectionItems = [[NSMutableArray alloc] init];
+		NSMutableArray *nonEmptyCategoryTitles = [[NSMutableArray alloc] init];
 
 		for (NSString *category in categories) {
 			NSPredicate *categoryPredicate = [NSPredicate predicateWithFormat:@"(self.category == %@)", category];
 			NSArray *filteredArray = [items filteredArrayUsingPredicate:categoryPredicate];
-			[categorySectionItems addObject:filteredArray];
+
+			if (filteredArray.count > 0) {
+				[categorySectionItems addObject:filteredArray];
+				[nonEmptyCategoryTitles addObject:category];
+			}
 		}
 
 		_items = categorySectionItems;
+		self.sectionTitles = nonEmptyCategoryTitles;
 
 	} else if (self.groupingAttribute == FreshlyItemGroupingAttributeSpace) {
 		NSMutableArray *spaceSectionItems = [[NSMutableArray alloc] init];
+		NSMutableArray *nonEmptySectionTitles = [[NSMutableArray alloc] init];
 
 		for (NSInteger space = FreshlySpaceRefrigerator; space < FreshlySpaceCount; ++space) {
 			NSPredicate *spacePredicate = [NSPredicate predicateWithFormat:@"(self.space == %@)", [NSNumber numberWithInteger:space]];
 			NSArray *filteredArray = [items filteredArrayUsingPredicate:spacePredicate];
-			[spaceSectionItems addObject:filteredArray];
+
+			if (filteredArray.count > 0) {
+				[spaceSectionItems addObject:filteredArray];
+				NSString *spaceTitle = [[FreshlyFoodItemService sharedInstance] spaceForInteger:space];
+				[nonEmptySectionTitles addObject:spaceTitle];
+			}
 		}
 
 		_items = spaceSectionItems;
+		self.sectionTitles = nonEmptySectionTitles;
 	}
 }
 
@@ -292,32 +306,11 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-	switch (self.groupingAttribute) {
-		case FreshlyItemGroupingAttributeAll:
-			return @"All Items";
-			break;
-		case FreshlyItemGroupingAttributeCategory:
-			return [[FreshlyFoodItemService sharedInstance] foodItemCategoryList][section];
-			break;
-		case FreshlyItemGroupingAttributeSpace:
-			switch (section) {
-				case FreshlySpaceRefrigerator:
-					return FRESHLY_SPACE_REFRIGERATOR;
-					break;
-				case FreshlySpaceFreezer:
-					return FRESHLY_SPACE_FREEZER;
-					break;
-				case FreshlySpacePantry:
-					return FRESHLY_SPACE_PANTRY;
-				default:
-					return @"";
-					break;
-			}
-			break;
-		default:
-			return @"";
-			break;
+	if (self.groupingAttribute == FreshlyItemGroupingAttributeAll) {
+		return @"All Items";
 	}
+
+	return self.sectionTitles[section];
 }
 
 @end

@@ -82,6 +82,41 @@
 	return FRESHLY_CATEGORY_COLOR_MISC;
 }
 
+- (NSString*)categoryForFoodItemName:(NSString*)itemName
+{
+	NSString *category = self.defaultFoodItemData[itemName][FRESHLY_ITEM_ATTRIBUTE_CATEGORY];
+
+	if (!category) {
+		category = [[self userFoodSources] objectForKey:itemName][FRESHLY_ITEM_ATTRIBUTE_CATEGORY];
+
+		if (!category) {
+			return FRESHLY_CATEGORY_MISC;
+		}
+
+		return category;
+	}
+
+	return category;
+}
+
+- (NSString*)spaceForInteger:(NSInteger)number
+{
+	switch (number) {
+		case FreshlySpaceRefrigerator:
+			return FRESHLY_SPACE_REFRIGERATOR;
+			break;
+		case FreshlySpaceFreezer:
+			return FRESHLY_SPACE_FREEZER;
+			break;
+		case FreshlySpacePantry:
+			return FRESHLY_SPACE_PANTRY;
+			break;
+		default:
+			return @"";
+			break;
+	}
+}
+
 #pragma mark - Static Food Sources
 
 - (void)createUserFoodSources
@@ -130,23 +165,6 @@
 	foodDictionary[FRESHLY_ITEM_ATTRIBUTE_CATEGORY] = category;
 	userFoodSources[name.lowercaseString] = foodDictionary;
 	[self writeUserFoodSources:userFoodSources];
-}
-
-- (NSString*)categoryForFoodItemName:(NSString*)itemName
-{
-	NSString *category = self.defaultFoodItemData[itemName][FRESHLY_ITEM_ATTRIBUTE_CATEGORY];
-
-	if (!category) {
-		category = [[self userFoodSources] objectForKey:itemName][FRESHLY_ITEM_ATTRIBUTE_CATEGORY];
-
-		if (!category) {
-			return FRESHLY_CATEGORY_MISC;
-		}
-
-		return category;
-	}
-
-	return category;
 }
 
 - (NSDictionary*)defaultFoodItemData

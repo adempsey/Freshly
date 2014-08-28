@@ -18,6 +18,7 @@
 - (UIColor*)colorForCategory:(NSString*)category;
 - (NSArray*)foodItemCategoryList;
 - (NSString*)categoryForFoodItemName:(NSString*)itemName;
+- (NSString*)spaceForInteger:(NSInteger)number;
 
 - (NSDictionary*)userFoodSources;
 
