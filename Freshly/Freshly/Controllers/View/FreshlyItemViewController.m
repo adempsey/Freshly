@@ -149,8 +149,8 @@
 										   50,
 										   160.0,
 										   kTextViewHeight);
-	[self.categoryButton setTitle:(self.item ? self.item.category : @"Category") forState:UIControlStateNormal];
-	[self.categoryButton setTitle:(self.item ? self.item.category : @"Category") forState:UIControlStateSelected];
+	[self.categoryButton setTitle:(self.item ? self.item.category : FRESHLY_ITEM_ATTRIBUTE_CATEGORY.capitalizedString) forState:UIControlStateNormal];
+	[self.categoryButton setTitle:(self.item ? self.item.category : FRESHLY_ITEM_ATTRIBUTE_CATEGORY.capitalizedString) forState:UIControlStateSelected];
 	[self.categoryButton setTitleColor:FRESHLY_COLOR_DARK forState:UIControlStateNormal];
 	[self.categoryButton setTitleColor:FRESHLY_COLOR_DARK forState:UIControlStateSelected];
 	[self.categoryButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
@@ -174,7 +174,7 @@
 										   30)];
 	self.spaceChooser.selectedSegmentIndex = [self.item.space integerValue];
 	self.spaceChooser.tintColor = categoryColor;
-	[self.spaceChooser setTitleTextAttributes:@{NSFontAttributeName: [UIFont freshlyFontOfSize:14.0]} forState:UIControlStateNormal];
+	[self.spaceChooser setTitleTextAttributes:@{NSFontAttributeName: [UIFont freshlyFontOfSize:12.0]} forState:UIControlStateNormal];
 	[whiteBackground addSubview:self.spaceChooser];
 	
 	if (self.itemExists) {
