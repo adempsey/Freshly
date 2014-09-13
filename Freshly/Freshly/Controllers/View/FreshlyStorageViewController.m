@@ -80,7 +80,7 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
     [super viewDidLoad];
 	
 	self.tableView.backgroundColor = FRESHLY_COLOR_PRIMARY;
-	
+
 	self.tableView.frame = self.view.frame;
 	[self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 80, 0, 0)];
 	[self sortItemsInTableView];
