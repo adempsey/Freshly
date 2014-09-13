@@ -38,7 +38,7 @@ static const NSUInteger kYEAR   = kMONTH*12;
 {
     NSInteger timeInterval = [[self normalizedDate] timeIntervalSinceNow];
     BOOL inPast = (timeInterval < 0);
-    NSUInteger timeSince = abs(timeInterval);
+    NSUInteger timeSince = labs(timeInterval);
     
     NSString *dateDescription;
     NSUInteger interval = 0;
@@ -48,19 +48,19 @@ static const NSUInteger kYEAR   = kMONTH*12;
         
     } else if (timeSince >= kDAY && timeSince < kWEEK) {
         interval = timeSince/kDAY;
-        dateDescription = [NSString stringWithFormat:@"%d day", interval];
+        dateDescription = [NSString stringWithFormat:@"%lu day", (unsigned long)interval];
         
     } else if (timeSince >= kWEEK && timeSince < kMONTH) {
         interval = timeSince/kWEEK;
-        dateDescription = [NSString stringWithFormat:@"%d week", interval];
+        dateDescription = [NSString stringWithFormat:@"%lu week", (unsigned long)interval];
         
     } else if (timeSince >= kMONTH && timeSince < kYEAR) {
         interval = timeSince/kMONTH;
-        dateDescription = [NSString stringWithFormat:@"%d month", interval];
+        dateDescription = [NSString stringWithFormat:@"%lu month", (unsigned long)interval];
         
     } else if (timeSince >= kYEAR) {
         interval = timeSince/kYEAR;
-        dateDescription = [NSString stringWithFormat:@"%d year", interval];
+        dateDescription = [NSString stringWithFormat:@"%lu year", (unsigned long)interval];
     }
     
     NSString *prefix = @"";

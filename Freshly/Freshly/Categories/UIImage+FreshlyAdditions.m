@@ -12,7 +12,7 @@
 
 + (UIImage*)imageForCategory:(NSString *)category withSize:(NSUInteger)size
 {
-	return [UIImage imageNamed:[NSString stringWithFormat:@"%@ %dx%d", category, size, size]];
+	return [UIImage imageNamed:[NSString stringWithFormat:@"%@ %lux%lu", category, (unsigned long)size, (unsigned long)size]];
 }
 
 @end
