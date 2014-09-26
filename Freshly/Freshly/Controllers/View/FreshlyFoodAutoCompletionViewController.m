@@ -36,14 +36,15 @@
 
 	self.tableView.separatorInset = UIEdgeInsetsZero;
 
-	CGRect screenBounds = [UIScreen mainScreen].bounds;
-	CGFloat viewHeight = [self.delegate heightForAutoCompletionTableView];
-	CGFloat viewOrigin = screenBounds.size.height - 216.0 - viewHeight;
-	self.view.frame = CGRectMake(0, viewOrigin, screenBounds.size.width, viewHeight);
-	self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
 	self.tableView.delegate = self;
 	self.tableView.dataSource = self;
 	[self.view addSubview:self.tableView];
+}
+
+- (void)setFrame:(CGRect)frame
+{
+	_frame = frame;
+	self.tableView.frame = frame;
 }
 
 - (void)setPrefix:(NSString *)prefix

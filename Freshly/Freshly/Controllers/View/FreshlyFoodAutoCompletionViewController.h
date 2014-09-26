@@ -12,7 +12,6 @@
 
 @required
 - (void)didSelectAutoCompletedItem:(NSString*)item withCategory:(NSString*)category;
-- (CGFloat)heightForAutoCompletionTableView;
 
 @end
 
@@ -20,6 +19,7 @@
 
 @property (nonatomic, readwrite, weak) id<FreshlyAutoCompletionDelegate> delegate;
 @property (nonatomic, readwrite, strong) NSString *prefix;
+@property (nonatomic, readwrite, assign) CGRect frame;
 
 - (BOOL)hasUniqueItemAvailable;
 

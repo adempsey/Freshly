@@ -80,6 +80,8 @@
 		self.autoCompletionViewController = [[FreshlyFoodAutoCompletionViewController alloc] init];
 		
 		self.itemExists = (item != nil);
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
 	}
 	return self;
 }
@@ -215,6 +217,7 @@
 	}
 	
 	self.autoCompletionViewController.delegate = self;
+	self.autoCompletionViewController.frame = CGRectMake(0, 260, screenBounds.size.width, 152.0);
 	[self.view addSubview:self.autoCompletionViewController.view];
 }
 
@@ -231,6 +234,27 @@
 
 		[[FreshlyFoodItemService sharedInstance] updateItem:self.item];
 	}
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+	return UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutorotate
+{
+	return YES;
+}
+
+- (void)keyboardDidShow:(NSNotification*)notification
+{
+	NSDictionary *info = [notification userInfo];
+	CGRect keyboardFrame = [info[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+	CGFloat autoCompletionOrigin = self.titleField.frame.origin.y + self.titleField.frame.size.height + 20.0;
+	self.autoCompletionViewController.frame = CGRectMake(0,
+														 autoCompletionOrigin,
+														 self.view.frame.size.width,
+														 keyboardFrame.origin.y - keyboardFrame.size.height - autoCompletionOrigin);
 }
 
 - (BOOL)hidesBottomBarWhenPushed
@@ -454,11 +478,6 @@
 	
 	[self dismissInput];
 	[self.autoCompletionViewController setPrefix:@""];
-}
-
-- (CGFloat)heightForAutoCompletionTableView
-{
-	return 152.0;
 }
 
 @end

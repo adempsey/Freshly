@@ -58,6 +58,7 @@
 		8DEB2AC31988CBA800043285 /* meat 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2AB91988CBA800043285 /* meat 50x50.png */; };
 		8DEB2AC51988CBA800043285 /* misc 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2ABB1988CBA800043285 /* misc 50x50.png */; };
 		8DEB2AC81988CBA800043285 /* vegetable 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2ABE1988CBA800043285 /* vegetable 50x50.png */; };
+		8DFA6C3B19D338BE004B28DB /* UINavigationController+FreshlyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFA6C3A19D338BE004B28DB /* UINavigationController+FreshlyAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +144,8 @@
 		8DEB2AB91988CBA800043285 /* meat 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "meat 50x50.png"; sourceTree = "<group>"; };
 		8DEB2ABB1988CBA800043285 /* misc 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "misc 50x50.png"; sourceTree = "<group>"; };
 		8DEB2ABE1988CBA800043285 /* vegetable 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vegetable 50x50.png"; sourceTree = "<group>"; };
+		8DFA6C3919D338BE004B28DB /* UINavigationController+FreshlyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FreshlyAdditions.h"; sourceTree = "<group>"; };
+		8DFA6C3A19D338BE004B28DB /* UINavigationController+FreshlyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FreshlyAdditions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +185,8 @@
 				8DD7EFBF1996F62A00FC0A10 /* UIImage+FreshlyAdditions.m */,
 				63EC4EE61989463A00060C4F /* NSDate+FreshlyAdditions.h */,
 				63EC4EE71989463A00060C4F /* NSDate+FreshlyAdditions.m */,
+				8DFA6C3919D338BE004B28DB /* UINavigationController+FreshlyAdditions.h */,
+				8DFA6C3A19D338BE004B28DB /* UINavigationController+FreshlyAdditions.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -550,6 +555,7 @@
 				8DD7EFC01996F62A00FC0A10 /* UIImage+FreshlyAdditions.m in Sources */,
 				8D916B5519A0117E003CEF8D /* FreshlyFoodAutoCompletionViewController.m in Sources */,
 				8DC3744619823C0C00DC9731 /* FreshlyFoodItem.m in Sources */,
+				8DFA6C3B19D338BE004B28DB /* UINavigationController+FreshlyAdditions.m in Sources */,
 				8DA08CA019AA98FC00F13CE4 /* UIFont+FreshlyAdditions.m in Sources */,
 				8D916B48199FDCF2003CEF8D /* FreshlyFoodAutoCompletionService.m in Sources */,
 				8DC373FD19821DC000DC9731 /* main.m in Sources */,

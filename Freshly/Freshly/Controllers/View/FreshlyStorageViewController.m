@@ -94,10 +94,24 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 	self.navigationItem.rightBarButtonItem = addNewItemButton;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	self.tableView.frame = self.view.frame;
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
 	[[FreshlySettingsService sharedInstance] setSelectedSection:0];
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+	CGRect screenBounds = [[UIScreen mainScreen] bounds];
+	CGRect newScreenBounds = CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.height, screenBounds.size.width);
+	self.view.frame = newScreenBounds;
+	self.tableView.frame = self.view.frame;
 }
 
 - (void)setItems:(NSArray *)items

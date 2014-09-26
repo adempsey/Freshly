@@ -12,6 +12,7 @@
 #import "FreshlySettingsService.h"
 
 #import "UIFont+FreshlyAdditions.h"
+#import "UINavigationController+FreshlyAdditions.h"
 
 @implementation FreshlyAppDelegate
 
@@ -22,7 +23,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = FRESHLY_COLOR_PRIMARY;
 	
 	[[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil]
 	 setTitleTextAttributes:

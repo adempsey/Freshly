@@ -61,6 +61,7 @@
 		self.autoCompletionViewController = [[FreshlyFoodAutoCompletionViewController alloc] init];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveItemUpdateNotification:) name:NOTIFICATION_ITEM_UPDATED object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     }
     return self;
 }
@@ -73,12 +74,9 @@
 	NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:FRESHLY_ITEM_ATTRIBUTE_NAME ascending:YES];
 	self.items = [self.items sortedArrayUsingDescriptors:@[sortDescriptor]];
 	[self.view addSubview:self.tableView];
-	
-	self.addNewItemView.frame = CGRectMake(0, 10, self.view.frame.size.width, 50);
+	[self updateAddNewItemLayout];
 	self.addNewItemView.backgroundColor = FRESHLY_COLOR_PRIMARY;
 	self.addNewItemView.alpha = 0.0;
-
-	self.addNewItemTextField.frame = CGRectMake(10, 15, self.view.frame.size.width - 20, 25);
 
 	UIView *textFieldPadding = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 25)];
 	self.addNewItemTextField.leftView = textFieldPadding;
@@ -110,6 +108,12 @@
 	[self.view addSubview:self.autoCompletionViewController.view];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	self.tableView.frame = self.view.frame;
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
@@ -122,9 +126,43 @@
 	[self moveSelectedItemsToStorage];
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+	CGRect screenBounds = [[UIScreen mainScreen] bounds];
+	CGRect newScreenBounds = CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.height, screenBounds.size.width);
+	self.view.frame = newScreenBounds;
+	self.tableView.frame = self.view.frame;
+	self.darkBackground.frame = self.view.frame;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+	[self updateAddNewItemLayout];
+}
+
 - (void)didReceiveItemUpdateNotification:(NSNotification*)notification
 {
 	[self reloadAllTableViewSections];
+}
+
+- (void)keyboardDidShow:(NSNotification*)notification
+{
+	NSDictionary *info = [notification userInfo];
+	CGRect keyboardFrame = [info[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+	CGFloat autoCompletionOrigin = self.addNewItemView.frame.origin.y + self.addNewItemView.frame.size.height;
+	self.autoCompletionViewController.frame = CGRectMake(0,
+														 autoCompletionOrigin,
+														 self.view.frame.size.width,
+														 keyboardFrame.origin.y - keyboardFrame.size.height - autoCompletionOrigin);
+}
+
+- (void)updateAddNewItemLayout
+{
+	CGFloat yOrigin = self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height;
+	CGFloat width = self.view.frame.size.width;
+	self.addNewItemView.frame = CGRectMake(0, yOrigin, width, 50);
+	
+	self.addNewItemTextField.frame = CGRectMake(10, 15, width - 20, 25);
 }
 
 - (void)reloadAllTableViewSections
@@ -171,10 +209,14 @@
 	[self.view bringSubviewToFront:self.autoCompletionViewController.view];
 	[self.addNewItemTextField becomeFirstResponder];
 	
+	CGRect addNewItemFrame = self.addNewItemView.frame;
+	addNewItemFrame.origin.y = 10;
+	self.addNewItemView.frame = addNewItemFrame;
+	
 	[UIView animateWithDuration:0.25 animations:^{
 		self.darkBackground.alpha = 0.5;
 		self.addNewItemView.alpha = 1.0;
-		self.addNewItemView.frame = CGRectMake(0, 60, self.view.frame.size.width, 50);
+		[self updateAddNewItemLayout];
 	}];
 }
 
@@ -195,6 +237,7 @@
 		[self.darkBackground removeFromSuperview];
 		[self.addNewItemView removeFromSuperview];
 		self.addNewItemTextField.text = @"";
+		[self updateAddNewItemLayout];
 	}];
 }
 
@@ -275,11 +318,6 @@
 {
 	[self saveItemToShoppingList:item withCategory:category];
 	[self dismissInput];
-}
-
-- (CGFloat)heightForAutoCompletionTableView
-{
-	return 242.0;
 }
 
 @end
