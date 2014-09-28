@@ -42,14 +42,23 @@
 	UINavigationController *shoppingListNavigationController = [[UINavigationController alloc] initWithRootViewController:shoppingListViewController];
 	shoppingListNavigationController.navigationBar.backgroundColor = FRESHLY_COLOR_LIGHT;
 	shoppingListNavigationController.navigationBar.tintColor = FRESHLY_COLOR_DARK;
-	
+
 	[tabBarController setViewControllers:@[storageNavigationController, shoppingListNavigationController]];
+
+	UITabBarItem *storageItem = tabBarController.tabBar.items[FreshlySectionStorage];
+	UIImage *storageIcon = [UIImage imageNamed:@"iconStorage"];
+	[storageItem setImage:storageIcon];
+
+	UITabBarItem *shoppingListItem = tabBarController.tabBar.items[FreshlySectionShoppingList];
+	UIImage *shoppingListIcon = [UIImage imageNamed:@"iconShoppingList"];
+	[shoppingListItem setImage:shoppingListIcon];
+
 	tabBarController.selectedIndex = [[FreshlySettingsService sharedInstance] selectedSection];
 	tabBarController.tabBar.tintColor = FRESHLY_COLOR_SELECTED;
 	tabBarController.tabBar.barTintColor = FRESHLY_COLOR_SECONDARY;
-	
+
 	self.window.rootViewController = tabBarController;
-	
+
     [self.window makeKeyAndVisible];
     return YES;
 }

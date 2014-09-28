@@ -16,6 +16,12 @@ typedef NS_ENUM(NSInteger, FreshlySpaces) {
 	FreshlySpaceCount
 };
 
+typedef NS_ENUM(NSInteger, FreshlySections) {
+	FreshlySectionStorage = 0,
+	FreshlySectionShoppingList,
+	FreshlySecctionCount
+};
+
 /************** Strings **************/
 
 #define FRESHLY_SECTION_STORAGE			@"Storage"
