@@ -87,7 +87,7 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 	[self.view addSubview:self.tableView];
 	
 	NSString *unicodeGear = @"\u2699";
-	UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithTitle:unicodeGear style:UIBarButtonItemStylePlain target:self action:@selector(presentSettingsActionSheet)];
+	UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithTitle:unicodeGear style:UIBarButtonItemStylePlain target:self action:@selector(presentSettingsView)];
 	self.navigationItem.leftBarButtonItem = settingsButton;
 
 	UIBarButtonItem *addNewItemButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewItemView)];
@@ -181,7 +181,7 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 	[self presentViewController:newItemNavigationController animated:YES completion:nil];
 }
 
-- (void)presentSettingsActionSheet
+- (void)presentSettingsView
 {
 	FreshlyStorageSettingsViewController *settingsViewController = [[FreshlyStorageSettingsViewController alloc] init];
 	UINavigationController *settingsNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
@@ -218,18 +218,6 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 		}
 
 		_items = newItems;
-	}
-}
-
-#pragma mark - UIActionSheet Delegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	if (buttonIndex < FreshlyItemSortingCategoryCount) {
-		self.sortingAttribute = buttonIndex;
-		[[FreshlySettingsService sharedInstance] setStorageSorting:buttonIndex];
-		[self sortItemsInTableView];
-		[self reloadAllTableViewSections];
 	}
 }
 
