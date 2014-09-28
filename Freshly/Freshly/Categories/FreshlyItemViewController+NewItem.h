@@ -10,6 +10,6 @@
 
 @interface FreshlyItemViewController (NewItem)
 
-- (void)cancelNewItemCreation;
+- (void)cancelModalItemView;
 
 @end

@@ -13,7 +13,8 @@
 
 #define kTimeIntervalTwoWeeks 1209600
 
-#define kItemHorizontalOffset 20.0
+#define kItemHorizontalOffsetiPhone 20.0
+#define kiPadFormSheetWidth 540.0
 #define kItemVerticalOffset 5.0
 
 @interface FreshlyItemDateViewController ()
@@ -71,45 +72,47 @@
 	
 	CGRect screenBounds = CGRectMake(0, 0, 280, 200);
 	self.view.backgroundColor = FRESHLY_CATEGORY_COLOR_MISC;
+	CGFloat purchaseLabelsOriginX = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? (kiPadFormSheetWidth / 4 ) - 40.0 : kItemHorizontalOffsetiPhone;
+	CGFloat expirationLabelsOriginX = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? (3*(kiPadFormSheetWidth / 4 )) - 100.0 : screenBounds.size.width - 115;
 	
-	[self.purchaseTitleLabel setFrame:CGRectMake(kItemHorizontalOffset, kItemVerticalOffset, 120, 20)];
+	[self.purchaseTitleLabel setFrame:CGRectMake(purchaseLabelsOriginX, kItemVerticalOffset, 120, 20)];
 	self.purchaseTitleLabel.font = [UIFont freshlyFontOfSize:14.0];
 	self.purchaseTitleLabel.text = @"Purchased";
 	self.purchaseTitleLabel.textColor = [UIColor whiteColor];
 	[self.view addSubview:self.purchaseTitleLabel];
 	
-	[self.purchaseDayLabel setFrame:CGRectMake(kItemHorizontalOffset, 25, 60, 60)];
+	[self.purchaseDayLabel setFrame:CGRectMake(self.purchaseTitleLabel.frame.origin.x, 25, 60, 60)];
 	self.purchaseDayLabel.font = [UIFont boldFreshlyFontOfSize:48.0];
 	self.purchaseDayLabel.textColor = [UIColor whiteColor];
 	[self.view addSubview:self.purchaseDayLabel];
 	
-	[self.purchaseMonthLabel setFrame:CGRectMake(80, 35, 60, 20)];
+	[self.purchaseMonthLabel setFrame:CGRectMake(self.purchaseTitleLabel.frame.origin.x + self.purchaseDayLabel.frame.size.width, 35, 60, 20)];
 	self.purchaseMonthLabel.font = [UIFont freshlyFontOfSize:16.0];
 	self.purchaseMonthLabel.textColor = [UIColor whiteColor];
 	[self.view addSubview:self.purchaseMonthLabel];
 	
-	[self.purchaseYearLabel setFrame:CGRectMake(80, 55, 60, 20)];
+	[self.purchaseYearLabel setFrame:CGRectMake(self.purchaseTitleLabel.frame.origin.x + self.purchaseDayLabel.frame.size.width, 55, 60, 20)];
 	self.purchaseYearLabel.font = [UIFont freshlyFontOfSize:16.0];
 	self.purchaseYearLabel.textColor = [UIColor whiteColor];
 	[self.view addSubview:self.purchaseYearLabel];
 	
-	[self.expirationTitleLabel setFrame:CGRectMake(screenBounds.size.width - 15 - 100, 5, 120, 20)];
+	[self.expirationTitleLabel setFrame:CGRectMake(expirationLabelsOriginX, 5, 120, 20)];
 	self.expirationTitleLabel.font = [UIFont freshlyFontOfSize:14.0];
 	self.expirationTitleLabel.text = @"Expires";
 	self.expirationTitleLabel.textColor = [UIColor whiteColor];
 	[self.view addSubview:self.expirationTitleLabel];
 	
-	[self.expirationDayLabel setFrame:CGRectMake(screenBounds.size.width - 15 - 100, 25, 60, 60)];
+	[self.expirationDayLabel setFrame:CGRectMake(self.expirationTitleLabel.frame.origin.x, 25, 60, 60)];
 	self.expirationDayLabel.font = [UIFont boldFreshlyFontOfSize:48.0];
 	self.expirationDayLabel.textColor = [UIColor whiteColor];
 	[self.view addSubview:self.expirationDayLabel];
 	
-	[self.expirationMonthLabel setFrame:CGRectMake(screenBounds.size.width - 15 - 40, 35, 60, 20)];
+	[self.expirationMonthLabel setFrame:CGRectMake(self.expirationDayLabel.frame.origin.x + self.expirationDayLabel.frame.size.width, 35, 60, 20)];
 	self.expirationMonthLabel.font = [UIFont freshlyFontOfSize:16.0];
 	self.expirationMonthLabel.textColor = [UIColor whiteColor];
 	[self.view addSubview:self.expirationMonthLabel];
 	
-	[self.expirationYearLabel setFrame:CGRectMake(screenBounds.size.width - 15 - 40, 55, 60, 20)];
+	[self.expirationYearLabel setFrame:CGRectMake(self.expirationDayLabel.frame.origin.x + self.expirationDayLabel.frame.size.width, 55, 60, 20)];
 	self.expirationYearLabel.font = [UIFont freshlyFontOfSize:16.0];
 	self.expirationYearLabel.textColor = [UIColor whiteColor];
 	[self.view addSubview:self.expirationYearLabel];

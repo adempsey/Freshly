@@ -10,7 +10,7 @@
 
 @implementation FreshlyItemViewController (NewItem)
 
-- (void)cancelNewItemCreation
+- (void)cancelModalItemView
 {
 	[self dismissViewControllerAnimated:YES completion:nil];
 }

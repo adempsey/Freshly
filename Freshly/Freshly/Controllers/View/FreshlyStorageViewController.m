@@ -166,10 +166,15 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 	FreshlyItemViewController *newItemViewController = [[FreshlyItemViewController alloc] initWithItem:nil];
 	UINavigationController *newItemNavigationController = [[UINavigationController alloc] initWithRootViewController:newItemViewController];
 
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		newItemNavigationController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+		newItemNavigationController.modalPresentationStyle = UIModalPresentationFormSheet;
+	}
+
 	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
 																	 style:UIBarButtonItemStylePlain
 																	target:newItemViewController
-																	action:@selector(cancelNewItemCreation)];
+																	action:@selector(cancelModalItemView)];
 	
 	newItemViewController.navigationItem.leftBarButtonItem = cancelButton;
 
@@ -290,8 +295,25 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 {
 	FreshlyFoodItem *item = self.items[indexPath.section][indexPath.row];
 	FreshlyItemViewController *itemViewController = [[FreshlyItemViewController alloc] initWithItem:item];
-	[self.navigationController pushViewController:itemViewController animated:YES];
-	
+
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+
+		UINavigationController *itemNavigationController = [[UINavigationController alloc] initWithRootViewController:itemViewController];
+		itemNavigationController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+		itemNavigationController.modalPresentationStyle = UIModalPresentationFormSheet;
+
+		UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Save"
+																		 style:UIBarButtonItemStylePlain
+																		target:itemViewController
+																		action:@selector(cancelModalItemView)];
+		itemViewController.navigationItem.rightBarButtonItem = cancelButton;
+
+		[self presentViewController:itemNavigationController animated:YES completion:nil];
+
+	} else {
+		[self.navigationController pushViewController:itemViewController animated:YES];
+	}
+
 	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

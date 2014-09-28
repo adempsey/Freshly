@@ -21,6 +21,9 @@
 #define kTitleFieldFontSize 22.0
 #define kCategoryFieldFontSize 18.0
 
+#define kiPadFormSheetWidth 540.0
+#define kiPadFormSheetHeight 620.0
+
 #define kItemOffset 20.0
 
 @interface FreshlyItemViewController ()
@@ -95,7 +98,9 @@
 	self.navigationController.navigationBar.backgroundColor = FRESHLY_COLOR_LIGHT;
 	self.navigationController.navigationBar.tintColor = FRESHLY_COLOR_DARK;
 	
-	UIView *whiteBackground = [[UIView alloc] initWithFrame:CGRectMake(kItemOffset, 90, self.view.frame.size.width - (kItemOffset*2), self.view.frame.size.height - 110)];
+	CGRect whiteBackgroundFrame = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? CGRectMake(kItemOffset, 70.0, 540.0 - (kItemOffset*2), 530.0) :
+																							CGRectMake(kItemOffset, 90, self.view.frame.size.width - (kItemOffset*2), self.view.frame.size.height - 110);
+	UIView *whiteBackground = [[UIView alloc] initWithFrame:whiteBackgroundFrame];
 	whiteBackground.backgroundColor = FRESHLY_COLOR_LIGHT;
 	[self.view addSubview:whiteBackground];
 	
@@ -106,7 +111,7 @@
 	
 	UIColor *categoryColor = [[FreshlyFoodItemService sharedInstance] colorForCategory:self.item.category];
 	
-	self.titleField.frame = CGRectMake(160, 110, 120, kTextViewHeight);
+	self.titleField.frame = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? CGRectMake(160, 90, 340, kTextViewHeight) : CGRectMake(160, 110, 120, kTextViewHeight);
 	self.titleField.backgroundColor = FRESHLY_COLOR_LIGHT;
 	self.titleField.text = self.item ? self.item.name : @"";
 	self.titleField.textColor = FRESHLY_COLOR_DARK;
@@ -148,7 +153,7 @@
 	self.expirationDatePicker.datePickerMode = UIDatePickerModeDate;
 	
 	self.categoryButton.frame = CGRectMake(self.imageView.frame.origin.x + self.imageView.frame.size.width + kItemOffset,
-										   50,
+										   50.0,
 										   160.0,
 										   kTextViewHeight);
 	[self.categoryButton setTitle:(self.item ? self.item.category : FRESHLY_ITEM_ATTRIBUTE_CATEGORY.capitalizedString) forState:UIControlStateNormal];
@@ -323,7 +328,9 @@
 	[self.view addSubview:pickerView];
 	
 	[UIView animateWithDuration:0.25 animations:^{
-		[pickerView setFrame:CGRectMake(0, screenBounds.size.height - kPickerHeight, screenBounds.size.width, kPickerHeight)];
+		CGFloat viewHeight = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? kiPadFormSheetHeight : screenBounds.size.height;
+		CGFloat viewWidth = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? kiPadFormSheetWidth : screenBounds.size.width;
+		[pickerView setFrame:CGRectMake(0, viewHeight - kPickerHeight, viewWidth, kPickerHeight)];
 		self.darkBackground.alpha = 0.5;
 	} completion:^(BOOL finished) {
 		self.currentPicker = pickerView;
@@ -341,7 +348,9 @@
 		
 		if (self.currentPicker) {
 			
-			[self.currentPicker setFrame:CGRectMake(0, screenBounds.size.height, screenBounds.size.width, kPickerHeight)];
+			CGFloat viewHeight = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? kiPadFormSheetHeight : screenBounds.size.height;
+			CGFloat viewWidth = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? kiPadFormSheetWidth : screenBounds.size.width;
+			[self.currentPicker setFrame:CGRectMake(0, viewHeight, viewWidth, kPickerHeight)];
 			
 			if ([self.currentPicker isKindOfClass:[UIPickerView class]] && [self.currentPicker isEqual:self.categoryPicker]) {
 				NSInteger selectedIndex = [self.currentPicker selectedRowInComponent:0];
