@@ -84,16 +84,10 @@
 
 - (NSString*)categoryForFoodItemName:(NSString*)itemName
 {
-	NSString *category = self.defaultFoodItemData[itemName][FRESHLY_ITEM_ATTRIBUTE_CATEGORY];
+	NSString *category = self.userFoodSources[itemName][FRESHLY_ITEM_ATTRIBUTE_CATEGORY];
 
 	if (!category) {
-		category = [[self userFoodSources] objectForKey:itemName][FRESHLY_ITEM_ATTRIBUTE_CATEGORY];
-
-		if (!category) {
-			return FRESHLY_CATEGORY_MISC;
-		}
-
-		return category;
+		return self.defaultFoodItemData[itemName][FRESHLY_ITEM_ATTRIBUTE_CATEGORY] ? : FRESHLY_CATEGORY_MISC;
 	}
 
 	return category;
@@ -221,7 +215,19 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ITEM_UPDATED object:nil];
 
 	NSString *defaultFoodItemKey = ((NSString*) attributes[FRESHLY_ITEM_ATTRIBUTE_NAME]).lowercaseString;
+
+	// User enters a new food item
 	if (![self.defaultFoodItemData objectForKey:defaultFoodItemKey]) {
+		[self generateUserCustomFoodItem:attributes[FRESHLY_ITEM_ATTRIBUTE_NAME] category:attributes[FRESHLY_ITEM_ATTRIBUTE_CATEGORY]];
+
+	// User enters an existing food item with a different category
+	} else if ((self.defaultFoodItemData[defaultFoodItemKey] &&
+				![((NSDictionary*)self.defaultFoodItemData[defaultFoodItemKey])[FRESHLY_ITEM_ATTRIBUTE_CATEGORY] isEqualToString:attributes[FRESHLY_ITEM_ATTRIBUTE_CATEGORY]])) {
+		[self generateUserCustomFoodItem:attributes[FRESHLY_ITEM_ATTRIBUTE_NAME] category:attributes[FRESHLY_ITEM_ATTRIBUTE_CATEGORY]];
+
+	// User enters an existing food item with original category after a change
+	} else if (self.userFoodSources[((NSString*)attributes[FRESHLY_ITEM_ATTRIBUTE_NAME]).lowercaseString] &&
+				  ![((NSDictionary*)self.userFoodSources[((NSString*)attributes[FRESHLY_ITEM_ATTRIBUTE_NAME]).lowercaseString])[FRESHLY_ITEM_ATTRIBUTE_CATEGORY] isEqualToString:attributes[FRESHLY_ITEM_ATTRIBUTE_CATEGORY]]) {
 		[self generateUserCustomFoodItem:attributes[FRESHLY_ITEM_ATTRIBUTE_NAME] category:attributes[FRESHLY_ITEM_ATTRIBUTE_CATEGORY]];
 	}
 }
