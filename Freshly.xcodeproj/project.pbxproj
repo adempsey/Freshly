@@ -12,6 +12,7 @@
 		8D0A475119D7C5EE006D7CB7 /* iconShoppingList.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D0A475019D7C5EE006D7CB7 /* iconShoppingList.png */; };
 		8D1B6AB6199F280F00B6D69C /* Freshly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8D1B6AB4199F280F00B6D69C /* Freshly.xcdatamodeld */; };
 		8D5C23F71999C2AA007B314B /* FreshlyItemDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C23F61999C2AA007B314B /* FreshlyItemDateViewController.m */; };
+		8D78A2881A144DD30016A770 /* FreshlyAppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D78A2871A144DD30016A770 /* FreshlyAppIcon.png */; };
 		8D916B48199FDCF2003CEF8D /* FreshlyFoodAutoCompletionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D916B47199FDCF2003CEF8D /* FreshlyFoodAutoCompletionService.m */; };
 		8D916B5219A0070C003CEF8D /* minFoodSource.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D916B5119A0070C003CEF8D /* minFoodSource.json */; };
 		8D916B5519A0117E003CEF8D /* FreshlyFoodAutoCompletionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D916B5419A0117E003CEF8D /* FreshlyFoodAutoCompletionViewController.m */; };
@@ -82,6 +83,7 @@
 		8D1B6AB5199F280F00B6D69C /* Freshly.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Freshly.xcdatamodel; sourceTree = "<group>"; };
 		8D5C23F51999C2AA007B314B /* FreshlyItemDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreshlyItemDateViewController.h; sourceTree = "<group>"; };
 		8D5C23F61999C2AA007B314B /* FreshlyItemDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreshlyItemDateViewController.m; sourceTree = "<group>"; };
+		8D78A2871A144DD30016A770 /* FreshlyAppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FreshlyAppIcon.png; sourceTree = "<group>"; };
 		8D916B46199FDCF2003CEF8D /* FreshlyFoodAutoCompletionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreshlyFoodAutoCompletionService.h; sourceTree = "<group>"; };
 		8D916B47199FDCF2003CEF8D /* FreshlyFoodAutoCompletionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreshlyFoodAutoCompletionService.m; sourceTree = "<group>"; };
 		8D916B5119A0070C003CEF8D /* minFoodSource.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = minFoodSource.json; sourceTree = "<group>"; };
@@ -427,6 +429,7 @@
 		8DEB2AB31988CB6000043285 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8D78A2871A144DD30016A770 /* FreshlyAppIcon.png */,
 				8D0A474B19D7C33F006D7CB7 /* Icons */,
 				8D916B5919A08E8D003CEF8D /* Utilities */,
 				8DEB2AB41988CB6700043285 /* Food Categories */,
@@ -531,6 +534,7 @@
 				8DC3740619821DC000DC9731 /* Images.xcassets in Resources */,
 				8DD7EFD01996F77B00FC0A10 /* fruit 100x100.png in Resources */,
 				8D0A475119D7C5EE006D7CB7 /* iconShoppingList.png in Resources */,
+				8D78A2881A144DD30016A770 /* FreshlyAppIcon.png in Resources */,
 				8DEB2AC21988CBA800043285 /* fruit 50x50.png in Resources */,
 				8DD7EFD11996F77B00FC0A10 /* meat 100x100.png in Resources */,
 				8DEB2AC31988CBA800043285 /* meat 50x50.png in Resources */,
