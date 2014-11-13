@@ -276,7 +276,12 @@
 {
 	[[FreshlyFoodItemService sharedInstance] deleteItem:self.item];
 	self.itemExists = NO;
-	[self.navigationController popViewControllerAnimated:YES];
+
+	if ([self respondsToSelector:@selector(presentingViewController)] && self.presentingViewController) {
+		[self dismissViewControllerAnimated:YES completion:nil];
+	} else {
+		[self.navigationController popViewControllerAnimated:YES];
+	}
 }
 
 #pragma mark - Actions
@@ -284,7 +289,12 @@
 - (void)moveItemToGroceryList
 {
 	self.item.inStorage = [NSNumber numberWithBool:NO];
-	[self.navigationController popViewControllerAnimated:YES];
+
+	if ([self respondsToSelector:@selector(presentingViewController)] && self.presentingViewController) {
+		[self dismissViewControllerAnimated:YES completion:nil];
+	} else {
+		[self.navigationController popViewControllerAnimated:YES];
+	}
 }
 
 - (void)saveNewItem
