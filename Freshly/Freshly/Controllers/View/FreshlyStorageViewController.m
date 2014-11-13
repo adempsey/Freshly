@@ -106,6 +106,11 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 	[[FreshlySettingsService sharedInstance] setSelectedSection:0];
 }
 
+- (BOOL)shouldAutorotate
+{
+	return YES;
+}
+
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
 	CGRect screenBounds = [[UIScreen mainScreen] bounds];

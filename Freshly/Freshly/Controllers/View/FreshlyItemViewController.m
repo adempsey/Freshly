@@ -248,7 +248,12 @@
 
 - (BOOL)shouldAutorotate
 {
-	return YES;
+	return NO;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+	return UIInterfaceOrientationPortrait;
 }
 
 - (void)keyboardDidShow:(NSNotification*)notification

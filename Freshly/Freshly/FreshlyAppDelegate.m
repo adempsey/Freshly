@@ -13,6 +13,7 @@
 
 #import "UIFont+FreshlyAdditions.h"
 #import "UINavigationController+FreshlyAdditions.h"
+#import "UITabBarController+FreshlyAdditions.h"
 
 @implementation FreshlyAppDelegate
 
