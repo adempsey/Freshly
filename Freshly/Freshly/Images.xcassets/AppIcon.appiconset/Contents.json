@@ -3,61 +3,61 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "FreshlyAppIcon.png",
+      "filename" : "FreshlyAppIcon58.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "FreshlyAppIcon-1.png",
+      "filename" : "FreshlyAppIcon80.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "FreshlyAppIcon-2.png",
+      "filename" : "FreshlyAppIcon120.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "FreshlyAppIcon-3.png",
+      "filename" : "FreshlyAppIcon180.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "FreshlyAppIcon-4.png",
+      "filename" : "FreshlyAppIcon29.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "FreshlyAppIcon-5.png",
+      "filename" : "FreshlyAppIcon58-1.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "FreshlyAppIcon-6.png",
+      "filename" : "FreshlyAppIcon40.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "FreshlyAppIcon-7.png",
+      "filename" : "FreshlyAppIcon80-1.png",
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "FreshlyAppIcon-8.png",
+      "filename" : "FreshlyAppIcon76.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "FreshlyAppIcon-9.png",
+      "filename" : "FreshlyAppIcon152.png",
       "scale" : "2x"
     }
   ],
