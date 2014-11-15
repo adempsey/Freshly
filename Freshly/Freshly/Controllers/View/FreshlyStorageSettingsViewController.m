@@ -8,12 +8,14 @@
 
 #import "FreshlyStorageSettingsViewController.h"
 #import "FreshlySettingsService.h"
+#import "FreshlyAboutViewController.h"
 
 #import "UIFont+FreshlyAdditions.h"
 
 typedef NS_ENUM(NSInteger, FreshlyStorageSettingsSections) {
 	FreshlyStorageSettingsSectionSorting = 0,
 	FreshlyStorageSettingsSectionGrouping,
+	FreshlyStorageSettingsSectionAbout,
 	FreshlyStorageSettingsCount
 };
 
@@ -121,6 +123,11 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 					return @"";
 					break;
 			}
+			break;
+
+		case FreshlyStorageSettingsSectionAbout:
+			return @"About";
+			break;
 
 		default:
 			return @"";
@@ -143,6 +150,9 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 			break;
 		case FreshlyStorageSettingsSectionGrouping:
 			return FreshlyItemGroupingAttributeCount;
+		case FreshlyStorageSettingsSectionAbout:
+			return 1;
+			break;
 		default:
 			return 0;
 			break;
@@ -167,6 +177,9 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 		(indexPath.section == FreshlyStorageSettingsSectionGrouping && indexPath.row == self.selectedGroupingSetting)) {
 
 		cell.accessoryType = UITableViewCellAccessoryCheckmark;
+
+	} else if (indexPath.section == FreshlyStorageSettingsSectionAbout) {
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
 	} else {
 		cell.accessoryType = UITableViewCellAccessoryNone;
@@ -201,6 +214,11 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 		case FreshlyStorageSettingsSectionGrouping:
 			self.selectedGroupingSetting = indexPath.row;
 			break;
+		case FreshlyStorageSettingsSectionAbout: {
+			FreshlyAboutViewController *aboutViewController = [[FreshlyAboutViewController alloc] init];
+			[self.navigationController pushViewController:aboutViewController animated:YES];
+			break;
+		}
 		default:
 			break;
 	}
