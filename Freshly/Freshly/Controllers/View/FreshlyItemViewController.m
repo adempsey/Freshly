@@ -523,9 +523,14 @@
 	self.spaceChooser.selectedSegmentIndex = [[FreshlyFoodItemService sharedInstance] spaceIndexForTitle:defaultItemSpace];
 
 	NSInteger defaultExpirationTime = [[FreshlyFoodItemService sharedInstance] defaultExpirationTimeForFoodItemName:item inSpace:defaultItemSpace];
-	NSDate *defaultExpirationDate = [[NSDate date] dateByAddingTimeInterval:60*60*24*defaultExpirationTime];
-	[self.itemDateViewController setExpirationDate:defaultExpirationDate];
-	self.expirationDatePicker.date = defaultExpirationDate;
+
+	if (defaultExpirationTime < 0) {
+		self.itemDateViewController.expirationDate = [NSDate distantFuture];
+	} else {
+		NSDate *defaultExpirationDate = [[NSDate date] dateByAddingTimeInterval:60*60*24*defaultExpirationTime];
+		self.itemDateViewController.expirationDate = defaultExpirationDate;
+		self.expirationDatePicker.date = defaultExpirationDate;
+	}
 
 	self.userUpdatedExpirationDate = NO;
 
