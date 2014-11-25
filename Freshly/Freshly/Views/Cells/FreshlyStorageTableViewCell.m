@@ -7,6 +7,7 @@
 //
 
 #import "FreshlyStorageTableViewCell.h"
+#import "FreshlySettingsService.h"
 
 #import "NSDate+FreshlyAdditions.h"
 #import "UIImage+FreshlyAdditions.h"
@@ -57,7 +58,26 @@
 - (void)setItem:(FreshlyFoodItem *)item
 {
 	self.textLabel.text = item.name;
-	self.detailTextLabel.text = [NSString stringWithFormat:@"Purchased %@", item.dateOfPurchase.approximateDescription];
+
+	NSString *dateText = @"";
+
+	NSString *purchaseText = [NSString stringWithFormat:@"Purchased %@", item.dateOfPurchase.approximateDescription];
+	NSString *expirationText = [NSString stringWithFormat:@"Expires %@", item.dateOfExpiration.approximateDescription];
+
+	BOOL showPurchaseDate = [[FreshlySettingsService sharedInstance] showPurchaseDate];
+	BOOL showExpirationDate = [[FreshlySettingsService sharedInstance] showExpirationDate];
+
+	if (showPurchaseDate && showExpirationDate) {
+		dateText = [NSString stringWithFormat:@"%@ / %@", purchaseText, expirationText];
+
+	} else if (showPurchaseDate) {
+		dateText = purchaseText;
+
+	} else if (showExpirationDate) {
+		dateText = expirationText;
+	}
+
+	self.detailTextLabel.text = dateText;
 	self.imageView.image = [UIImage imageForCategory:item.category withSize:50];
 	self.spaceLabel.text = @[@"R", @"F", @"P"][item.space.integerValue];
 }

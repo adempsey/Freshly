@@ -8,9 +8,11 @@
 
 #import "FreshlySettingsService.h"
 
-#define kFRESHLY_SETTINGS_KEY_SELECTED_SECTION	@"selectedSection"
-#define kFRESHLY_SETTINGS_KEY_STORAGE_SORTING	@"storageSorting"
-#define kFRESHLY_SETTINGS_KEY_STORAGE_GROUPING	@"storageGrouping"
+#define kFRESHLY_SETTINGS_KEY_SELECTED_SECTION		@"selectedSection"
+#define kFRESHLY_SETTINGS_KEY_STORAGE_SORTING		@"storageSorting"
+#define kFRESHLY_SETTINGS_KEY_STORAGE_GROUPING		@"storageGrouping"
+#define kFRESHLY_SETTINGS_KEY_SHOW_PURCHASE_DATE	@"showPurchaseDate"
+#define kFRESHLY_SETTINGS_KEY_SHOW_EXPIRATION_DATE	@"showExpirationDate"
 
 @implementation FreshlySettingsService
 
@@ -22,6 +24,21 @@
 		sharedInstance = [[self alloc] init];
 	});
 	return sharedInstance;
+}
+
+- (instancetype)init
+{
+	if (self = [super init]) {
+		NSDictionary *defaultValues = @{
+										kFRESHLY_SETTINGS_KEY_SELECTED_SECTION: @0,
+										kFRESHLY_SETTINGS_KEY_STORAGE_SORTING: @0,
+										kFRESHLY_SETTINGS_KEY_STORAGE_GROUPING: @0,
+										kFRESHLY_SETTINGS_KEY_SHOW_PURCHASE_DATE: @YES,
+										kFRESHLY_SETTINGS_KEY_SHOW_EXPIRATION_DATE: @YES
+										};
+		[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
+	}
+	return self;
 }
 
 - (NSInteger)selectedSection
@@ -60,6 +77,32 @@
 	}
 }
 
+- (BOOL)showPurchaseDate
+{
+	return [self boolForKey:kFRESHLY_SETTINGS_KEY_SHOW_PURCHASE_DATE];
+}
+
+- (void)setShowPurchaseDate:(BOOL)showPurchaseDate
+{
+	if (self.showPurchaseDate != showPurchaseDate) {
+		[self setBool:showPurchaseDate forKey:kFRESHLY_SETTINGS_KEY_SHOW_PURCHASE_DATE];
+		[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_STORAGE_SETTINGS_UPDATED object:nil];
+	}
+}
+
+- (BOOL)showExpirationDate
+{
+	return [self boolForKey:kFRESHLY_SETTINGS_KEY_SHOW_EXPIRATION_DATE];
+}
+
+- (void)setShowExpirationDate:(BOOL)showExpirationDate
+{
+	if (self.showExpirationDate != showExpirationDate) {
+		[self setBool:showExpirationDate forKey:kFRESHLY_SETTINGS_KEY_SHOW_EXPIRATION_DATE];
+		[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_STORAGE_SETTINGS_UPDATED object:nil];
+	}
+}
+
 #pragma mark - User Defaults Accessors
 
 - (void)setInteger:(NSInteger)integer forKey:(NSString*)key
@@ -71,6 +114,17 @@
 - (NSInteger)integerForKey:(NSString*)key
 {
 	return [[NSUserDefaults standardUserDefaults] integerForKey:key];
+}
+
+- (void)setBool:(BOOL)boolean forKey:(NSString *)key
+{
+	[[NSUserDefaults standardUserDefaults] setBool:boolean forKey:key];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)boolForKey:(NSString*)key
+{
+	return [[NSUserDefaults standardUserDefaults] boolForKey:key];
 }
 
 @end

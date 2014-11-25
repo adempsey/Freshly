@@ -15,6 +15,7 @@
 typedef NS_ENUM(NSInteger, FreshlyStorageSettingsSections) {
 	FreshlyStorageSettingsSectionSorting = 0,
 	FreshlyStorageSettingsSectionGrouping,
+	FreshlyStorageSettingsSectionOptions,
 	FreshlyStorageSettingsSectionAbout,
 	FreshlyStorageSettingsCount
 };
@@ -31,6 +32,12 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 	FreshlyItemGroupingAttributeCategory,
 	FreshlyItemGroupingAttributeSpace,
 	FreshlyItemGroupingAttributeCount
+};
+
+typedef NS_ENUM(NSInteger, FreshlyItemDatePreferences) {
+	FreshlyOptionShowPurchaseDate = 0,
+	FreshlyOptionShowExpirationDate,
+	FreshlyOptionCount
 };
 
 @interface FreshlyStorageSettingsViewController ()
@@ -80,6 +87,112 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 	}];
 }
 
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+	return FreshlyStorageSettingsCount;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+	switch (section) {
+		case FreshlyStorageSettingsSectionSorting:
+			return FreshlyItemSortingCategoryCount;
+			break;
+		case FreshlyStorageSettingsSectionGrouping:
+			return FreshlyItemGroupingAttributeCount;
+		case FreshlyStorageSettingsSectionOptions:
+			return FreshlyOptionCount;
+		case FreshlyStorageSettingsSectionAbout:
+			return 1;
+			break;
+		default:
+			return 0;
+			break;
+	}
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	UITableViewCell *cell = [[UITableViewCell alloc] init];
+	
+	cell.backgroundColor = FRESHLY_COLOR_LIGHT;
+	
+    cell.textLabel.text = [self titleForCellAtIndexPath:indexPath];
+	cell.textLabel.font = [UIFont freshlyFontOfSize:18.0];
+	cell.textLabel.textColor = FRESHLY_COLOR_DARK;
+	cell.tintColor = FRESHLY_COLOR_SELECTED;
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
+	cell.accessoryType = [self accessoryTypeForCellAtIndexPath:indexPath];
+	
+	if (indexPath.section == FreshlyStorageSettingsSectionOptions) {
+		cell.accessoryView = [self switchForCellAtIndexPath:indexPath];
+	}
+
+    return cell;
+}
+
+#pragma mark - Table view delegate
+
+- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+	switch (section) {
+		case FreshlyStorageSettingsSectionSorting:
+			return @"Sort items by...";
+			break;
+		case FreshlyStorageSettingsSectionGrouping:
+			return @"Group items by...";
+			break;
+		case FreshlyStorageSettingsSectionOptions:
+			return @"Item Options";
+			break;
+		default:
+			return @"";
+			break;
+	}
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	switch (indexPath.section) {
+		case FreshlyStorageSettingsSectionSorting:
+			self.selectedSortingSetting = indexPath.row;
+			break;
+		case FreshlyStorageSettingsSectionGrouping:
+			self.selectedGroupingSetting = indexPath.row;
+			break;
+		case FreshlyStorageSettingsSectionAbout: {
+			FreshlyAboutViewController *aboutViewController = [[FreshlyAboutViewController alloc] init];
+			[self.navigationController pushViewController:aboutViewController animated:YES];
+			break;
+		}
+		default:
+			break;
+	}
+
+	[self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+	[self.tableView reloadData];
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+	UIView *view = [[UIView alloc] init];
+	view.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, 50.0);
+
+	UILabel *titleLabel = [[UILabel alloc] init];
+	CGFloat originY = section == 0 ? view.frame.size.height - 20.0 - 10.0 : view.frame.size.height - 50.0;
+	titleLabel.frame = CGRectMake(16.0, originY, 200.0, 20.0);
+	titleLabel.font = [UIFont freshlyFontOfSize:18.0];
+	titleLabel.text = [self tableView:tableView titleForHeaderInSection:section];
+	titleLabel.textColor = FRESHLY_COLOR_DARK;
+	[view addSubview:titleLabel];
+
+	return view;
+}
+
+#pragma mark - Extra table view methods
+
 - (NSString*)titleForCellAtIndexPath:(NSIndexPath*)indexPath
 {
 	switch (indexPath.section) {
@@ -125,6 +238,23 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 			}
 			break;
 
+		case FreshlyStorageSettingsSectionOptions:
+			switch (indexPath.row) {
+
+				case FreshlyOptionShowPurchaseDate:
+					return @"Show Purchase Dates";
+					break;
+
+				case FreshlyOptionShowExpirationDate:
+					return @"Show Expiration Dates";
+					break;
+
+				default:
+					return @"";
+					break;
+			}
+			break;
+
 		case FreshlyStorageSettingsSectionAbout:
 			return @"About";
 			break;
@@ -135,112 +265,62 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 	}
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-	return FreshlyStorageSettingsCount;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-	switch (section) {
-		case FreshlyStorageSettingsSectionSorting:
-			return FreshlyItemSortingCategoryCount;
-			break;
-		case FreshlyStorageSettingsSectionGrouping:
-			return FreshlyItemGroupingAttributeCount;
-		case FreshlyStorageSettingsSectionAbout:
-			return 1;
-			break;
-		default:
-			return 0;
-			break;
-	}
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	UITableViewCell *cell = [[UITableViewCell alloc] init];
-	
-	cell.backgroundColor = FRESHLY_COLOR_LIGHT;
-	
-    cell.textLabel.text = [self titleForCellAtIndexPath:indexPath];
-	cell.textLabel.font = [UIFont freshlyFontOfSize:18.0];
-	cell.textLabel.textColor = FRESHLY_COLOR_DARK;
-	
-	cell.tintColor = FRESHLY_COLOR_SELECTED;
-	
-	cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-	if ((indexPath.section == FreshlyStorageSettingsSectionSorting && indexPath.row == self.selectedSortingSetting) ||
-		(indexPath.section == FreshlyStorageSettingsSectionGrouping && indexPath.row == self.selectedGroupingSetting)) {
-
-		cell.accessoryType = UITableViewCellAccessoryCheckmark;
-
-	} else if (indexPath.section == FreshlyStorageSettingsSectionAbout) {
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
-	} else {
-		cell.accessoryType = UITableViewCellAccessoryNone;
-	}
-
-    return cell;
-}
-
-#pragma mark - Table view delegate
-
-- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-	switch (section) {
-		case FreshlyStorageSettingsSectionSorting:
-			return @"Sort items by...";
-			break;
-		case FreshlyStorageSettingsSectionGrouping:
-			return @"Group items by...";
-			break;
-		default:
-			return @"";
-			break;
-	}
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCellAccessoryType)accessoryTypeForCellAtIndexPath:(NSIndexPath *)indexPath
 {
 	switch (indexPath.section) {
-		case FreshlyStorageSettingsSectionSorting:
-			self.selectedSortingSetting = indexPath.row;
-			break;
 		case FreshlyStorageSettingsSectionGrouping:
-			self.selectedGroupingSetting = indexPath.row;
+			if (indexPath.row == self.selectedGroupingSetting) {
+				return UITableViewCellAccessoryCheckmark;
+			}
 			break;
-		case FreshlyStorageSettingsSectionAbout: {
-			FreshlyAboutViewController *aboutViewController = [[FreshlyAboutViewController alloc] init];
-			[self.navigationController pushViewController:aboutViewController animated:YES];
+		case FreshlyStorageSettingsSectionSorting: {
+			if (indexPath.row == self.selectedSortingSetting) {
+				return UITableViewCellAccessoryCheckmark;
+			}
 			break;
 		}
-		default:
+		case FreshlyStorageSettingsSectionAbout:
+			return UITableViewCellAccessoryDisclosureIndicator;
 			break;
 	}
-
-	[self.tableView deselectRowAtIndexPath:indexPath animated:NO];
-	[self.tableView reloadData];
+	return UITableViewCellAccessoryNone;
 }
 
-- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (UISwitch*)switchForCellAtIndexPath:(NSIndexPath*)indexPath
 {
-	UIView *view = [[UIView alloc] init];
-	view.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, 50.0);
+	if (indexPath.section == FreshlyStorageSettingsSectionOptions) {
+		UISwitch *cellSwitch = [[UISwitch alloc] init];
 
-	UILabel *titleLabel = [[UILabel alloc] init];
-	CGFloat originY = section == 0 ? view.frame.size.height - 20.0 - 10.0 : view.frame.size.height - 50.0;
-	titleLabel.frame = CGRectMake(16.0, originY, 200.0, 20.0);
-	titleLabel.font = [UIFont freshlyFontOfSize:18.0];
-	titleLabel.text = [self tableView:tableView titleForHeaderInSection:section];
-	titleLabel.textColor = FRESHLY_COLOR_DARK;
-	[view addSubview:titleLabel];
+		if (indexPath.row == FreshlyOptionShowPurchaseDate) {
+			cellSwitch.on = [[FreshlySettingsService sharedInstance] showPurchaseDate];
+			cellSwitch.tag = FreshlyOptionShowPurchaseDate;
 
-	return view;
+		} else if (indexPath.row == FreshlyOptionShowExpirationDate) {
+			cellSwitch.on = [[FreshlySettingsService sharedInstance] showExpirationDate];
+			cellSwitch.tag = FreshlyOptionShowExpirationDate;
+
+		}
+
+		cellSwitch.onTintColor = FRESHLY_COLOR_SELECTED;
+		[cellSwitch addTarget:self action:@selector(didToggleSwitch:) forControlEvents:UIControlEventValueChanged];
+
+		return cellSwitch;
+	}
+	return nil;
+}
+
+- (void)didToggleSwitch:(id)sender
+{
+	if ([sender isKindOfClass:[UISwitch class]]) {
+		UISwitch *cellSwitch = (UISwitch*)sender;
+
+		if (cellSwitch.tag == FreshlyOptionShowPurchaseDate) {
+			[[FreshlySettingsService sharedInstance] setShowPurchaseDate:cellSwitch.on];
+
+		} else if (cellSwitch.tag == FreshlyOptionShowExpirationDate) {
+			[[FreshlySettingsService sharedInstance] setShowExpirationDate:cellSwitch.on];
+		}
+	}
 }
 
 @end

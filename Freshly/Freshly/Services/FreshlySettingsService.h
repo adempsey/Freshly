@@ -13,6 +13,8 @@
 @property (nonatomic, readwrite, assign) NSInteger selectedSection;
 @property (nonatomic, readwrite, assign) NSInteger storageSorting;
 @property (nonatomic, readwrite, assign) NSInteger storageGrouping;
+@property (nonatomic, readwrite, assign) BOOL showPurchaseDate;
+@property (nonatomic, readwrite, assign) BOOL showExpirationDate;
 
 + (FreshlySettingsService*)sharedInstance;
 
