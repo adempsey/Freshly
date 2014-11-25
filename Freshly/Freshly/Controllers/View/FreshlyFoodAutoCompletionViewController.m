@@ -109,7 +109,7 @@
 {
 	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 	NSString *itemName = self.items[indexPath.row];
-	[self.delegate didSelectAutoCompletedItem:itemName withCategory:[[FreshlyFoodItemService sharedInstance] categoryForFoodItemName:itemName]];
+	[self.delegate didSelectAutoCompletedItem:itemName withCategory:[[FreshlyFoodItemService sharedInstance] defaultCategoryForFoodItemName:itemName]];
 }
 
 @end

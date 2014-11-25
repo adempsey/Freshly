@@ -156,7 +156,7 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 
 			if (filteredArray.count > 0) {
 				[spaceSectionItems addObject:filteredArray];
-				NSString *spaceTitle = [[FreshlyFoodItemService sharedInstance] spaceForInteger:space];
+				NSString *spaceTitle = [[FreshlyFoodItemService sharedInstance] titleForSpaceIndex:space];
 				[nonEmptySectionTitles addObject:spaceTitle];
 			}
 		}

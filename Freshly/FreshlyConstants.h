@@ -48,6 +48,8 @@ typedef NS_ENUM(NSInteger, FreshlySections) {
 #define FRESHLY_ITEM_ATTRIBUTE_PURCHASE_DATE	@"dateOfPurchase"
 #define FRESHLY_ITEM_ATTRIBUTE_EXPIRATION_DATE	@"dateOfExpiration"
 
+#define FRESHLY_ITEM_EXPIRATION_DATE_INFINITE @"-"
+
 /************** Colors **************/
 
 #define UIColorFromRGB(rgbValue) [UIColor \

@@ -82,7 +82,7 @@
 	return FRESHLY_CATEGORY_COLOR_MISC;
 }
 
-- (NSString*)categoryForFoodItemName:(NSString*)itemName
+- (NSString*)defaultCategoryForFoodItemName:(NSString*)itemName
 {
 	NSString *category = self.userFoodSources[itemName][FRESHLY_ITEM_ATTRIBUTE_CATEGORY];
 
@@ -93,7 +93,60 @@
 	return category;
 }
 
-- (NSString*)spaceForInteger:(NSInteger)number
+- (NSString*)defaultSpaceForFoodItemName:(NSString *)itemName
+{
+	NSString *space = self.userFoodSources[itemName][FRESHLY_ITEM_ATTRIBUTE_SPACE];
+
+	if (!space) {
+		space = self.defaultFoodItemData[itemName][FRESHLY_ITEM_ATTRIBUTE_SPACE];
+	}
+	// this is dumb - should just convert short spaces to full in json
+	if (!space || [space isEqualToString:@"r"]) {
+		return FRESHLY_SPACE_REFRIGERATOR;
+
+	} else if ([space isEqualToString:@"f"]) {
+		return FRESHLY_SPACE_FREEZER;
+
+	} else if ([space isEqualToString:@"p"]) {
+		return FRESHLY_SPACE_PANTRY;
+	}
+
+	return nil;
+}
+
+- (NSInteger)defaultExpirationTimeForFoodItemName:(NSString *)itemName inSpace:(NSString*)space
+{
+
+	NSString *shortSpace;
+	// this is dumb - should just convert short spaces to full in json
+	if ([space isEqualToString:FRESHLY_SPACE_REFRIGERATOR]) {
+		shortSpace = @"r";
+	} else if ([space isEqualToString:FRESHLY_SPACE_FREEZER]) {
+		shortSpace = @"f";
+	} else if ([space isEqualToString:FRESHLY_SPACE_PANTRY]) {
+		shortSpace = @"p";
+	} else {
+		return -1;
+	}
+
+	NSString *timeString = self.userFoodSources[itemName][@"exp"][shortSpace];
+
+	if (!timeString) {
+		timeString = self.defaultFoodItemData[itemName][@"exp"][shortSpace];
+	}
+
+	// by default, we'll just return two weeks.
+	if (!timeString) {
+		return 14;
+
+	} else if ([timeString isEqualToString:FRESHLY_ITEM_EXPIRATION_DATE_INFINITE]) {
+		return -1;
+	}
+
+	return timeString.integerValue;
+}
+
+- (NSString*)titleForSpaceIndex:(NSInteger)number
 {
 	switch (number) {
 		case FreshlySpaceRefrigerator:
@@ -108,6 +161,17 @@
 		default:
 			return @"";
 			break;
+	}
+}
+
+- (NSInteger)spaceIndexForTitle:(NSString*)title
+{
+	if ([title isEqualToString:FRESHLY_SPACE_REFRIGERATOR]) {
+		return 0;
+	} else if ([title isEqualToString:FRESHLY_SPACE_FREEZER]) {
+		return 1;
+	} else {
+		return 2;
 	}
 }
 

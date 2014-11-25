@@ -489,6 +489,13 @@
 	[self.categoryButton setTitle:category forState:UIControlStateSelected];
 	NSInteger categoryIndex = [self.categoryList indexOfObject:category];
 	[self.categoryPicker selectRow:categoryIndex inComponent:0 animated:NO];
+
+	NSString *defaultItemSpace = [[FreshlyFoodItemService sharedInstance] defaultSpaceForFoodItemName:item];
+	self.spaceChooser.selectedSegmentIndex = [[FreshlyFoodItemService sharedInstance] spaceIndexForTitle:defaultItemSpace];
+
+	NSInteger defaultExpirationTime = [[FreshlyFoodItemService sharedInstance] defaultExpirationTimeForFoodItemName:item inSpace:defaultItemSpace];
+	NSDate *defaultExpirationDate = [[NSDate date] dateByAddingTimeInterval:60*60*24*defaultExpirationTime];
+	[self.itemDateViewController setExpirationDate:defaultExpirationDate];
 	
 	UIColor *categoryColor = [[FreshlyFoodItemService sharedInstance] colorForCategory:category];
 	

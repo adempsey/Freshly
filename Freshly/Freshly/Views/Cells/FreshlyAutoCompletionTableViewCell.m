@@ -20,7 +20,7 @@
 {
 	if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TABLE_VIEW_CELL_AUTO_COMPLETION_IDENTIFIER]) {
 		self.textLabel.text = name.capitalizedString;
-		NSString *category = [[FreshlyFoodItemService sharedInstance] categoryForFoodItemName:name];
+		NSString *category = [[FreshlyFoodItemService sharedInstance] defaultCategoryForFoodItemName:name];
 		self.imageView.image = [UIImage imageForCategory:category withSize:50];
 	}
 	return self;

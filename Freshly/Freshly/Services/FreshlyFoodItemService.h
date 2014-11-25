@@ -17,8 +17,13 @@
 
 - (UIColor*)colorForCategory:(NSString*)category;
 - (NSArray*)foodItemCategoryList;
-- (NSString*)categoryForFoodItemName:(NSString*)itemName;
-- (NSString*)spaceForInteger:(NSInteger)number;
+
+- (NSString*)defaultCategoryForFoodItemName:(NSString*)itemName;
+- (NSString*)defaultSpaceForFoodItemName:(NSString*)itemName;
+- (NSInteger)defaultExpirationTimeForFoodItemName:(NSString*)itemName inSpace:(NSString*)space;
+
+- (NSString*)titleForSpaceIndex:(NSInteger)number;
+- (NSInteger)spaceIndexForTitle:(NSString*)title;
 
 - (NSDictionary*)userFoodSources;
 
