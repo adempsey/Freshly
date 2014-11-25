@@ -63,6 +63,9 @@
 	NSString *licenseText = [NSString stringWithFormat:@"%@\n%@\n\n%@\n\n%@\n\n%@", license[0], license[1], license[2], license[3], license[4]];
 	content = [content stringByAppendingString:licenseText];
 
+	content = [content stringByAppendingString:@"\n\nNote: Freshly is intended to be a helpful resource for managing food purchases, but is not a reputable source for food quality. "];
+	content = [content stringByAppendingString:@"Always check the date on packages before consuming. i.e. Freshly isn't responsible if you die from your food lol."];
+
 	content = [content stringByAppendingString:@"\n\nIcon Attributions:\n\n"];
 
 	NSString *nounProjectURLText = @"Noun Project";
