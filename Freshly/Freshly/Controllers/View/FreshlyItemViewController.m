@@ -156,6 +156,7 @@
 	self.expirationDatePicker.backgroundColor = FRESHLY_COLOR_PRIMARY;
 	self.expirationDatePicker.date = self.item.dateOfExpiration ? : [NSDate date];
 	self.expirationDatePicker.datePickerMode = UIDatePickerModeDate;
+	self.expirationDatePicker.minimumDate = self.purchaseDatePicker.date;
 	
 	self.categoryButton.frame = CGRectMake(self.imageView.frame.origin.x + self.imageView.frame.size.width + kItemOffset,
 										   50.0,
@@ -407,6 +408,8 @@
 					if ([self.currentPicker isEqual:self.purchaseDatePicker]) {
 						self.itemDateViewController.purchaseDate = ((UIDatePicker*) self.currentPicker).date;
 
+						self.expirationDatePicker.minimumDate = ((UIDatePicker*) self.currentPicker).date;
+
 						if (!self.userUpdatedExpirationDate) {
 							NSString *selectedSpace = [[FreshlyFoodItemService sharedInstance] titleForSpaceIndex:self.spaceChooser.selectedSegmentIndex];
 							NSInteger defaultExpirationTime = [[FreshlyFoodItemService sharedInstance] defaultExpirationTimeForFoodItemName:self.titleField.text inSpace:selectedSpace];
@@ -522,6 +525,7 @@
 	NSInteger defaultExpirationTime = [[FreshlyFoodItemService sharedInstance] defaultExpirationTimeForFoodItemName:item inSpace:defaultItemSpace];
 	NSDate *defaultExpirationDate = [[NSDate date] dateByAddingTimeInterval:60*60*24*defaultExpirationTime];
 	[self.itemDateViewController setExpirationDate:defaultExpirationDate];
+	self.expirationDatePicker.date = defaultExpirationDate;
 
 	self.userUpdatedExpirationDate = NO;
 
