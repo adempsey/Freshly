@@ -10,6 +10,7 @@
 #import "FreshlyStorageViewController.h"
 #import "FreshlyShoppingListViewController.h"
 #import "FreshlySettingsService.h"
+#import "FreshlyFoodAutoCompletionService.h"
 
 #import "UIFont+FreshlyAdditions.h"
 #import "UINavigationController+FreshlyAdditions.h"
@@ -59,6 +60,11 @@
 	tabBarController.tabBar.barTintColor = FRESHLY_COLOR_SECONDARY;
 
 	self.window.rootViewController = tabBarController;
+
+	// Load auto completion data in the background
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		[FreshlyFoodAutoCompletionService sharedInstance];
+	});
 
     [self.window makeKeyAndVisible];
     return YES;
