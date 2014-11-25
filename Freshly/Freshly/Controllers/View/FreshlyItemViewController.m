@@ -444,6 +444,7 @@
 		NSInteger defaultExpirationTime = [[FreshlyFoodItemService sharedInstance] defaultExpirationTimeForFoodItemName:self.titleField.text inSpace:selectedSpace];
 		NSDate *defaultExpirationDate = [[NSDate date] dateByAddingTimeInterval:60*60*24*defaultExpirationTime];
 		self.itemDateViewController.expirationDate = defaultExpirationDate;
+		self.expirationDatePicker.date = defaultExpirationDate;
 	}
 }
 
