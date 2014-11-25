@@ -79,7 +79,12 @@
 
 	self.detailTextLabel.text = dateText;
 	self.imageView.image = [UIImage imageForCategory:item.category withSize:50];
-	self.spaceLabel.text = @[@"R", @"F", @"P"][item.space.integerValue];
+
+	if ([[FreshlySettingsService sharedInstance] showStorageLocation]) {
+		self.spaceLabel.text = @[@"R", @"F", @"P"][item.space.integerValue];
+	} else {
+		self.spaceLabel.text = @"";
+	}
 }
 
 @end

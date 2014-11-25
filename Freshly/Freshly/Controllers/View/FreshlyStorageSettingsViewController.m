@@ -37,6 +37,7 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 typedef NS_ENUM(NSInteger, FreshlyItemDatePreferences) {
 	FreshlyOptionShowPurchaseDate = 0,
 	FreshlyOptionShowExpirationDate,
+	FreshlyOptionShowStorageLocation,
 	FreshlyOptionCount
 };
 
@@ -249,6 +250,10 @@ typedef NS_ENUM(NSInteger, FreshlyItemDatePreferences) {
 					return @"Show Expiration Dates";
 					break;
 
+				case FreshlyOptionShowStorageLocation:
+					return @"Show Storage Location";
+					break;
+
 				default:
 					return @"";
 					break;
@@ -299,6 +304,9 @@ typedef NS_ENUM(NSInteger, FreshlyItemDatePreferences) {
 			cellSwitch.on = [[FreshlySettingsService sharedInstance] showExpirationDate];
 			cellSwitch.tag = FreshlyOptionShowExpirationDate;
 
+		} else if (indexPath.row == FreshlyOptionShowStorageLocation) {
+			cellSwitch.on = [[FreshlySettingsService sharedInstance] showStorageLocation];
+			cellSwitch.tag = FreshlyOptionShowStorageLocation;
 		}
 
 		cellSwitch.onTintColor = FRESHLY_COLOR_SELECTED;
@@ -319,6 +327,9 @@ typedef NS_ENUM(NSInteger, FreshlyItemDatePreferences) {
 
 		} else if (cellSwitch.tag == FreshlyOptionShowExpirationDate) {
 			[[FreshlySettingsService sharedInstance] setShowExpirationDate:cellSwitch.on];
+
+		} else if (cellSwitch.tag == FreshlyOptionShowStorageLocation) {
+			[[FreshlySettingsService sharedInstance] setShowStorageLocation:cellSwitch.on];
 		}
 	}
 }

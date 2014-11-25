@@ -13,6 +13,7 @@
 #define kFRESHLY_SETTINGS_KEY_STORAGE_GROUPING		@"storageGrouping"
 #define kFRESHLY_SETTINGS_KEY_SHOW_PURCHASE_DATE	@"showPurchaseDate"
 #define kFRESHLY_SETTINGS_KEY_SHOW_EXPIRATION_DATE	@"showExpirationDate"
+#define kFRESHLY_SETTINGS_KEY_SHOW_STORAGE_LOCATION	@"showStorageLocation"
 
 @implementation FreshlySettingsService
 
@@ -34,7 +35,8 @@
 										kFRESHLY_SETTINGS_KEY_STORAGE_SORTING: @0,
 										kFRESHLY_SETTINGS_KEY_STORAGE_GROUPING: @0,
 										kFRESHLY_SETTINGS_KEY_SHOW_PURCHASE_DATE: @YES,
-										kFRESHLY_SETTINGS_KEY_SHOW_EXPIRATION_DATE: @YES
+										kFRESHLY_SETTINGS_KEY_SHOW_EXPIRATION_DATE: @YES,
+										kFRESHLY_SETTINGS_KEY_SHOW_STORAGE_LOCATION: @YES
 										};
 		[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
 	}
@@ -99,6 +101,19 @@
 {
 	if (self.showExpirationDate != showExpirationDate) {
 		[self setBool:showExpirationDate forKey:kFRESHLY_SETTINGS_KEY_SHOW_EXPIRATION_DATE];
+		[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_STORAGE_SETTINGS_UPDATED object:nil];
+	}
+}
+
+- (BOOL)showStorageLocation
+{
+	return [self boolForKey:kFRESHLY_SETTINGS_KEY_SHOW_STORAGE_LOCATION];
+}
+
+- (void)setShowStorageLocation:(BOOL)showStorageLocation
+{
+	if (self.showStorageLocation != showStorageLocation) {
+		[self setBool:showStorageLocation forKey:kFRESHLY_SETTINGS_KEY_SHOW_STORAGE_LOCATION];
 		[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_STORAGE_SETTINGS_UPDATED object:nil];
 	}
 }

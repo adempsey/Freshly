@@ -15,6 +15,7 @@
 @property (nonatomic, readwrite, assign) NSInteger storageGrouping;
 @property (nonatomic, readwrite, assign) BOOL showPurchaseDate;
 @property (nonatomic, readwrite, assign) BOOL showExpirationDate;
+@property (nonatomic, readwrite, assign) BOOL showStorageLocation;
 
 + (FreshlySettingsService*)sharedInstance;
 
