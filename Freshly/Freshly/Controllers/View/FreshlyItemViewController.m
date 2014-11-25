@@ -403,10 +403,17 @@
 				[self.currentPicker removeFromSuperview];
 				
 				if ([self.currentPicker isKindOfClass:[UIDatePicker class]]) {
-					
+
 					if ([self.currentPicker isEqual:self.purchaseDatePicker]) {
 						self.itemDateViewController.purchaseDate = ((UIDatePicker*) self.currentPicker).date;
-						
+
+						if (!self.userUpdatedExpirationDate) {
+							NSString *selectedSpace = [[FreshlyFoodItemService sharedInstance] titleForSpaceIndex:self.spaceChooser.selectedSegmentIndex];
+							NSInteger defaultExpirationTime = [[FreshlyFoodItemService sharedInstance] defaultExpirationTimeForFoodItemName:self.titleField.text inSpace:selectedSpace];
+							NSDate *defaultExpirationDate = [self.itemDateViewController.purchaseDate dateByAddingTimeInterval:60*60*24*defaultExpirationTime];
+							self.itemDateViewController.expirationDate = defaultExpirationDate;
+						}
+
 					} else if ([self.currentPicker isEqual:self.expirationDatePicker]) {
 						self.itemDateViewController.expirationDate = ((UIDatePicker*) self.expirationDatePicker).date;
 					}
@@ -437,7 +444,7 @@
 	}
 }
 
-#pragma mark - UIPickerView Delegate
+#pragma mark - UIPickerView Datasource
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -449,7 +456,7 @@
 	return self.categoryList.count;
 }
 
-#pragma mark - UIPickerView Datasource
+#pragma mark - UIPickerView Delegate
 
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
