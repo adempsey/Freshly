@@ -177,6 +177,37 @@
 	}
 }
 
+- (NSDictionary*)defaultExpirationTimesForItemInCategory:(NSString*)category
+{
+	if ([category isEqualToString:FRESHLY_CATEGORY_DAIRY]) {
+		return @{@"r": @"14", @"f": @"168", @"p": @"1"};
+
+	} else if ([category isEqualToString:FRESHLY_CATEGORY_DRINK]) {
+		return @{@"r": @"31", @"f": @"365", @"p": @"31"};
+
+	} else if ([category isEqualToString:FRESHLY_CATEGORY_FRUIT]) {
+		return @{@"r": @"14", @"f": @"168", @"p": @"7"};
+
+	} else if ([category isEqualToString:FRESHLY_CATEGORY_GRAIN]) {
+		return @{@"r": @"1", @"f": @"365", @"p": @"7"};
+
+	} else if ([category isEqualToString:FRESHLY_CATEGORY_MISC]) {
+		return @{@"r": @"7", @"f": @"365", @"p": @"7"};
+
+	} else if ([category isEqualToString:FRESHLY_CATEGORY_PROTEIN]) {
+		return @{@"r": @"7", @"f": @"365", @"p": @"0"};
+
+	} else if ([category isEqualToString:FRESHLY_CATEGORY_SEAFOOD]) {
+		return @{@"r": @"7", @"f": @"62", @"p": @"0"};
+
+	} else if ([category isEqualToString:FRESHLY_CATEGORY_VEGETABLE]) {
+		return @{@"r": @"14", @"f": @"365", @"p": @"14"};
+
+	}
+
+	return @{@"r": @"14", @"f": @"365", @"p": @"7"};
+}
+
 #pragma mark - Static Food Sources
 
 - (void)createUserFoodSources
@@ -218,12 +249,32 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CUSTOM_USER_FOOD_SOURCES_UPDATED object:nil];
 }
 
-- (void)generateUserCustomFoodItem:(NSString*)name category:(NSString*)category
+- (void)generateUserCustomFoodItemWithAttributes:(NSDictionary*)attributes
 {
 	NSMutableDictionary *userFoodSources = [[self userFoodSources] mutableCopy];
-	NSMutableDictionary *foodDictionary = [[NSMutableDictionary alloc] init];
-	foodDictionary[FRESHLY_ITEM_ATTRIBUTE_CATEGORY] = category;
-	userFoodSources[name.lowercaseString] = foodDictionary;
+	NSString *itemName = attributes[FRESHLY_ITEM_ATTRIBUTE_NAME];
+
+	NSMutableDictionary *userValues = [[NSMutableDictionary alloc] init];
+	userValues[FRESHLY_ITEM_ATTRIBUTE_CATEGORY] = attributes[FRESHLY_ITEM_ATTRIBUTE_CATEGORY];
+	NSInteger userSpaceIndex = [attributes[FRESHLY_ITEM_ATTRIBUTE_SPACE] integerValue];
+	NSString *userSpace = @[@"r",@"f",@"p"][userSpaceIndex];
+	userValues[FRESHLY_ITEM_ATTRIBUTE_SPACE] = userSpace;
+
+	NSDictionary *oldUserValues = self.userFoodSources[itemName.lowercaseString];
+	NSDictionary *defaultValues = self.defaultFoodItemData[itemName.lowercaseString];
+	NSDictionary *precedentedDictionary = (oldUserValues) ? : defaultValues;
+
+	if (precedentedDictionary) {
+		NSMutableDictionary *expirationTimes = [precedentedDictionary[@"exp"] mutableCopy];
+		NSTimeInterval customExpirationTime = [attributes[FRESHLY_ITEM_ATTRIBUTE_EXPIRATION_DATE] timeIntervalSinceDate:attributes[FRESHLY_ITEM_ATTRIBUTE_PURCHASE_DATE]];
+		NSInteger customExpirationDays = ((NSInteger) customExpirationTime)/(60*60*24);
+		expirationTimes[userSpace] = [NSString stringWithFormat:@"%ld", (long) customExpirationDays];
+		userValues[@"exp"] = expirationTimes;
+	} else {
+		userValues[@"exp"] = [self defaultExpirationTimesForItemInCategory:attributes[FRESHLY_ITEM_ATTRIBUTE_CATEGORY]];
+	}
+
+	userFoodSources[itemName.lowercaseString] = userValues;
 	[self writeUserFoodSources:userFoodSources];
 }
 
@@ -279,23 +330,7 @@
 	[newItem setValuesForKeysWithDictionary:attributes];
 	[self.managedObjectContext save:nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ITEM_UPDATED object:nil];
-
-	NSString *defaultFoodItemKey = ((NSString*) attributes[FRESHLY_ITEM_ATTRIBUTE_NAME]).lowercaseString;
-
-	// User enters a new food item
-	if (![self.defaultFoodItemData objectForKey:defaultFoodItemKey]) {
-		[self generateUserCustomFoodItem:attributes[FRESHLY_ITEM_ATTRIBUTE_NAME] category:attributes[FRESHLY_ITEM_ATTRIBUTE_CATEGORY]];
-
-	// User enters an existing food item with a different category
-	} else if ((self.defaultFoodItemData[defaultFoodItemKey] &&
-				![((NSDictionary*)self.defaultFoodItemData[defaultFoodItemKey])[FRESHLY_ITEM_ATTRIBUTE_CATEGORY] isEqualToString:attributes[FRESHLY_ITEM_ATTRIBUTE_CATEGORY]])) {
-		[self generateUserCustomFoodItem:attributes[FRESHLY_ITEM_ATTRIBUTE_NAME] category:attributes[FRESHLY_ITEM_ATTRIBUTE_CATEGORY]];
-
-	// User enters an existing food item with original category after a change
-	} else if (self.userFoodSources[((NSString*)attributes[FRESHLY_ITEM_ATTRIBUTE_NAME]).lowercaseString] &&
-				  ![((NSDictionary*)self.userFoodSources[((NSString*)attributes[FRESHLY_ITEM_ATTRIBUTE_NAME]).lowercaseString])[FRESHLY_ITEM_ATTRIBUTE_CATEGORY] isEqualToString:attributes[FRESHLY_ITEM_ATTRIBUTE_CATEGORY]]) {
-		[self generateUserCustomFoodItem:attributes[FRESHLY_ITEM_ATTRIBUTE_NAME] category:attributes[FRESHLY_ITEM_ATTRIBUTE_CATEGORY]];
-	}
+	[self generateUserCustomFoodItemWithAttributes:attributes];
 }
 
 - (void)updateItem:(FreshlyFoodItem*)item
