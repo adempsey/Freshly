@@ -117,6 +117,8 @@
 - (NSInteger)defaultExpirationTimeForFoodItemName:(NSString *)itemName inSpace:(NSString*)space
 {
 
+	itemName = itemName.lowercaseString;
+
 	NSString *shortSpace;
 	// this is dumb - should just convert short spaces to full in json
 	if ([space isEqualToString:FRESHLY_SPACE_REFRIGERATOR]) {

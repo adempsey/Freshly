@@ -49,9 +49,12 @@
 @property (nonatomic, readwrite, strong) UIView *darkBackground;
 @property (nonatomic, readwrite, weak) id currentPicker;
 
+@property (nonatomic, readwrite, assign) BOOL userUpdatedExpirationDate;
+
 @property (nonatomic, readwrite, strong) FreshlyFoodAutoCompletionViewController *autoCompletionViewController;
 
 @property (nonatomic, readwrite, assign) BOOL itemExists;
+
 
 @end
 
@@ -83,7 +86,9 @@
 		self.autoCompletionViewController = [[FreshlyFoodAutoCompletionViewController alloc] init];
 		
 		self.itemExists = (item != nil);
-		
+
+		self.userUpdatedExpirationDate = self.itemExists;
+
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
 	}
 	return self;
@@ -182,6 +187,7 @@
 	self.spaceChooser.selectedSegmentIndex = [self.item.space integerValue];
 	self.spaceChooser.tintColor = categoryColor;
 	[self.spaceChooser setTitleTextAttributes:@{NSFontAttributeName: [UIFont freshlyFontOfSize:12.0]} forState:UIControlStateNormal];
+	[self.spaceChooser addTarget:self action:@selector(userDidChangeSpace:) forControlEvents:UIControlEventValueChanged];
 	[whiteBackground addSubview:self.spaceChooser];
 	
 	if (self.itemExists) {
@@ -419,6 +425,18 @@
 	return [categories indexOfObject:object];
 }
 
+#pragma mark - Space Chooser
+
+- (void)userDidChangeSpace:(id)sender
+{
+	if (!self.userUpdatedExpirationDate) {
+		NSString *selectedSpace = [[FreshlyFoodItemService sharedInstance] titleForSpaceIndex:self.spaceChooser.selectedSegmentIndex];
+		NSInteger defaultExpirationTime = [[FreshlyFoodItemService sharedInstance] defaultExpirationTimeForFoodItemName:self.titleField.text inSpace:selectedSpace];
+		NSDate *defaultExpirationDate = [[NSDate date] dateByAddingTimeInterval:60*60*24*defaultExpirationTime];
+		self.itemDateViewController.expirationDate = defaultExpirationDate;
+	}
+}
+
 #pragma mark - UIPickerView Delegate
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -446,6 +464,7 @@
 		[self presentPicker:self.purchaseDatePicker];
 	} else if ([date isEqual:self.itemDateViewController.expirationDate]) {
 		[self presentPicker:self.expirationDatePicker];
+		self.userUpdatedExpirationDate = YES;
 	}
 }
 
@@ -496,7 +515,9 @@
 	NSInteger defaultExpirationTime = [[FreshlyFoodItemService sharedInstance] defaultExpirationTimeForFoodItemName:item inSpace:defaultItemSpace];
 	NSDate *defaultExpirationDate = [[NSDate date] dateByAddingTimeInterval:60*60*24*defaultExpirationTime];
 	[self.itemDateViewController setExpirationDate:defaultExpirationDate];
-	
+
+	self.userUpdatedExpirationDate = NO;
+
 	UIColor *categoryColor = [[FreshlyFoodItemService sharedInstance] colorForCategory:category];
 	
 	[UIView animateWithDuration:0.25 animations:^{
