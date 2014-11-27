@@ -12,6 +12,7 @@
 @interface FreshlyFoodAutoCompletionService ()
 
 @property (nonatomic, readwrite, strong) NSMutableDictionary *keys;
+@property (nonatomic, readwrite, assign) BOOL terminal;
 
 @end
 
@@ -32,6 +33,7 @@
 - (instancetype)initRootStructure
 {
 	if (self = [self init]) {
+
 		NSDictionary *foodItemData = [[FreshlyFoodItemService sharedInstance] defaultFoodItemData];
 
 		if (foodItemData) {
@@ -48,6 +50,7 @@
 - (instancetype)init
 {
 	if (self = [super init]) {
+		self.terminal = NO;
 		self.keys = [[NSMutableDictionary alloc] init];
 	}
 	return self;
@@ -64,7 +67,13 @@
 
 - (void)insertString:(NSString*)string
 {
-	if (string.length < 1) return;
+	if (string.length == 1) {
+		self.terminal = YES;
+	}
+
+	if (string.length < 1) {
+		return;
+	}
 
 	NSString *key = [string substringToIndex:1];
 
@@ -102,39 +111,47 @@
 
 - (NSArray*)wordsWithPrefix:(NSString*)prefix forList:(FreshlyFoodAutoCompletionService*)list
 {
+	// Traverse prefix trie until we reach the final character of the prefix
 	if (prefix.length > 1) {
 		NSString *firstChar = [prefix substringToIndex:1];
 		return [self wordsWithPrefix:[prefix substringFromIndex:1] forList:list.keys[firstChar]];
 	}
 	
-	FreshlyFoodAutoCompletionService *newList = list.keys[prefix];
+	// Suffix list is composed of all keys that can follow the given prefix
+	FreshlyFoodAutoCompletionService *suffixKeys = list.keys[prefix];
 	
-	NSMutableArray *words = [[NSMutableArray alloc] init];
+	// Words will contain all our suffixes
+	NSMutableArray *suffixList = [[NSMutableArray alloc] init];
+
+	if (list.terminal) {
+		[suffixList addObject:prefix];
+	}
 	
+	// We first check that our list has keys for the given prefix
 	if (list.keys.count > 0 && list.keys[prefix]) {
 		
-		for (NSString *key in newList.keys) {
-			
-			if (((FreshlyFoodAutoCompletionService*)newList.keys[key]).keys.count) {
-				NSArray *newListWords = [self wordsWithPrefix:key forList:newList];
+		for (NSString *key in suffixKeys.keys) {
 
+			// If a suffix key is non-terminal, recurse into it
+			if (((FreshlyFoodAutoCompletionService*)suffixKeys.keys[key]).keys.count) {
+				NSArray *newListWords = [self wordsWithPrefix:key forList:suffixKeys];
+
+				// Add each suffix we found at a deeper level to the suffix list
 				for (NSString *word in newListWords) {
-					[words addObject:[prefix stringByAppendingString:word]];
+					[suffixList addObject:[prefix stringByAppendingString:word]];
 				}
 
 			} else {
-				[words addObject:[prefix stringByAppendingString:key]];
+				[suffixList addObject:[prefix stringByAppendingString:key]];
 			}
-			
 		}
 		
-		if (words.count == 0) {
+		if (suffixList.count == 0) {
 			return @[prefix];
 		}
 	}
 	
-	return words;
-	
+	return suffixList;
 }
 
 @end
