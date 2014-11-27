@@ -21,6 +21,6 @@
 @property (nonatomic, readwrite, strong) NSString *prefix;
 @property (nonatomic, readwrite, assign) CGRect frame;
 
-- (BOOL)hasUniqueItemAvailable;
+- (BOOL)containsItem:(NSString*)item;
 
 @end

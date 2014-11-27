@@ -498,7 +498,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-	if (![self.autoCompletionViewController hasUniqueItemAvailable]) {
+	if (![self.autoCompletionViewController containsItem:self.titleField.text]) {
 		[self dismissInput];
 	}
 	return YES;

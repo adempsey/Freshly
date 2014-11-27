@@ -76,9 +76,9 @@
 	}
 }
 
-- (BOOL)hasUniqueItemAvailable
+- (BOOL)containsItem:(NSString*)item
 {
-	if (self.items.count == 1) {
+	if ([self.items containsObject:item.lowercaseString]) {
 		[self.tableView.delegate tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
 		return YES;
 	}
