@@ -67,11 +67,8 @@
 
 - (void)insertString:(NSString*)string
 {
-	if (string.length == 1) {
-		self.terminal = YES;
-	}
-
 	if (string.length < 1) {
+		self.terminal = YES;
 		return;
 	}
 
@@ -123,7 +120,7 @@
 	// Words will contain all our suffixes
 	NSMutableArray *suffixList = [[NSMutableArray alloc] init];
 
-	if (list.terminal) {
+	if (suffixKeys.terminal) {
 		[suffixList addObject:prefix];
 	}
 	
