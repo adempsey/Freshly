@@ -62,7 +62,9 @@
 	NSString *dateText = @"";
 
 	NSString *purchaseText = [NSString stringWithFormat:@"Purchased %@", item.dateOfPurchase.approximateDescription];
-	NSString *expirationText = [NSString stringWithFormat:@"Expires %@", item.dateOfExpiration.approximateDescription];
+
+	NSString *expirationTextSuffix = ([item.dateOfExpiration timeIntervalSinceNow] >= 0) ? @"s" : @"d";
+	NSString *expirationText = [NSString stringWithFormat:@"Expire%@ %@", expirationTextSuffix, item.dateOfExpiration.approximateDescription];
 
 	BOOL showPurchaseDate = [[FreshlySettingsService sharedInstance] showPurchaseDate];
 	BOOL showExpirationDate = [[FreshlySettingsService sharedInstance] showExpirationDate];
