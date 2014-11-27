@@ -116,7 +116,11 @@
 	
 	UIColor *categoryColor = [[FreshlyFoodItemService sharedInstance] colorForCategory:self.item.category];
 	
-	self.titleField.frame = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? CGRectMake(160, 90, 340, kTextViewHeight) : CGRectMake(160, 110, 120, kTextViewHeight);
+	CGFloat whiteBackgroundRightCoordinate = whiteBackgroundFrame.origin.x + whiteBackgroundFrame.size.width;
+	CGFloat titleFieldXOrigin = 160;
+	CGFloat titleFieldWidth = whiteBackgroundRightCoordinate - 20.0 - titleFieldXOrigin;
+
+	self.titleField.frame = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? CGRectMake(titleFieldXOrigin, 90, titleFieldWidth, kTextViewHeight) : CGRectMake(titleFieldXOrigin, 110, titleFieldWidth, kTextViewHeight);
 	self.titleField.backgroundColor = FRESHLY_COLOR_LIGHT;
 	self.titleField.text = self.item ? self.item.name : @"";
 	self.titleField.textColor = FRESHLY_COLOR_DARK;
