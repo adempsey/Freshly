@@ -154,6 +154,7 @@
 	self.purchaseDatePicker.backgroundColor = FRESHLY_COLOR_PRIMARY;
 	self.purchaseDatePicker.date = self.item.dateOfPurchase ? : [NSDate date];
 	self.purchaseDatePicker.datePickerMode = UIDatePickerModeDate;
+	self.purchaseDatePicker.maximumDate = [NSDate date];
 	
 	self.expirationDatePicker.frame = CGRectMake(0, screenBounds.size.height, screenBounds.size.width, kPickerHeight);
 	self.expirationDatePicker.backgroundColor = FRESHLY_COLOR_PRIMARY;
