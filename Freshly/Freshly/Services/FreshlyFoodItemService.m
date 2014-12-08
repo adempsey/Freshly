@@ -95,6 +95,8 @@
 
 - (NSString*)defaultSpaceForFoodItemName:(NSString *)itemName
 {
+	itemName = itemName.lowercaseString;
+
 	NSString *space = self.userFoodSources[itemName][FRESHLY_ITEM_ATTRIBUTE_SPACE];
 
 	if (!space) {
@@ -330,7 +332,9 @@
 	[newItem setValuesForKeysWithDictionary:attributes];
 	[self.managedObjectContext save:nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ITEM_UPDATED object:nil];
-	[self generateUserCustomFoodItemWithAttributes:attributes];
+	if (attributes[FRESHLY_ITEM_ATTRIBUTE_IN_STORAGE] == [NSNumber numberWithBool:1]) {
+		[self generateUserCustomFoodItemWithAttributes:attributes];
+	}
 }
 
 - (void)updateItem:(FreshlyFoodItem*)item

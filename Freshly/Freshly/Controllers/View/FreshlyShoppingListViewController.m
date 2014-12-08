@@ -194,6 +194,15 @@
 	NSArray *checkedItemsCopy = [NSArray arrayWithArray:[self.checkedItems copy]];
 	for (FreshlyFoodItem *item in checkedItemsCopy) {
 		item.inStorage = [NSNumber numberWithBool:YES];
+
+		NSString *itemSpace = [[FreshlyFoodItemService sharedInstance] defaultSpaceForFoodItemName:item.name];
+		item.space = [NSNumber numberWithInteger:[[FreshlyFoodItemService sharedInstance] spaceIndexForTitle:itemSpace]];
+
+		item.dateOfPurchase = [NSDate date];
+
+		NSInteger expirationTime = [[FreshlyFoodItemService sharedInstance] defaultExpirationTimeForFoodItemName:item.name inSpace:itemSpace];
+		item.dateOfExpiration = [NSDate dateWithTimeIntervalSinceNow:60*60*24*expirationTime];
+
 		[[FreshlyFoodItemService sharedInstance] updateItem:item];
 	}
 	[self.checkedItems removeAllObjects];
