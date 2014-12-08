@@ -70,10 +70,9 @@
 {
     [super viewDidLoad];
 	
-	CGRect screenBounds = CGRectMake(0, 0, 280, 200);
 	self.view.backgroundColor = FRESHLY_CATEGORY_COLOR_MISC;
 	CGFloat purchaseLabelsOriginX = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? (kiPadFormSheetWidth / 4 ) - 40.0 : kItemHorizontalOffsetiPhone;
-	CGFloat expirationLabelsOriginX = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? (3*(kiPadFormSheetWidth / 4 )) - 100.0 : screenBounds.size.width - 115;
+	CGFloat expirationLabelsOriginX = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? (3*(kiPadFormSheetWidth / 4 )) - 100.0 : self.view.bounds.size.width - kItemHorizontalOffsetiPhone - 140;
 	
 	[self.purchaseTitleLabel setFrame:CGRectMake(purchaseLabelsOriginX, kItemVerticalOffset, 120, 20)];
 	self.purchaseTitleLabel.font = [UIFont freshlyFontOfSize:14.0];
