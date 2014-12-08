@@ -58,6 +58,7 @@
 - (void)setItem:(FreshlyFoodItem *)item
 {
 	self.textLabel.text = item.name;
+	self.textLabel.textColor = (item.dateOfExpiration.timeIntervalSinceNow >= 0.0) ? FRESHLY_COLOR_DARK : FRESHLY_COLOR_RED;
 
 	NSString *dateText = @"";
 
