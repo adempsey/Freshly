@@ -175,8 +175,10 @@
 	[self.categoryButton addTarget:self action:@selector(presentCategoryPicker) forControlEvents:UIControlEventTouchUpInside];
 	[whiteBackground addSubview:self.categoryButton];
 	
+	BOOL smallScreen = self.view.frame.size.height < 550.0;
+
 	[self.itemDateViewController.view setFrame:CGRectMake(0,
-														  self.imageView.frame.origin.y + self.imageView.frame.size.height + kItemOffset,
+														  self.imageView.frame.origin.y + self.imageView.frame.size.height + (smallScreen?.5:1)*kItemOffset,
 														  whiteBackground.frame.size.width,
 														  80)];
 	[self.itemDateViewController setBackgroundColor:categoryColor];
@@ -186,7 +188,7 @@
 	[whiteBackground addSubview:self.itemDateViewController.view];
 	
 	[self.spaceChooser setFrame:CGRectMake(kItemOffset,
-										   self.itemDateViewController.view.frame.origin.y + self.itemDateViewController.view.frame.size.height + 2*kItemOffset,
+										   self.itemDateViewController.view.frame.origin.y + self.itemDateViewController.view.frame.size.height + (smallScreen?.5:2)*kItemOffset,
 										   whiteBackground.frame.size.width - (kItemOffset*2),
 										   30)];
 	self.spaceChooser.selectedSegmentIndex = [self.item.space integerValue];
@@ -197,6 +199,8 @@
 	
 	if (self.itemExists) {
 		[self.moveToGroceryListButton setFrame:CGRectMake(kItemOffset,
+														  smallScreen?
+														  self.spaceChooser.frame.origin.y + self.spaceChooser.frame.size.height + kItemOffset :
 														  (whiteBackground.frame.size.height + self.spaceChooser.frame.origin.y)/2 - 40,
 														  self.spaceChooser.frame.size.width,
 														  40)];
@@ -208,6 +212,8 @@
 		[whiteBackground addSubview:self.moveToGroceryListButton];
 
 		[self.deleteButton setFrame:CGRectMake(kItemOffset,
+											   smallScreen?
+											   self.moveToGroceryListButton.frame.origin.y + self.moveToGroceryListButton.frame.size.height + .5*kItemOffset:
 											   (whiteBackground.frame.size.height + self.spaceChooser.frame.origin.y)/2 + 30,
 											   self.spaceChooser.frame.size.width,
 											   40)];
