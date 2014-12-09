@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Andrew Dempsey. All rights reserved.
 //
 
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 #import "FreshlyAppDelegate.h"
 #import "FreshlyStorageViewController.h"
 #import "FreshlyShoppingListViewController.h"
@@ -24,6 +27,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	[Fabric with:@[CrashlyticsKit]];
+	
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = FRESHLY_COLOR_PRIMARY;
 	
