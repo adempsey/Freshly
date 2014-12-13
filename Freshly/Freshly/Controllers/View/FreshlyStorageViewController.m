@@ -208,7 +208,7 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 			break;
 		case FreshlyItemSortingCategoryExpirationDate:
 			sortingDescriptorKey = FRESHLY_ITEM_ATTRIBUTE_EXPIRATION_DATE;
-			ascending = NO;
+			ascending = YES;
 			break;
 		default:
 			break;
