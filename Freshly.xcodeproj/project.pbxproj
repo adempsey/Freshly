@@ -67,6 +67,7 @@
 		8DEB2AC51988CBA800043285 /* misc 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2ABB1988CBA800043285 /* misc 50x50.png */; };
 		8DEB2AC81988CBA800043285 /* vegetable 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2ABE1988CBA800043285 /* vegetable 50x50.png */; };
 		8DFA6C3B19D338BE004B28DB /* UINavigationController+FreshlyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFA6C3A19D338BE004B28DB /* UINavigationController+FreshlyAdditions.m */; };
+		A8800F09C5FA91935C172524 /* Pods_Freshly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEE0F8AA430487FE42BB86FB /* Pods_Freshly.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2F90A0E4B88B9DDE42DCBE52 /* Pods-Freshly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Freshly.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Freshly/Pods-Freshly.debug.xcconfig"; sourceTree = "<group>"; };
+		5D3F229201345985DD68D584 /* Pods-Freshly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Freshly.release.xcconfig"; path = "Pods/Target Support Files/Pods-Freshly/Pods-Freshly.release.xcconfig"; sourceTree = "<group>"; };
 		63EC4EE61989463A00060C4F /* NSDate+FreshlyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+FreshlyAdditions.h"; sourceTree = "<group>"; };
 		63EC4EE71989463A00060C4F /* NSDate+FreshlyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+FreshlyAdditions.m"; sourceTree = "<group>"; };
 		8D0A474E19D7C58D006D7CB7 /* iconStorage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconStorage.png; sourceTree = "<group>"; };
@@ -164,6 +167,7 @@
 		8DEB2ABE1988CBA800043285 /* vegetable 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vegetable 50x50.png"; sourceTree = "<group>"; };
 		8DFA6C3919D338BE004B28DB /* UINavigationController+FreshlyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FreshlyAdditions.h"; sourceTree = "<group>"; };
 		8DFA6C3A19D338BE004B28DB /* UINavigationController+FreshlyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FreshlyAdditions.m"; sourceTree = "<group>"; };
+		EEE0F8AA430487FE42BB86FB /* Pods_Freshly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Freshly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +181,7 @@
 				8DC373F319821DC000DC9731 /* UIKit.framework in Frameworks */,
 				8DC373EF19821DC000DC9731 /* Foundation.framework in Frameworks */,
 				8D785CC51A36897F00AF7153 /* Fabric.framework in Frameworks */,
+				A8800F09C5FA91935C172524 /* Pods_Freshly.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +216,15 @@
 				8DFA6C3A19D338BE004B28DB /* UINavigationController+FreshlyAdditions.m */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		89FBB393DE362542869C14D9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2F90A0E4B88B9DDE42DCBE52 /* Pods-Freshly.debug.xcconfig */,
+				5D3F229201345985DD68D584 /* Pods-Freshly.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		8D0A474B19D7C33F006D7CB7 /* Icons */ = {
@@ -254,6 +268,7 @@
 				8DC3741319821DC000DC9731 /* FreshlyTests */,
 				8DC373ED19821DC000DC9731 /* Frameworks */,
 				8DC373EC19821DC000DC9731 /* Products */,
+				89FBB393DE362542869C14D9 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -276,6 +291,7 @@
 				8DC373F219821DC000DC9731 /* UIKit.framework */,
 				8DC373F419821DC000DC9731 /* CoreData.framework */,
 				8DC3740C19821DC000DC9731 /* XCTest.framework */,
+				EEE0F8AA430487FE42BB86FB /* Pods_Freshly.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -469,10 +485,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DC3741D19821DC000DC9731 /* Build configuration list for PBXNativeTarget "Freshly" */;
 			buildPhases = (
+				EE9ED2AD31B99F87ACCA2823 /* [CP] Check Pods Manifest.lock */,
 				8DC373E719821DC000DC9731 /* Sources */,
 				8DC373E819821DC000DC9731 /* Frameworks */,
 				8DC373E919821DC000DC9731 /* Resources */,
 				8D785CC11A36893D00AF7153 /* ShellScript */,
+				53A5A3BBEA429D025B04AA7F /* [CP] Embed Pods Frameworks */,
+				D5EE8470BDB41F90348D8569 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -578,6 +597,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		53A5A3BBEA429D025B04AA7F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Freshly/Pods-Freshly-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8D785CC11A36893D00AF7153 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -590,6 +624,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run d30c22026c802c81271986fec1942bda82623f85 9f467a0932e39ec6389aab1ea38905a439a05932fbeb266286f61bb84a139596";
+		};
+		D5EE8470BDB41F90348D8569 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Freshly/Pods-Freshly-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EE9ED2AD31B99F87ACCA2823 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -736,6 +800,7 @@
 		};
 		8DC3741E19821DC000DC9731 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2F90A0E4B88B9DDE42DCBE52 /* Pods-Freshly.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -746,6 +811,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Freshly/Freshly-Prefix.pch";
 				INFOPLIST_FILE = "Freshly/Freshly-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -753,6 +819,7 @@
 		};
 		8DC3741F19821DC000DC9731 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D3F229201345985DD68D584 /* Pods-Freshly.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -763,6 +830,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Freshly/Freshly-Prefix.pch";
 				INFOPLIST_FILE = "Freshly/Freshly-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
