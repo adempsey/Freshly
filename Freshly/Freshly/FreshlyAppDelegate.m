@@ -15,6 +15,9 @@
 #import "FreshlySettingsService.h"
 #import "FreshlyFoodAutoCompletionService.h"
 
+#import "UIColor+FreshlyAdditions.h"
+#import "FreshlyTabBarController.h"
+
 #import "UIFont+FreshlyAdditions.h"
 #import "UINavigationController+FreshlyAdditions.h"
 #import "UITabBarController+FreshlyAdditions.h"
@@ -30,39 +33,9 @@
 	[Fabric with:@[CrashlyticsKit]];
 	
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = FRESHLY_COLOR_PRIMARY;
-	
-	[[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil]
-	 setTitleTextAttributes:
-	 @{NSForegroundColorAttributeName:FRESHLY_COLOR_DARK,
-	   NSFontAttributeName:[UIFont boldFreshlyFontOfSize:16.0]}
-	 forState:UIControlStateNormal];
+    self.window.backgroundColor = [UIColor freshly_backgroundColor];
 
-	UITabBarController *tabBarController = [[UITabBarController alloc] init];
-	
-	FreshlyStorageViewController *storageViewController = [[FreshlyStorageViewController alloc] init];
-	UINavigationController *storageNavigationController = [[UINavigationController alloc] initWithRootViewController:storageViewController];
-	storageNavigationController.navigationBar.backgroundColor = FRESHLY_COLOR_LIGHT;
-	storageNavigationController.navigationBar.tintColor = FRESHLY_COLOR_DARK;
-	
-	FreshlyShoppingListViewController *shoppingListViewController = [[FreshlyShoppingListViewController alloc] init];
-	UINavigationController *shoppingListNavigationController = [[UINavigationController alloc] initWithRootViewController:shoppingListViewController];
-	shoppingListNavigationController.navigationBar.backgroundColor = FRESHLY_COLOR_LIGHT;
-	shoppingListNavigationController.navigationBar.tintColor = FRESHLY_COLOR_DARK;
-
-	[tabBarController setViewControllers:@[storageNavigationController, shoppingListNavigationController]];
-
-	UITabBarItem *storageItem = tabBarController.tabBar.items[FreshlySectionStorage];
-	UIImage *storageIcon = [UIImage imageNamed:@"iconStorage"];
-	[storageItem setImage:storageIcon];
-
-	UITabBarItem *shoppingListItem = tabBarController.tabBar.items[FreshlySectionShoppingList];
-	UIImage *shoppingListIcon = [UIImage imageNamed:@"iconShoppingList"];
-	[shoppingListItem setImage:shoppingListIcon];
-
-	tabBarController.selectedIndex = [[FreshlySettingsService sharedInstance] selectedSection];
-	tabBarController.tabBar.tintColor = FRESHLY_COLOR_SELECTED;
-	tabBarController.tabBar.barTintColor = FRESHLY_COLOR_SECONDARY;
+	FreshlyTabBarController *tabBarController = [FreshlyTabBarController new];
 
 	self.window.rootViewController = tabBarController;
 
@@ -73,28 +46,6 @@
 
     [self.window makeKeyAndVisible];
     return YES;
-}
-
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-	// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-	// Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-	// Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-	// If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-	// Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-	// Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

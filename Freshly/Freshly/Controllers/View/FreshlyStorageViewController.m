@@ -16,6 +16,7 @@
 
 #import "FreshlyItemViewController+NewItem.h"
 #import "UIFont+FreshlyAdditions.h"
+#import "UIColor+FreshlyAdditions.h"
 
 @interface FreshlyStorageViewController ()
 
@@ -47,16 +48,18 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 - (id)init
 {
     self = [super init];
+
     if (self) {
 
 		self.title = FRESHLY_SECTION_STORAGE;
 
-		UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-		titleLabel.text = FRESHLY_SECTION_STORAGE;
-		titleLabel.textColor = FRESHLY_COLOR_DARK;
-		titleLabel.font = [UIFont boldFreshlyFontOfSize:18.0];
-		titleLabel.textAlignment = NSTextAlignmentCenter;
-		self.navigationItem.titleView = titleLabel;
+//        self.navigationItem.title = @"Storage";
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+        titleLabel.text = FRESHLY_SECTION_STORAGE;
+        titleLabel.textColor = [UIColor whiteColor];
+        titleLabel.font = [UIFont boldFreshlyFontOfSize:18.0];
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        self.navigationItem.titleView = titleLabel;
 
 		self.sortingAttribute = [[FreshlySettingsService sharedInstance] storageSorting];
 		self.groupingAttribute = [[FreshlySettingsService sharedInstance] storageGrouping];
@@ -72,6 +75,7 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadAllTableViewSections) name:NOTIFICATION_ITEM_UPDATED object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadAllTableViewSections) name:NOTIFICATION_STORAGE_SETTINGS_UPDATED object:nil];
     }
+
     return self;
 }
 
@@ -79,7 +83,7 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 {
     [super viewDidLoad];
 	
-	self.tableView.backgroundColor = FRESHLY_COLOR_PRIMARY;
+	self.tableView.backgroundColor = [UIColor freshly_backgroundColor];
 
 	self.tableView.frame = self.view.frame;
 	[self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 80, 0, 0)];

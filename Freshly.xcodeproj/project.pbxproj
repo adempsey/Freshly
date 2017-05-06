@@ -47,6 +47,9 @@
 		8DC3741A19821DC000DC9731 /* FreshlyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC3741919821DC000DC9731 /* FreshlyTests.m */; };
 		8DC3744119822E3F00DC9731 /* FreshlyFoodItemService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC3744019822E3F00DC9731 /* FreshlyFoodItemService.m */; };
 		8DC3744619823C0C00DC9731 /* FreshlyFoodItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC3744519823C0C00DC9731 /* FreshlyFoodItem.m */; };
+		8DD091371EB9A6E5004EC297 /* UIColor+FreshlyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD091361EB9A6E5004EC297 /* UIColor+FreshlyAdditions.m */; };
+		8DD0913A1EB9AB4F004EC297 /* FreshlyTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD091391EB9AB4F004EC297 /* FreshlyTabBarController.m */; };
+		8DD0913D1EB9AB9F004EC297 /* FreshlyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD0913C1EB9AB9F004EC297 /* FreshlyNavigationController.m */; };
 		8DD7EFBD1996F3CA00FC0A10 /* FreshlyItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD7EFBC1996F3CA00FC0A10 /* FreshlyItemViewController.m */; };
 		8DD7EFC01996F62A00FC0A10 /* UIImage+FreshlyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD7EFBF1996F62A00FC0A10 /* UIImage+FreshlyAdditions.m */; };
 		8DD7EFCD1996F77B00FC0A10 /* dairy 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD7EFC31996F77B00FC0A10 /* dairy 100x100.png */; };
@@ -141,6 +144,12 @@
 		8DC374431982333300DC9731 /* FreshlyConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FreshlyConstants.h; sourceTree = "<group>"; };
 		8DC3744419823C0C00DC9731 /* FreshlyFoodItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreshlyFoodItem.h; sourceTree = "<group>"; };
 		8DC3744519823C0C00DC9731 /* FreshlyFoodItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreshlyFoodItem.m; sourceTree = "<group>"; };
+		8DD091351EB9A6E5004EC297 /* UIColor+FreshlyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FreshlyAdditions.h"; sourceTree = "<group>"; };
+		8DD091361EB9A6E5004EC297 /* UIColor+FreshlyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FreshlyAdditions.m"; sourceTree = "<group>"; };
+		8DD091381EB9AB4F004EC297 /* FreshlyTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreshlyTabBarController.h; sourceTree = "<group>"; };
+		8DD091391EB9AB4F004EC297 /* FreshlyTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreshlyTabBarController.m; sourceTree = "<group>"; };
+		8DD0913B1EB9AB9F004EC297 /* FreshlyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreshlyNavigationController.h; sourceTree = "<group>"; };
+		8DD0913C1EB9AB9F004EC297 /* FreshlyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreshlyNavigationController.m; sourceTree = "<group>"; };
 		8DD7EFBB1996F3CA00FC0A10 /* FreshlyItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreshlyItemViewController.h; sourceTree = "<group>"; };
 		8DD7EFBC1996F3CA00FC0A10 /* FreshlyItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreshlyItemViewController.m; sourceTree = "<group>"; };
 		8DD7EFBE1996F62A00FC0A10 /* UIImage+FreshlyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FreshlyAdditions.h"; sourceTree = "<group>"; };
@@ -214,6 +223,8 @@
 				63EC4EE71989463A00060C4F /* NSDate+FreshlyAdditions.m */,
 				8DFA6C3919D338BE004B28DB /* UINavigationController+FreshlyAdditions.h */,
 				8DFA6C3A19D338BE004B28DB /* UINavigationController+FreshlyAdditions.m */,
+				8DD091351EB9A6E5004EC297 /* UIColor+FreshlyAdditions.h */,
+				8DD091361EB9A6E5004EC297 /* UIColor+FreshlyAdditions.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -350,6 +361,10 @@
 			isa = PBXGroup;
 			children = (
 				8DC374311982220700DC9731 /* View */,
+				8DD0913B1EB9AB9F004EC297 /* FreshlyNavigationController.h */,
+				8DD0913C1EB9AB9F004EC297 /* FreshlyNavigationController.m */,
+				8DD091381EB9AB4F004EC297 /* FreshlyTabBarController.h */,
+				8DD091391EB9AB4F004EC297 /* FreshlyTabBarController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -667,10 +682,13 @@
 				8DEB2AB11988C3A000043285 /* FreshlyStorageTableViewCell.m in Sources */,
 				8DA66B75199D5F2E00A129A3 /* FreshlyItemViewController+NewItem.m in Sources */,
 				8D5C23F71999C2AA007B314B /* FreshlyItemDateViewController.m in Sources */,
+				8DD0913D1EB9AB9F004EC297 /* FreshlyNavigationController.m in Sources */,
 				8DA66B78199EE2A200A129A3 /* FreshlyShoppingListTableViewCell.m in Sources */,
 				8D2199061A16BDEF00F01096 /* FreshlyAboutViewController.m in Sources */,
 				8D1B6AB6199F280F00B6D69C /* Freshly.xcdatamodeld in Sources */,
+				8DD0913A1EB9AB4F004EC297 /* FreshlyTabBarController.m in Sources */,
 				8D916B5819A02226003CEF8D /* FreshlyAutoCompletionTableViewCell.m in Sources */,
+				8DD091371EB9A6E5004EC297 /* UIColor+FreshlyAdditions.m in Sources */,
 				8DC3740119821DC000DC9731 /* FreshlyAppDelegate.m in Sources */,
 				8DA08C9D19AA5BC000F13CE4 /* FreshlyStorageSettingsViewController.m in Sources */,
 				8DEB2AAB1988BF3300043285 /* FreshlyStorageViewController.m in Sources */,
