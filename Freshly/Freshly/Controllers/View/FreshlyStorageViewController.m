@@ -18,11 +18,32 @@
 #import "UIFont+FreshlyAdditions.h"
 #import "UIColor+FreshlyAdditions.h"
 
-@interface FreshlyStorageViewController ()
+@import Masonry;
+
+NS_ASSUME_NONNULL_BEGIN
+
+typedef NS_ENUM(NSInteger, FreshlyItemSortingCategories) {
+    FreshlyItemSortingCategoryName = 0,
+    FreshlyItemSortingCategoryPurchaseDate,
+    FreshlyItemSortingCategoryExpirationDate,
+    FreshlyItemSortingCategoryCount
+};
+
+typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
+    FreshlyItemGroupingAttributeAll = 0,
+    FreshlyItemGroupingAttributeCategory,
+    FreshlyItemGroupingAttributeSpace,
+    FreshlyItemGroupingAttributeCount
+};
+
+@interface FreshlyStorageViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, readwrite, strong) NSArray *items;
 @property (nonatomic, readwrite, strong) NSArray *sectionTitles;
+
 @property (nonatomic, readwrite, strong) UITableView *tableView;
+@property (nonatomic, readwrite, strong) UIBarButtonItem *settingsButton;
+@property (nonatomic, readwrite, strong) UIBarButtonItem *newItemButton;
 
 @property (nonatomic, readwrite, assign) NSInteger sortingAttribute;
 @property (nonatomic, readwrite, assign) NSInteger groupingAttribute;
@@ -31,21 +52,9 @@
 
 @implementation FreshlyStorageViewController
 
-typedef NS_ENUM(NSInteger, FreshlyItemSortingCategories) {
-	FreshlyItemSortingCategoryName = 0,
-	FreshlyItemSortingCategoryPurchaseDate,
-	FreshlyItemSortingCategoryExpirationDate,
-	FreshlyItemSortingCategoryCount
-};
+#pragma mark - Initialization
 
-typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
-	FreshlyItemGroupingAttributeAll = 0,
-	FreshlyItemGroupingAttributeCategory,
-	FreshlyItemGroupingAttributeSpace,
-	FreshlyItemGroupingAttributeCount
-};
-
-- (id)init
+- (instancetype)init
 {
     self = [super init];
 
@@ -53,7 +62,6 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 
 		self.title = FRESHLY_SECTION_STORAGE;
 
-//        self.navigationItem.title = @"Storage";
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
         titleLabel.text = FRESHLY_SECTION_STORAGE;
         titleLabel.textColor = [UIColor whiteColor];
@@ -67,44 +75,80 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 		[[FreshlyFoodItemService sharedInstance] retrieveItemsForStorageWithBlock:^(NSArray *items) {
 			self.items = items;
 		}];
-
-		self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped];
-		self.tableView.delegate = self;
-		self.tableView.dataSource = self;
 		
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadAllTableViewSections) name:NOTIFICATION_ITEM_UPDATED object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadAllTableViewSections) name:NOTIFICATION_STORAGE_SETTINGS_UPDATED object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(reloadAllTableViewSections)
+                                                     name:NOTIFICATION_ITEM_UPDATED
+                                                   object:nil];
+
+		[[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(reloadAllTableViewSections)
+                                                     name:NOTIFICATION_STORAGE_SETTINGS_UPDATED
+                                                   object:nil];
     }
 
     return self;
 }
 
+#pragma mark - Lazy Properties
+
+- (UITableView *)tableView
+{
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = [UIColor freshly_backgroundColor];
+    }
+
+    return _tableView;
+}
+
+- (UIBarButtonItem *)settingsButton
+{
+    if (_settingsButton == nil) {
+        UIImage *icon = [UIImage imageNamed:@"icon-gear"];
+        UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithImage:icon
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(didPressSettingsButton:)];
+        _settingsButton = button;
+    }
+
+    return _settingsButton;
+}
+
+- (UIBarButtonItem *)newItemButton
+{
+    if (_newItemButton == nil) {
+        _newItemButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                       target:self
+                                                                       action:@selector(didPressNewItemButton:)];
+    }
+
+    return _newItemButton;
+}
+
+#pragma mark - View Controller Configuration
+
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+#pragma mark - View Controller Lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-	self.tableView.backgroundColor = [UIColor freshly_backgroundColor];
 
-	self.tableView.frame = self.view.frame;
-	[self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 80, 0, 0)];
 	[self sortItemsInTableView];
 	[self.view addSubview:self.tableView];
 
-    UIImage *image = [UIImage imageNamed:@"icon-gear"];
-    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithImage:image
-                                                                       style:UIBarButtonItemStylePlain
-                                                                      target:self
-                                                                      action:@selector(presentSettingsView)];
-	self.navigationItem.leftBarButtonItem = settingsButton;
+    [self createConstraints];
 
-	UIBarButtonItem *addNewItemButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewItemView)];
-	self.navigationItem.rightBarButtonItem = addNewItemButton;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-	[super viewWillAppear:animated];
-	self.tableView.frame = self.view.frame;
+	self.navigationItem.leftBarButtonItem = self.settingsButton;
+    self.navigationItem.rightBarButtonItem = self.newItemButton;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -113,17 +157,43 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 	[[FreshlySettingsService sharedInstance] setSelectedSection:0];
 }
 
-- (BOOL)shouldAutorotate
+#pragma mark - Layout Methods
+
+- (void)createConstraints
 {
-	return YES;
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+#pragma mark - Actions
+
+- (void)didPressSettingsButton:(id)sender
 {
-	CGRect screenBounds = [[UIScreen mainScreen] bounds];
-	CGRect newScreenBounds = CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.height, screenBounds.size.width);
-	self.view.frame = newScreenBounds;
-	self.tableView.frame = self.view.frame;
+
+    FreshlyStorageSettingsViewController *settingsViewController = [[FreshlyStorageSettingsViewController alloc] init];
+    UINavigationController *settingsNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
+
+    [self presentViewController:settingsNavigationController
+                       animated:YES
+                     completion:nil];
+}
+
+- (void)didPressNewItemButton:(id)sender
+{
+    FreshlyItemViewController *newItemViewController = [[FreshlyItemViewController alloc] initWithItem:nil];
+    UINavigationController *newItemNavigationController = [[UINavigationController alloc] initWithRootViewController:newItemViewController];
+
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:newItemViewController
+                                                                    action:@selector(cancelModalItemView)];
+    
+    newItemViewController.navigationItem.leftBarButtonItem = cancelButton;
+    
+    [self presentViewController:newItemNavigationController
+                       animated:YES
+                     completion:nil];
 }
 
 - (void)setItems:(NSArray *)items
@@ -171,33 +241,6 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 		_items = spaceSectionItems;
 		self.sectionTitles = nonEmptySectionTitles;
 	}
-}
-
-- (void)presentNewItemView
-{
-	FreshlyItemViewController *newItemViewController = [[FreshlyItemViewController alloc] initWithItem:nil];
-	UINavigationController *newItemNavigationController = [[UINavigationController alloc] initWithRootViewController:newItemViewController];
-
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-		newItemNavigationController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-		newItemNavigationController.modalPresentationStyle = UIModalPresentationFormSheet;
-	}
-
-	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
-																	 style:UIBarButtonItemStylePlain
-																	target:newItemViewController
-																	action:@selector(cancelModalItemView)];
-	
-	newItemViewController.navigationItem.leftBarButtonItem = cancelButton;
-
-	[self presentViewController:newItemNavigationController animated:YES completion:nil];
-}
-
-- (void)presentSettingsView
-{
-	FreshlyStorageSettingsViewController *settingsViewController = [[FreshlyStorageSettingsViewController alloc] init];
-	UINavigationController *settingsNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
-	[self presentViewController:settingsNavigationController animated:YES completion:nil];
 }
 
 - (void)sortItemsInTableView
@@ -324,7 +367,7 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 	}
 }
 
-- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (nullable UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
 	UIView *view = [[UIView alloc] init];
 	view.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, 50.0);
@@ -340,7 +383,7 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 	return view;
 }
 
-- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+- (nullable NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
 	if (self.groupingAttribute == FreshlyItemGroupingAttributeAll) {
 		return @"All Items";
@@ -350,3 +393,5 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

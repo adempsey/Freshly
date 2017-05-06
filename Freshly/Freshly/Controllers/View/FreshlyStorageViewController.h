@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FreshlyStorageViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface FreshlyStorageViewController : UIViewController
 
 @end
