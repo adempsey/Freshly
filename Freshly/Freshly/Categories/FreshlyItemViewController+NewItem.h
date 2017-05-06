@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Andrew Dempsey. All rights reserved.
 //
 
-#import "FreshlyItemViewController.h"
+#import "FRSItemViewController.h"
 
-@interface FreshlyItemViewController (NewItem)
+@interface FRSItemViewController (NewItem)
 
 - (void)cancelModalItemView;
 

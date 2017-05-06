@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "FreshlyAppDelegate.h"
+#import "FRSAppDelegate.h"
 
 int main(int argc, char * argv[])
 {
 	@autoreleasepool {
-	    return UIApplicationMain(argc, argv, nil, NSStringFromClass([FreshlyAppDelegate class]));
+	    return UIApplicationMain(argc, argv, nil, NSStringFromClass([FRSAppDelegate class]));
 	}
 }

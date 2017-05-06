@@ -7,7 +7,7 @@
 //
 
 #import "UINavigationController+FreshlyAdditions.h"
-#import "FreshlyItemViewController.h"
+#import "FRSItemViewController.h"
 
 @implementation UINavigationController (FreshlyAdditions)
 

@@ -8,7 +8,7 @@
 
 #import "FreshlyItemViewController+NewItem.h"
 
-@implementation FreshlyItemViewController (NewItem)
+@implementation FRSItemViewController (NewItem)
 
 - (void)cancelModalItemView
 {
