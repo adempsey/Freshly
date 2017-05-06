@@ -89,9 +89,12 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 	[self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 80, 0, 0)];
 	[self sortItemsInTableView];
 	[self.view addSubview:self.tableView];
-	
-	NSString *unicodeGear = @"\u2699";
-	UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithTitle:unicodeGear style:UIBarButtonItemStylePlain target:self action:@selector(presentSettingsView)];
+
+    UIImage *image = [UIImage imageNamed:@"icon-gear"];
+    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithImage:image
+                                                                       style:UIBarButtonItemStylePlain
+                                                                      target:self
+                                                                      action:@selector(presentSettingsView)];
 	self.navigationItem.leftBarButtonItem = settingsButton;
 
 	UIBarButtonItem *addNewItemButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewItemView)];
