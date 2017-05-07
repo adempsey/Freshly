@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "FRSFoodItem.h"
+#import "FRSTableViewCell.h"
 
 #define TABLE_VIEW_CELL_STORAGE_IDENTIFIER @"StorageTableViewCell"
 
-@interface FRSStorageTableViewCell : UITableViewCell
+@interface FRSStorageTableViewCell : FRSTableViewCell
 
-- (instancetype)initWithItem:(FRSFoodItem *)item;
-- (void)setItem:(FRSFoodItem *)item;
+//- (instancetype)initWithItem:(FRSFoodItem *)item;
+//- (void)setItem:(FRSFoodItem *)item;
 
 @end

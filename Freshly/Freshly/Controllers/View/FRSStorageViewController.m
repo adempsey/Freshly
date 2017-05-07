@@ -17,6 +17,7 @@
 #import "FreshlyItemViewController+NewItem.h"
 #import "UIFont+FreshlyAdditions.h"
 #import "UIColor+FreshlyAdditions.h"
+#import "FRSFoodItemDataSource.h"
 
 @import Masonry;
 
@@ -36,10 +37,12 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
     FreshlyItemGroupingAttributeCount
 };
 
-@interface FRSStorageViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface FRSStorageViewController () </*UITableViewDataSource,*/ UITableViewDelegate>
 
 @property (nonatomic, readwrite, strong) NSArray *items;
 @property (nonatomic, readwrite, strong) NSArray *sectionTitles;
+
+@property (nonatomic, readwrite, strong) FRSFoodItemDataSource *dataSource;
 
 @property (nonatomic, readwrite, strong) UITableView *tableView;
 @property (nonatomic, readwrite, strong) UIBarButtonItem *settingsButton;
@@ -92,12 +95,21 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 
 #pragma mark - Lazy Properties
 
+- (FRSFoodItemDataSource *)dataSource
+{
+    if (_dataSource == nil) {
+        _dataSource = [[FRSFoodItemDataSource alloc] init];
+    }
+
+    return _dataSource;
+}
+
 - (UITableView *)tableView
 {
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tableView.delegate = self;
-        _tableView.dataSource = self;
+        _tableView.dataSource = self.dataSource;
         _tableView.backgroundColor = [UIColor freshly_backgroundColor];
     }
 
@@ -300,32 +312,32 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 
 #pragma mark - TableView Datasource
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-	if (self.items[section]) {
-		return ((NSArray*)self.items[section]).count;
-	}
-	return 0;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-	return self.items.count;
-}
-
-- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	FRSFoodItem *item = self.items[indexPath.section][indexPath.row];
-	FRSStorageTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:TABLE_VIEW_CELL_STORAGE_IDENTIFIER];
-	
-	if (!cell) {
-		cell = [[FRSStorageTableViewCell alloc] initWithItem:item];
-	} else {
-		[cell setItem:item];
-	}
-	
-	return cell;
-}
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//	if (self.items[section]) {
+//		return ((NSArray*)self.items[section]).count;
+//	}
+//	return 0;
+//}
+//
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//	return self.items.count;
+//}
+//
+//- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//	FRSFoodItem *item = self.items[indexPath.section][indexPath.row];
+//	FRSStorageTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:TABLE_VIEW_CELL_STORAGE_IDENTIFIER];
+//	
+//	if (!cell) {
+//		cell = [[FRSStorageTableViewCell alloc] initWithItem:item];
+//	} else {
+//		[cell setItem:item];
+//	}
+//	
+//	return cell;
+//}
 
 #pragma mark - TableView Delegate
 
