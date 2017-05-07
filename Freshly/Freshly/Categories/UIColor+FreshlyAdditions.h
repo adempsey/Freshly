@@ -22,4 +22,7 @@
 // #FFFFFF
 + (UIColor *)freshly_whiteColor;
 
+
++ (UIColor *)freshly_darkGrayColor;
+
 @end

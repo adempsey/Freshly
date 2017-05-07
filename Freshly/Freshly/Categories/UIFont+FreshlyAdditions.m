@@ -12,12 +12,14 @@
 
 + (UIFont*)freshlyFontOfSize:(CGFloat)size
 {
-	return [UIFont fontWithName:@"AvenirNext-Regular" size:size];
+	return [UIFont fontWithName:@"AvenirNext-Regular"
+                           size:size];
 }
 
 + (UIFont*)boldFreshlyFontOfSize:(CGFloat)size
 {
-	return [UIFont fontWithName:@"AvenirNext-DemiBold" size:size];
+	return [UIFont fontWithName:@"AvenirNext-DemiBold"
+                           size:size];
 }
 
 @end

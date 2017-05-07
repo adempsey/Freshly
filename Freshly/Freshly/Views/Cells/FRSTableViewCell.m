@@ -7,6 +7,8 @@
 //
 
 #import "FRSTableViewCell.h"
+#import "UIColor+FreshlyAdditions.h"
+#import "UIFont+FreshlyAdditions.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation FRSTableViewCell
 
+#pragma mark - Initialization
+
 - (instancetype)initWithViewModel:(id<FRSViewModelProtocol>)viewModel
                             style:(UITableViewCellStyle)style
                   reuseIdentifier:(NSString *)identifier
@@ -28,10 +32,19 @@ NS_ASSUME_NONNULL_BEGIN
     if (self) {
         _viewModel = viewModel;
 
-        self.textLabel.text = viewModel.title;
+        [self configureTextLabel];
     }
 
     return self;
+}
+
+#pragma mark - Cell Configuration
+
+- (void)configureTextLabel
+{
+    self.textLabel.text = self.viewModel.title;
+    self.textLabel.font = [UIFont freshlyFontOfSize:[UIFont labelFontSize]];
+    self.textLabel.textColor = [UIColor freshly_darkGrayColor];
 }
 
 @end

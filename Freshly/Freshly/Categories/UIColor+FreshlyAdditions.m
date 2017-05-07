@@ -42,4 +42,10 @@
                            alpha:1.0];
 }
 
++ (UIColor *)freshly_darkGrayColor
+{
+    return [UIColor colorWithWhite:100.0/255.0
+                             alpha:1.0];
+}
+
 @end
