@@ -98,7 +98,7 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 - (FRSFoodItemDataSource *)dataSource
 {
     if (_dataSource == nil) {
-        _dataSource = [[FRSFoodItemDataSource alloc] init];
+        _dataSource = [[FRSFoodItemDataSource alloc] initWithCellClass:[FRSStorageTableViewCell class]];
     }
 
     return _dataSource;

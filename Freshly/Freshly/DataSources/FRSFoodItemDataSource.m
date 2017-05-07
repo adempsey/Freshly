@@ -8,7 +8,7 @@
 
 #import "FRSFoodItemDataSource.h"
 #import "FRSFoodItemViewModel.h"
-#import "FRSTableViewCell.h"
+#import "FRSStorageTableViewCell.h"
 
 #import "FRSFoodItemService.h"
 
@@ -16,34 +16,33 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FRSFoodItemDataSource ()
 
+@property (nonatomic, readwrite, strong) Class<FRSTableViewCellProtocol> CellClass;
 @property (nonatomic, readwrite, strong) NSArray<FRSFoodItem *> *items;
 
 @end
 
 @implementation FRSFoodItemDataSource
 
-- (instancetype)init
+#pragma mark - FRSDataSourceProtocol
+
+- (instancetype)initWithCellClass:(Class<FRSTableViewCellProtocol>)CellClass
 {
     self = [super init];
 
     if (self) {
+        _CellClass = CellClass;
         [[FRSFoodItemService sharedInstance] retrieveItemsForStorageWithBlock:^(NSArray *items) {
             _items = items;
         }];
-
     }
 
     return self;
 }
 
-#pragma mark - Private Methods
-
-- (FRSFoodItemViewModel *)viewModelForCellAtIndexPath:(NSIndexPath *)indexPath
+- (id<FRSViewModelProtocol>)viewModelForCellAtIndexPath:(NSIndexPath *)indexPath
 {
     return [[FRSFoodItemViewModel alloc] initWithItem:self.items[indexPath.row]];
 }
-
-#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -55,14 +54,15 @@ NS_ASSUME_NONNULL_BEGIN
     return self.items.count;
 }
 
-- (FRSTableViewCell *)tableView:(UITableView *)tableView
-          cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell<FRSTableViewCellProtocol> *)tableView:(UITableView *)tableView
+                                   cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FRSFoodItemViewModel *viewModel = [self viewModelForCellAtIndexPath:indexPath];
 
-    FRSTableViewCell *cell = [[FRSTableViewCell alloc] initWithViewModel:viewModel
-                                                                   style:UITableViewCellStyleSubtitle
-                                                         reuseIdentifier:@"shit"];
+    Class CellClass = self.CellClass;
+    UITableViewCell<FRSTableViewCellProtocol> *cell = [[CellClass alloc] initWithViewModel:viewModel
+                                                                                     style:UITableViewCellStyleSubtitle
+                                                                           reuseIdentifier:@"shit"];
     return cell;
 }
 

@@ -111,6 +111,7 @@
 		8D8333411EBEB5F600DFDECC /* FRSFoodItemDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRSFoodItemDataSource.m; sourceTree = "<group>"; };
 		8D8333431EBEB6DC00DFDECC /* FRSTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRSTableViewCell.h; sourceTree = "<group>"; };
 		8D8333441EBEB6DC00DFDECC /* FRSTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRSTableViewCell.m; sourceTree = "<group>"; };
+		8D83334B1EBEBF3B00DFDECC /* FRSDataSourceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRSDataSourceProtocol.h; sourceTree = "<group>"; };
 		8D916B46199FDCF2003CEF8D /* FRSFoodAutoCompletionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRSFoodAutoCompletionService.h; sourceTree = "<group>"; };
 		8D916B47199FDCF2003CEF8D /* FRSFoodAutoCompletionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRSFoodAutoCompletionService.m; sourceTree = "<group>"; };
 		8D916B5119A0070C003CEF8D /* minFoodSource.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = minFoodSource.json; sourceTree = "<group>"; };
@@ -272,6 +273,7 @@
 		8D83333F1EBEB5C500DFDECC /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
+				8D83334B1EBEBF3B00DFDECC /* FRSDataSourceProtocol.h */,
 				8D8333401EBEB5F600DFDECC /* FRSFoodItemDataSource.h */,
 				8D8333411EBEB5F600DFDECC /* FRSFoodItemDataSource.m */,
 			);

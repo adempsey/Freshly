@@ -6,12 +6,18 @@
 //  Copyright © 2017 Andrew Dempsey. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "FRSViewModelProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FRSTableViewCell : UITableViewCell
+@protocol FRSTableViewCellProtocol <NSObject>
+
+- (instancetype)initWithViewModel:(id<FRSViewModelProtocol>)viewModel
+                            style:(UITableViewCellStyle)style
+                  reuseIdentifier:(NSString *)identifier;
+@end
+
+@interface FRSTableViewCell : UITableViewCell <FRSTableViewCellProtocol>
 
 - (instancetype)initWithViewModel:(id<FRSViewModelProtocol>)viewModel
                             style:(UITableViewCellStyle)style
