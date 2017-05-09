@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Andrew Dempsey. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-@interface FRSStorageSettingsViewController : UITableViewController
+@interface FRSSettingsViewController : UITableViewController
 
 @end

@@ -29,7 +29,7 @@
 		8D916B5E19A0915B003CEF8D /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D916B5D19A0915B003CEF8D /* checkbox_checked.png */; };
 		8D97EF2D19DC998000F0C7C3 /* UITabBarController+FreshlyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97EF2C19DC998000F0C7C3 /* UITabBarController+FreshlyAdditions.m */; };
 		8DA08C9319A99E0C00F13CE4 /* FRSSettingsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA08C9219A99E0C00F13CE4 /* FRSSettingsService.m */; };
-		8DA08C9D19AA5BC000F13CE4 /* FRSStorageSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA08C9C19AA5BC000F13CE4 /* FRSStorageSettingsViewController.m */; };
+		8DA08C9D19AA5BC000F13CE4 /* FRSSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA08C9C19AA5BC000F13CE4 /* FRSSettingsViewController.m */; };
 		8DA08CA019AA98FC00F13CE4 /* UIFont+FreshlyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA08C9F19AA98FC00F13CE4 /* UIFont+FreshlyAdditions.m */; };
 		8DA66B75199D5F2E00A129A3 /* FreshlyItemViewController+NewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA66B74199D5F2E00A129A3 /* FreshlyItemViewController+NewItem.m */; };
 		8DA66B78199EE2A200A129A3 /* FRSShoppingListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA66B77199EE2A200A129A3 /* FRSShoppingListTableViewCell.m */; };
@@ -109,8 +109,8 @@
 		8D97EF2C19DC998000F0C7C3 /* UITabBarController+FreshlyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+FreshlyAdditions.m"; sourceTree = "<group>"; };
 		8DA08C9119A99E0C00F13CE4 /* FRSSettingsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRSSettingsService.h; sourceTree = "<group>"; };
 		8DA08C9219A99E0C00F13CE4 /* FRSSettingsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRSSettingsService.m; sourceTree = "<group>"; };
-		8DA08C9B19AA5BC000F13CE4 /* FRSStorageSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRSStorageSettingsViewController.h; sourceTree = "<group>"; };
-		8DA08C9C19AA5BC000F13CE4 /* FRSStorageSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRSStorageSettingsViewController.m; sourceTree = "<group>"; };
+		8DA08C9B19AA5BC000F13CE4 /* FRSSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRSSettingsViewController.h; sourceTree = "<group>"; };
+		8DA08C9C19AA5BC000F13CE4 /* FRSSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRSSettingsViewController.m; sourceTree = "<group>"; };
 		8DA08C9E19AA98FC00F13CE4 /* UIFont+FreshlyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+FreshlyAdditions.h"; sourceTree = "<group>"; };
 		8DA08C9F19AA98FC00F13CE4 /* UIFont+FreshlyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FreshlyAdditions.m"; sourceTree = "<group>"; };
 		8DA66B73199D5F2E00A129A3 /* FreshlyItemViewController+NewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FreshlyItemViewController+NewItem.h"; sourceTree = "<group>"; };
@@ -378,8 +378,8 @@
 			children = (
 				8D2199041A16BDEF00F01096 /* FRSAboutViewController.h */,
 				8D2199051A16BDEF00F01096 /* FRSAboutViewController.m */,
-				8DA08C9B19AA5BC000F13CE4 /* FRSStorageSettingsViewController.h */,
-				8DA08C9C19AA5BC000F13CE4 /* FRSStorageSettingsViewController.m */,
+				8DA08C9B19AA5BC000F13CE4 /* FRSSettingsViewController.h */,
+				8DA08C9C19AA5BC000F13CE4 /* FRSSettingsViewController.m */,
 				8D916B5319A0117E003CEF8D /* FRSFoodAutoCompletionViewController.h */,
 				8D916B5419A0117E003CEF8D /* FRSFoodAutoCompletionViewController.m */,
 				8D5C23F51999C2AA007B314B /* FRSItemDateViewController.h */,
@@ -642,7 +642,7 @@
 				8D916B5819A02226003CEF8D /* FRSAutoCompletionTableViewCell.m in Sources */,
 				8DD091371EB9A6E5004EC297 /* UIColor+FreshlyAdditions.m in Sources */,
 				8DC3740119821DC000DC9731 /* FRSAppDelegate.m in Sources */,
-				8DA08C9D19AA5BC000F13CE4 /* FRSStorageSettingsViewController.m in Sources */,
+				8DA08C9D19AA5BC000F13CE4 /* FRSSettingsViewController.m in Sources */,
 				8DEB2AAB1988BF3300043285 /* FRSStorageViewController.m in Sources */,
 				8DD7EFBD1996F3CA00FC0A10 /* FRSItemViewController.m in Sources */,
 				63EC4EE81989463A00060C4F /* NSDate+FreshlyAdditions.m in Sources */,

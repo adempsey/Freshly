@@ -12,12 +12,13 @@
 #import "FRSFoodItem.h"
 #import "FRSItemViewController.h"
 #import "FRSSettingsService.h"
-#import "FRSStorageSettingsViewController.h"
+#import "FRSSettingsViewController.h"
 
 #import "FreshlyItemViewController+NewItem.h"
 #import "UIFont+FreshlyAdditions.h"
 #import "UIColor+FreshlyAdditions.h"
 #import "FRSFoodItemDataSource.h"
+#import "FRSNavigationController.h"
 
 @import Masonry;
 
@@ -183,8 +184,8 @@ typedef NS_ENUM(NSInteger, FreshlyItemGroupingAttributes) {
 - (void)didPressSettingsButton:(id)sender
 {
 
-    FRSStorageSettingsViewController *settingsViewController = [[FRSStorageSettingsViewController alloc] init];
-    UINavigationController *settingsNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
+    FRSSettingsViewController *settingsViewController = [FRSSettingsViewController new];
+    FRSNavigationController *settingsNavigationController = [[FRSNavigationController alloc] initWithRootViewController:settingsViewController];
 
     [self presentViewController:settingsNavigationController
                        animated:YES

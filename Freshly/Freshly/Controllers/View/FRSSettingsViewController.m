@@ -6,11 +6,12 @@
 //  Copyright (c) 2014 Andrew Dempsey. All rights reserved.
 //
 
-#import "FRSStorageSettingsViewController.h"
+#import "FRSSettingsViewController.h"
 #import "FRSSettingsService.h"
 #import "FRSAboutViewController.h"
 
 #import "UIFont+FreshlyAdditions.h"
+#import "UIColor+FreshlyAdditions.h"
 
 typedef NS_ENUM(NSInteger, FreshlyStorageSettingsSections) {
 	FreshlyStorageSettingsSectionSorting = 0,
@@ -41,14 +42,14 @@ typedef NS_ENUM(NSInteger, FreshlyItemDatePreferences) {
 	FreshlyOptionCount
 };
 
-@interface FRSStorageSettingsViewController ()
+@interface FRSSettingsViewController ()
 
 @property (nonatomic, readwrite, assign) NSInteger selectedSortingSetting;
 @property (nonatomic, readwrite, assign) NSInteger selectedGroupingSetting;
 
 @end
 
-@implementation FRSStorageSettingsViewController
+@implementation FRSSettingsViewController
 
 - (instancetype)init
 {
@@ -62,22 +63,21 @@ typedef NS_ENUM(NSInteger, FreshlyItemDatePreferences) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.navigationItem.title = @"Storage Settings";
+
+
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    titleLabel.text = @"Settings";
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.font = [UIFont boldFreshlyFontOfSize:18.0];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.navigationItem.titleView = titleLabel;
+
+	self.tableView.backgroundColor = [UIColor freshly_backgroundColor];
 	
-	UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-	titleLabel.text = @"Storage Settings";
-	titleLabel.textColor = FRESHLY_COLOR_DARK;
-	titleLabel.font = [UIFont boldFreshlyFontOfSize:18.0];
-	titleLabel.textAlignment = NSTextAlignmentCenter;
-	self.navigationItem.titleView = titleLabel;
-	
-	self.tableView.backgroundColor = FRESHLY_COLOR_PRIMARY;
-	self.navigationController.navigationBar.tintColor = FRESHLY_COLOR_DARK;
-	
-	UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+	UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
 																				target:self
 																				action:@selector(dismissSettings)];
-	self.navigationItem.rightBarButtonItem = doneButton;
+	self.navigationItem.leftBarButtonItem = doneButton;
 }
 
 - (void)dismissSettings
@@ -118,12 +118,12 @@ typedef NS_ENUM(NSInteger, FreshlyItemDatePreferences) {
 {
 	UITableViewCell *cell = [[UITableViewCell alloc] init];
 	
-	cell.backgroundColor = FRESHLY_COLOR_LIGHT;
+	cell.backgroundColor = [UIColor freshly_whiteColor];
 	
     cell.textLabel.text = [self titleForCellAtIndexPath:indexPath];
 	cell.textLabel.font = [UIFont freshlyFontOfSize:18.0];
-	cell.textLabel.textColor = FRESHLY_COLOR_DARK;
-	cell.tintColor = FRESHLY_COLOR_SELECTED;
+	cell.textLabel.textColor = [UIColor freshly_darkGrayColor];
+	cell.tintColor = [UIColor freshly_primaryGreen];
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	cell.accessoryType = [self accessoryTypeForCellAtIndexPath:indexPath];
 	
@@ -134,7 +134,19 @@ typedef NS_ENUM(NSInteger, FreshlyItemDatePreferences) {
     return cell;
 }
 
-#pragma mark - Table view delegate
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView
+willDisplayHeaderView:(UIView *)view
+       forSection:(NSInteger)section
+{
+    if ([view isKindOfClass:[UITableViewHeaderFooterView class]]) {
+        UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+        header.textLabel.font = [UIFont freshlyFontOfSize:[UIFont systemFontSize]];
+        header.textLabel.textColor = [UIColor freshly_darkGrayColor];
+        header.textLabel.text = header.textLabel.text.capitalizedString;
+    }
+}
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
@@ -174,22 +186,6 @@ typedef NS_ENUM(NSInteger, FreshlyItemDatePreferences) {
 
 	[self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 	[self.tableView reloadData];
-}
-
-- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-	UIView *view = [[UIView alloc] init];
-	view.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, 50.0);
-
-	UILabel *titleLabel = [[UILabel alloc] init];
-	CGFloat originY = section == 0 ? view.frame.size.height - 20.0 - 10.0 : view.frame.size.height - 50.0;
-	titleLabel.frame = CGRectMake(16.0, originY, 200.0, 20.0);
-	titleLabel.font = [UIFont freshlyFontOfSize:18.0];
-	titleLabel.text = [self tableView:tableView titleForHeaderInSection:section];
-	titleLabel.textColor = FRESHLY_COLOR_DARK;
-	[view addSubview:titleLabel];
-
-	return view;
 }
 
 #pragma mark - Extra table view methods
@@ -309,8 +305,10 @@ typedef NS_ENUM(NSInteger, FreshlyItemDatePreferences) {
 			cellSwitch.tag = FreshlyOptionShowStorageLocation;
 		}
 
-		cellSwitch.onTintColor = FRESHLY_COLOR_SELECTED;
-		[cellSwitch addTarget:self action:@selector(didToggleSwitch:) forControlEvents:UIControlEventValueChanged];
+		cellSwitch.onTintColor = [UIColor freshly_primaryGreen];
+		[cellSwitch addTarget:self
+                       action:@selector(didToggleSwitch:)
+             forControlEvents:UIControlEventValueChanged];
 
 		return cellSwitch;
 	}
