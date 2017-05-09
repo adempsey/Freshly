@@ -7,6 +7,7 @@
 //
 
 #import "FRSAboutViewController.h"
+#import "UIColor+FreshlyAdditions.h"
 
 @interface FRSAboutViewController ()
 
@@ -24,13 +25,14 @@
 	return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 
 	self.textView.editable = NO;
 	self.textView.dataDetectorTypes = UIDataDetectorTypeAll;
-	self.textView.backgroundColor = FRESHLY_COLOR_PRIMARY;
-	self.textView.tintColor = FRESHLY_COLOR_SELECTED;
+    self.textView.backgroundColor = [UIColor freshly_backgroundColor];
+	self.textView.tintColor = [UIColor freshly_primaryGreen];
 	self.textView.attributedText = [self generateContent];
 
 	[self.view addSubview:self.textView];
@@ -64,7 +66,7 @@
 	content = [content stringByAppendingString:licenseText];
 
 	content = [content stringByAppendingString:@"\n\nNote: Freshly is intended to be a helpful resource for managing food purchases, but is not a reputable source for food quality. "];
-	content = [content stringByAppendingString:@"Always check the date on packages before consuming. i.e. Freshly isn't responsible if you die from your food lol."];
+	content = [content stringByAppendingString:@"Always check the date on packages before consuming."];
 
 	content = [content stringByAppendingString:@"\n\nIcon Attributions:\n\n"];
 
