@@ -10,42 +10,92 @@
 
 @implementation UIColor (FreshlyAdditions)
 
+#pragma mark - System Colors
+
 + (UIColor *)freshly_primaryGreen
 {
-    return [UIColor colorWithRed:50.0/255.0
-                           green:179.0/255.0
-                            blue:101.0/255.0
-                           alpha:1.0];
+    return [UIColor colorWithRGBHexCode:0x4AA85F];
 }
 
 + (UIColor *)freshly_lightGreen
 {
-    return [UIColor colorWithRed:240.0/255.0
-                           green:248.0/255.0
-                            blue:245.0/255.0
-                           alpha:1.0];
+    return [UIColor colorWithRGBHexCode:0xEFFFFE];
 }
 
 + (UIColor *)freshly_backgroundColor
 {
-    return [UIColor colorWithRed:237.0/255.0
-                           green:242.0/255.0
-                            blue:244.0/255.0
-                           alpha:1.0];
+    return [UIColor colorWithRGBHexCode:0xEDF2F4];
 }
 
 + (UIColor *)freshly_whiteColor
 {
-    return [UIColor colorWithRed:255.0/255.0
-                           green:255.0/255.0
-                            blue:255.0/255.0
-                           alpha:1.0];
+    return [UIColor colorWithRGBHexCode:0xFFFFFF];
 }
 
 + (UIColor *)freshly_darkGrayColor
 {
-    return [UIColor colorWithWhite:100.0/255.0
-                             alpha:1.0];
+    return [UIColor colorWithRGBHexCode:0x646464];
+}
+
+#pragma mark - Food Category Colors
+
++ (UIColor *)freshly_alcoholColor
+{
+    return [UIColor colorWithRGBHexCode:0xB55085];
+}
+
++ (UIColor *)freshly_dairyColor
+{
+    return [UIColor colorWithRGBHexCode:0xDED362];
+}
+
++ (UIColor *)freshly_defaultColor
+{
+    return [UIColor freshly_darkGrayColor];
+}
+
++ (UIColor *)freshly_drinkColor
+{
+    return [UIColor colorWithRGBHexCode:0x684A97];
+}
+
++ (UIColor *)freshly_fruitColor
+{
+    return [UIColor colorWithRGBHexCode:0xB1D15C];
+}
+
++ (UIColor *)freshly_grainColor
+{
+    return [UIColor colorWithRGBHexCode:0xDEA962];
+}
+
++ (UIColor *)freshly_proteinColor
+{
+    return [UIColor colorWithRGBHexCode:0xDE6E62];
+}
+
++ (UIColor *)freshly_seafoodColor
+{
+    return [UIColor colorWithRGBHexCode:0x3F7C8A];
+}
+
++ (UIColor *)freshly_vegetableColor
+{
+    return [UIColor freshly_primaryGreen];
+}
+
+#pragma mark - Private Helper Methods
+
++ (UIColor *)colorWithRGBHexCode:(uint32_t)code
+{
+    float r = ((float) ((code & 0xFF0000) >> 16)) / 255.0;
+    float g = ((float) ((code & 0x00FF00) >> 8)) / 255.0;
+    float b = ((float) ((code & 0x0000FF))) / 255.0;
+
+    return [UIColor colorWithRed:r
+                           green:g
+                            blue:b
+                           alpha:1.0];
 }
 
 @end

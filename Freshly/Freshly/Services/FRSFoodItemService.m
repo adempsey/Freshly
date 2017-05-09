@@ -9,6 +9,8 @@
 #import "FRSAppDelegate.h"
 #import "FRSFoodItemService.h"
 
+#import "UIColor+FreshlyAdditions.h"
+
 #define kFoodItemEntityName @"FreshlyFoodItem"
 #define kCustomUserFoodSourcesFileName @"userFoodSources.json"
 
@@ -56,29 +58,29 @@
 - (UIColor*)colorForCategory:(NSString*)category
 {	
 	if ([category isEqualToString:FRESHLY_CATEGORY_DAIRY]) {
-		return FRESHLY_CATEGORY_COLOR_DAIRY;
+		return [UIColor freshly_dairyColor];
 		
 	} else if ([category isEqualToString:FRESHLY_CATEGORY_DRINK]) {
-		return FRESHLY_CATEGORY_COLOR_DRINK;
+		return [UIColor freshly_drinkColor];
 		
 	} else if ([category isEqualToString:FRESHLY_CATEGORY_FRUIT]) {
-		return FRESHLY_CATEGORY_COLOR_FRUIT;
+		return [UIColor freshly_fruitColor];
 		
 	} else if ([category isEqualToString:FRESHLY_CATEGORY_GRAIN]) {
-		return FRESHLY_CATEGORY_COLOR_GRAIN;
+		return [UIColor freshly_grainColor];
 		
 	} else if ([category isEqualToString:FRESHLY_CATEGORY_PROTEIN]) {
-		return FRESHLY_CATEGORY_COLOR_PROTEIN;
+		return [UIColor freshly_proteinColor];
 		
 	} else if ([category isEqualToString:FRESHLY_CATEGORY_SEAFOOD]) {
-		return FRESHLY_CATEGORY_COLOR_SEAFOOD;
+		return [UIColor freshly_seafoodColor];
 		
 	} else if ([category isEqualToString:FRESHLY_CATEGORY_VEGETABLE]) {
-		return FRESHLY_CATEGORY_COLOR_VEGETABLE;
+		return [UIColor freshly_vegetableColor];
 		
 	}
 	
-	return FRESHLY_CATEGORY_COLOR_MISC;
+	return [UIColor freshly_defaultColor];
 }
 
 - (NSString*)defaultCategoryForFoodItemName:(NSString*)itemName

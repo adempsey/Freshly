@@ -6,23 +6,38 @@
 //  Copyright © 2017 Andrew Dempsey. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @interface UIColor (FreshlyAdditions)
 
-// #75C783
+#pragma mark - System Colors
+
 + (UIColor *)freshly_primaryGreen;
 
-// #E7FFEB
 + (UIColor *)freshly_lightGreen;
 
-// #CFDEE0
 + (UIColor *)freshly_backgroundColor;
 
-// #FFFFFF
 + (UIColor *)freshly_whiteColor;
 
-
 + (UIColor *)freshly_darkGrayColor;
+
+#pragma mark - Food Category Colors
+
++ (UIColor *)freshly_alcoholColor;
+
++ (UIColor *)freshly_dairyColor;
+
++ (UIColor *)freshly_defaultColor;
+
++ (UIColor *)freshly_drinkColor;
+
++ (UIColor *)freshly_fruitColor;
+
++ (UIColor *)freshly_grainColor;
+
++ (UIColor *)freshly_proteinColor;
+
++ (UIColor *)freshly_seafoodColor;
+
++ (UIColor *)freshly_vegetableColor;
 
 @end
