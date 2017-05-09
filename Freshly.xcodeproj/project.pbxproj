@@ -29,8 +29,6 @@
 		8D916B5E19A0915B003CEF8D /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D916B5D19A0915B003CEF8D /* checkbox_checked.png */; };
 		8D97EF2D19DC998000F0C7C3 /* UITabBarController+FreshlyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D97EF2C19DC998000F0C7C3 /* UITabBarController+FreshlyAdditions.m */; };
 		8DA08C9319A99E0C00F13CE4 /* FRSSettingsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA08C9219A99E0C00F13CE4 /* FRSSettingsService.m */; };
-		8DA08C9519A9B56100F13CE4 /* grain 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA08C9419A9B56100F13CE4 /* grain 100x100.png */; };
-		8DA08C9719A9B59D00F13CE4 /* grain 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA08C9619A9B59D00F13CE4 /* grain 50x50.png */; };
 		8DA08C9D19AA5BC000F13CE4 /* FRSStorageSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA08C9C19AA5BC000F13CE4 /* FRSStorageSettingsViewController.m */; };
 		8DA08CA019AA98FC00F13CE4 /* UIFont+FreshlyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA08C9F19AA98FC00F13CE4 /* UIFont+FreshlyAdditions.m */; };
 		8DA66B75199D5F2E00A129A3 /* FreshlyItemViewController+NewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA66B74199D5F2E00A129A3 /* FreshlyItemViewController+NewItem.m */; };
@@ -56,23 +54,9 @@
 		8DD0913D1EB9AB9F004EC297 /* FRSNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD0913C1EB9AB9F004EC297 /* FRSNavigationController.m */; };
 		8DD7EFBD1996F3CA00FC0A10 /* FRSItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD7EFBC1996F3CA00FC0A10 /* FRSItemViewController.m */; };
 		8DD7EFC01996F62A00FC0A10 /* UIImage+FreshlyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD7EFBF1996F62A00FC0A10 /* UIImage+FreshlyAdditions.m */; };
-		8DD7EFCD1996F77B00FC0A10 /* dairy 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD7EFC31996F77B00FC0A10 /* dairy 100x100.png */; };
-		8DD7EFCE1996F77B00FC0A10 /* drink 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD7EFC41996F77B00FC0A10 /* drink 100x100.png */; };
-		8DD7EFCF1996F77B00FC0A10 /* seafood 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD7EFC51996F77B00FC0A10 /* seafood 100x100.png */; };
-		8DD7EFD01996F77B00FC0A10 /* fruit 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD7EFC61996F77B00FC0A10 /* fruit 100x100.png */; };
-		8DD7EFD11996F77B00FC0A10 /* protein 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD7EFC71996F77B00FC0A10 /* protein 100x100.png */; };
-		8DD7EFD31996F77B00FC0A10 /* misc 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD7EFC91996F77B00FC0A10 /* misc 100x100.png */; };
-		8DD7EFD61996F77B00FC0A10 /* vegetable 100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD7EFCC1996F77B00FC0A10 /* vegetable 100x100.png */; };
 		8DEB2AAB1988BF3300043285 /* FRSStorageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEB2AAA1988BF3300043285 /* FRSStorageViewController.m */; };
 		8DEB2AAE1988BF4A00043285 /* FRSShoppingListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEB2AAD1988BF4A00043285 /* FRSShoppingListViewController.m */; };
 		8DEB2AB11988C3A000043285 /* FRSStorageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEB2AB01988C3A000043285 /* FRSStorageTableViewCell.m */; };
-		8DEB2ABF1988CBA800043285 /* dairy 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2AB51988CBA800043285 /* dairy 50x50.png */; };
-		8DEB2AC01988CBA800043285 /* drink 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2AB61988CBA800043285 /* drink 50x50.png */; };
-		8DEB2AC11988CBA800043285 /* seafood 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2AB71988CBA800043285 /* seafood 50x50.png */; };
-		8DEB2AC21988CBA800043285 /* fruit 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2AB81988CBA800043285 /* fruit 50x50.png */; };
-		8DEB2AC31988CBA800043285 /* protein 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2AB91988CBA800043285 /* protein 50x50.png */; };
-		8DEB2AC51988CBA800043285 /* misc 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2ABB1988CBA800043285 /* misc 50x50.png */; };
-		8DEB2AC81988CBA800043285 /* vegetable 50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB2ABE1988CBA800043285 /* vegetable 50x50.png */; };
 		8DFA6C3B19D338BE004B28DB /* UINavigationController+FreshlyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFA6C3A19D338BE004B28DB /* UINavigationController+FreshlyAdditions.m */; };
 		A8800F09C5FA91935C172524 /* Pods_Freshly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEE0F8AA430487FE42BB86FB /* Pods_Freshly.framework */; };
 /* End PBXBuildFile section */
@@ -125,8 +109,6 @@
 		8D97EF2C19DC998000F0C7C3 /* UITabBarController+FreshlyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+FreshlyAdditions.m"; sourceTree = "<group>"; };
 		8DA08C9119A99E0C00F13CE4 /* FRSSettingsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRSSettingsService.h; sourceTree = "<group>"; };
 		8DA08C9219A99E0C00F13CE4 /* FRSSettingsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRSSettingsService.m; sourceTree = "<group>"; };
-		8DA08C9419A9B56100F13CE4 /* grain 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grain 100x100.png"; sourceTree = "<group>"; };
-		8DA08C9619A9B59D00F13CE4 /* grain 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grain 50x50.png"; sourceTree = "<group>"; };
 		8DA08C9B19AA5BC000F13CE4 /* FRSStorageSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRSStorageSettingsViewController.h; sourceTree = "<group>"; };
 		8DA08C9C19AA5BC000F13CE4 /* FRSStorageSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRSStorageSettingsViewController.m; sourceTree = "<group>"; };
 		8DA08C9E19AA98FC00F13CE4 /* UIFont+FreshlyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+FreshlyAdditions.h"; sourceTree = "<group>"; };
@@ -167,26 +149,12 @@
 		8DD7EFBC1996F3CA00FC0A10 /* FRSItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRSItemViewController.m; sourceTree = "<group>"; };
 		8DD7EFBE1996F62A00FC0A10 /* UIImage+FreshlyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FreshlyAdditions.h"; sourceTree = "<group>"; };
 		8DD7EFBF1996F62A00FC0A10 /* UIImage+FreshlyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FreshlyAdditions.m"; sourceTree = "<group>"; };
-		8DD7EFC31996F77B00FC0A10 /* dairy 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dairy 100x100.png"; sourceTree = "<group>"; };
-		8DD7EFC41996F77B00FC0A10 /* drink 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drink 100x100.png"; sourceTree = "<group>"; };
-		8DD7EFC51996F77B00FC0A10 /* seafood 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "seafood 100x100.png"; sourceTree = "<group>"; };
-		8DD7EFC61996F77B00FC0A10 /* fruit 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fruit 100x100.png"; sourceTree = "<group>"; };
-		8DD7EFC71996F77B00FC0A10 /* protein 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "protein 100x100.png"; sourceTree = "<group>"; };
-		8DD7EFC91996F77B00FC0A10 /* misc 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "misc 100x100.png"; sourceTree = "<group>"; };
-		8DD7EFCC1996F77B00FC0A10 /* vegetable 100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vegetable 100x100.png"; sourceTree = "<group>"; };
 		8DEB2AA91988BF3300043285 /* FRSStorageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRSStorageViewController.h; sourceTree = "<group>"; };
 		8DEB2AAA1988BF3300043285 /* FRSStorageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRSStorageViewController.m; sourceTree = "<group>"; };
 		8DEB2AAC1988BF4A00043285 /* FRSShoppingListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRSShoppingListViewController.h; sourceTree = "<group>"; };
 		8DEB2AAD1988BF4A00043285 /* FRSShoppingListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRSShoppingListViewController.m; sourceTree = "<group>"; };
 		8DEB2AAF1988C3A000043285 /* FRSStorageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRSStorageTableViewCell.h; sourceTree = "<group>"; };
 		8DEB2AB01988C3A000043285 /* FRSStorageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRSStorageTableViewCell.m; sourceTree = "<group>"; };
-		8DEB2AB51988CBA800043285 /* dairy 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dairy 50x50.png"; sourceTree = "<group>"; };
-		8DEB2AB61988CBA800043285 /* drink 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drink 50x50.png"; sourceTree = "<group>"; };
-		8DEB2AB71988CBA800043285 /* seafood 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "seafood 50x50.png"; sourceTree = "<group>"; };
-		8DEB2AB81988CBA800043285 /* fruit 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fruit 50x50.png"; sourceTree = "<group>"; };
-		8DEB2AB91988CBA800043285 /* protein 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "protein 50x50.png"; sourceTree = "<group>"; };
-		8DEB2ABB1988CBA800043285 /* misc 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "misc 50x50.png"; sourceTree = "<group>"; };
-		8DEB2ABE1988CBA800043285 /* vegetable 50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vegetable 50x50.png"; sourceTree = "<group>"; };
 		8DFA6C3919D338BE004B28DB /* UINavigationController+FreshlyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FreshlyAdditions.h"; sourceTree = "<group>"; };
 		8DFA6C3A19D338BE004B28DB /* UINavigationController+FreshlyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FreshlyAdditions.m"; sourceTree = "<group>"; };
 		EEE0F8AA430487FE42BB86FB /* Pods_Freshly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Freshly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -472,36 +440,6 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		8DD7EFC21996F74C00FC0A10 /* 50px */ = {
-			isa = PBXGroup;
-			children = (
-				8DEB2AB51988CBA800043285 /* dairy 50x50.png */,
-				8DEB2AB61988CBA800043285 /* drink 50x50.png */,
-				8DEB2AB71988CBA800043285 /* seafood 50x50.png */,
-				8DEB2AB81988CBA800043285 /* fruit 50x50.png */,
-				8DA08C9619A9B59D00F13CE4 /* grain 50x50.png */,
-				8DEB2AB91988CBA800043285 /* protein 50x50.png */,
-				8DEB2ABB1988CBA800043285 /* misc 50x50.png */,
-				8DEB2ABE1988CBA800043285 /* vegetable 50x50.png */,
-			);
-			path = 50px;
-			sourceTree = "<group>";
-		};
-		8DD7EFD71996F78000FC0A10 /* 100px */ = {
-			isa = PBXGroup;
-			children = (
-				8DD7EFC31996F77B00FC0A10 /* dairy 100x100.png */,
-				8DD7EFC41996F77B00FC0A10 /* drink 100x100.png */,
-				8DD7EFC51996F77B00FC0A10 /* seafood 100x100.png */,
-				8DD7EFC61996F77B00FC0A10 /* fruit 100x100.png */,
-				8DA08C9419A9B56100F13CE4 /* grain 100x100.png */,
-				8DD7EFC71996F77B00FC0A10 /* protein 100x100.png */,
-				8DD7EFC91996F77B00FC0A10 /* misc 100x100.png */,
-				8DD7EFCC1996F77B00FC0A10 /* vegetable 100x100.png */,
-			);
-			path = 100px;
-			sourceTree = "<group>";
-		};
 		8DEB2AB21988CB5300043285 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -517,18 +455,8 @@
 				8D78A2871A144DD30016A770 /* FreshlyAppIcon.png */,
 				8D0A474B19D7C33F006D7CB7 /* Icons */,
 				8D916B5919A08E8D003CEF8D /* Utilities */,
-				8DEB2AB41988CB6700043285 /* Food Categories */,
 			);
 			path = Images;
-			sourceTree = "<group>";
-		};
-		8DEB2AB41988CB6700043285 /* Food Categories */ = {
-			isa = PBXGroup;
-			children = (
-				8DD7EFD71996F78000FC0A10 /* 100px */,
-				8DD7EFC21996F74C00FC0A10 /* 50px */,
-			);
-			path = "Food Categories";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -611,32 +539,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DD7EFCD1996F77B00FC0A10 /* dairy 100x100.png in Resources */,
 				8D916B5219A0070C003CEF8D /* minFoodSource.json in Resources */,
-				8DEB2ABF1988CBA800043285 /* dairy 50x50.png in Resources */,
 				8D0A474F19D7C58D006D7CB7 /* iconStorage.png in Resources */,
-				8DD7EFD31996F77B00FC0A10 /* misc 100x100.png in Resources */,
-				8DEB2AC51988CBA800043285 /* misc 50x50.png in Resources */,
 				8D8333351EBE4B4100DFDECC /* Assets.xcassets in Resources */,
-				8DD7EFCE1996F77B00FC0A10 /* drink 100x100.png in Resources */,
-				8DEB2AC01988CBA800043285 /* drink 50x50.png in Resources */,
 				8DC373FB19821DC000DC9731 /* InfoPlist.strings in Resources */,
 				8DC3740619821DC000DC9731 /* Images.xcassets in Resources */,
-				8DD7EFD01996F77B00FC0A10 /* fruit 100x100.png in Resources */,
 				8D0A475119D7C5EE006D7CB7 /* iconShoppingList.png in Resources */,
 				8D78A2881A144DD30016A770 /* FreshlyAppIcon.png in Resources */,
-				8DEB2AC21988CBA800043285 /* fruit 50x50.png in Resources */,
 				8D2199031A16AF7B00F01096 /* Launch Screen.xib in Resources */,
-				8DD7EFD11996F77B00FC0A10 /* protein 100x100.png in Resources */,
-				8DEB2AC31988CBA800043285 /* protein 50x50.png in Resources */,
-				8DD7EFCF1996F77B00FC0A10 /* seafood 100x100.png in Resources */,
 				8D916B5C19A08EB7003CEF8D /* checkbox_empty.png in Resources */,
-				8DA08C9719A9B59D00F13CE4 /* grain 50x50.png in Resources */,
 				8D916B5E19A0915B003CEF8D /* checkbox_checked.png in Resources */,
-				8DEB2AC11988CBA800043285 /* seafood 50x50.png in Resources */,
-				8DD7EFD61996F77B00FC0A10 /* vegetable 100x100.png in Resources */,
-				8DEB2AC81988CBA800043285 /* vegetable 50x50.png in Resources */,
-				8DA08C9519A9B56100F13CE4 /* grain 100x100.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 //
 
 #import "FRSFoodItemViewModel.h"
+#import "UIImage+FreshlyAdditions.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -43,6 +44,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)title
 {
     return self.item.name;
+}
+
+- (UIImage *)image
+{
+    return [UIImage imageForCategory:self.item.category withSize:0];
 }
 
 @end

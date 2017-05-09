@@ -12,7 +12,8 @@
 
 + (UIImage*)imageForCategory:(NSString *)category withSize:(NSUInteger)size
 {
-	return [UIImage imageNamed:[NSString stringWithFormat:@"%@ %lux%lu", category.lowercaseString, (unsigned long)size, (unsigned long)size]];
+    NSString *name = [NSString stringWithFormat:@"icon-%@", category.lowercaseString];
+	return [UIImage imageNamed:name];
 }
 
 @end

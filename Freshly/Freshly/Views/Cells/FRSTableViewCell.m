@@ -45,6 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
     self.textLabel.text = self.viewModel.title;
     self.textLabel.font = [UIFont freshlyFontOfSize:[UIFont labelFontSize]];
     self.textLabel.textColor = [UIColor freshly_darkGrayColor];
+
+    self.imageView.image = self.viewModel.image;
 }
 
 @end
