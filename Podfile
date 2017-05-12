@@ -4,4 +4,6 @@ use_frameworks!
 
 target 'Freshly' do
     pod 'Masonry', '~> 1.0.2'
+    pod 'Fabric'
+    pod 'Crashlytics'
 end

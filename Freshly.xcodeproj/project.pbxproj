@@ -14,8 +14,6 @@
 		8D2199031A16AF7B00F01096 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D2199021A16AF7B00F01096 /* Launch Screen.xib */; };
 		8D2199061A16BDEF00F01096 /* FRSAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2199051A16BDEF00F01096 /* FRSAboutViewController.m */; };
 		8D5C23F71999C2AA007B314B /* FRSItemDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C23F61999C2AA007B314B /* FRSItemDateViewController.m */; };
-		8D785CC41A36897F00AF7153 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D785CC21A36897F00AF7153 /* Crashlytics.framework */; };
-		8D785CC51A36897F00AF7153 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D785CC31A36897F00AF7153 /* Fabric.framework */; };
 		8D78A2881A144DD30016A770 /* FreshlyAppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D78A2871A144DD30016A770 /* FreshlyAppIcon.png */; };
 		8D8333351EBE4B4100DFDECC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D8333341EBE4B4100DFDECC /* Assets.xcassets */; };
 		8D83333D1EBEB17600DFDECC /* FRSFoodItemViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D83333C1EBEB17600DFDECC /* FRSFoodItemViewModel.m */; };
@@ -84,8 +82,6 @@
 		8D2199051A16BDEF00F01096 /* FRSAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRSAboutViewController.m; sourceTree = "<group>"; };
 		8D5C23F51999C2AA007B314B /* FRSItemDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRSItemDateViewController.h; sourceTree = "<group>"; };
 		8D5C23F61999C2AA007B314B /* FRSItemDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRSItemDateViewController.m; sourceTree = "<group>"; };
-		8D785CC21A36897F00AF7153 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		8D785CC31A36897F00AF7153 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		8D78A2871A144DD30016A770 /* FreshlyAppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FreshlyAppIcon.png; sourceTree = "<group>"; };
 		8D8333341EBE4B4100DFDECC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D83333B1EBEB17600DFDECC /* FRSFoodItemViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRSFoodItemViewModel.h; sourceTree = "<group>"; };
@@ -166,11 +162,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DC373F119821DC000DC9731 /* CoreGraphics.framework in Frameworks */,
-				8D785CC41A36897F00AF7153 /* Crashlytics.framework in Frameworks */,
 				8DC373F519821DC000DC9731 /* CoreData.framework in Frameworks */,
 				8DC373F319821DC000DC9731 /* UIKit.framework in Frameworks */,
 				8DC373EF19821DC000DC9731 /* Foundation.framework in Frameworks */,
-				8D785CC51A36897F00AF7153 /* Fabric.framework in Frameworks */,
 				A8800F09C5FA91935C172524 /* Pods_Freshly.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,8 +290,6 @@
 		8DC373ED19821DC000DC9731 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8D785CC21A36897F00AF7153 /* Crashlytics.framework */,
-				8D785CC31A36897F00AF7153 /* Fabric.framework */,
 				8DC373EE19821DC000DC9731 /* Foundation.framework */,
 				8DC373F019821DC000DC9731 /* CoreGraphics.framework */,
 				8DC373F219821DC000DC9731 /* UIKit.framework */,
@@ -470,7 +462,6 @@
 				8DC373E719821DC000DC9731 /* Sources */,
 				8DC373E819821DC000DC9731 /* Frameworks */,
 				8DC373E919821DC000DC9731 /* Resources */,
-				8D785CC11A36893D00AF7153 /* ShellScript */,
 				53A5A3BBEA429D025B04AA7F /* [CP] Embed Pods Frameworks */,
 				D5EE8470BDB41F90348D8569 /* [CP] Copy Pods Resources */,
 			);
@@ -577,19 +568,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Freshly/Pods-Freshly-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		8D785CC11A36893D00AF7153 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run d30c22026c802c81271986fec1942bda82623f85 9f467a0932e39ec6389aab1ea38905a439a05932fbeb266286f61bb84a139596";
 		};
 		D5EE8470BDB41F90348D8569 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
